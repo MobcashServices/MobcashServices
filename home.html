@@ -10,14 +10,12 @@
       padding: 0;
       background-color: #f2f2f2;
       font-family: 'Arial', sans-serif;
-      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     header {
       background-color: #fff;
       padding: 12px 16px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-      transition: background-color 0.3s ease;
     }
 
     .header-content {
@@ -37,11 +35,10 @@
       margin: 0;
       text-align: center;
       flex-grow: 1;
-      transition: color 0.3s ease;
     }
 
     .wallet-container {
-      background-color: #eaf2f8 !important;
+      background-color: #eaf2f8;
       padding: 4px 10px;
       border-radius: 12px;
       font-size: 13px;
@@ -51,24 +48,6 @@
       display: flex;
       align-items: center;
       user-select: all;
-    }
-
-    /* الوضع الليلي */
-    body.dark-mode {
-      background-color: #121212;
-      color: #fff;
-    }
-
-    header.dark-mode {
-      background-color: #1f1f1f;
-    }
-
-    .menu-icon.dark-mode {
-      color: #fff;
-    }
-
-    .site-title.dark-mode {
-      color: #fff;
     }
 
     @media screen and (min-width: 1024px),
@@ -88,33 +67,15 @@
     <div class="header-content">
       <div class="menu-icon">&#9776;</div>
       <h1 class="site-title" id="siteTitle">Mobcash Services</h1>
-      <div class="wallet-container">ID: 2749258268</div>
+      <div class="wallet-container" id="walletContainer">ID: </div>
     </div>
   </header>
 
   <script>
-    function applySystemTheme() {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const body = document.body;
-      const header = document.querySelector('header');
-      const siteTitle = document.getElementById('siteTitle');
-      const menuIcon = document.querySelector('.menu-icon');
-
-      if (prefersDark) {
-        body.classList.add('dark-mode');
-        header.classList.add('dark-mode');
-        menuIcon.classList.add('dark-mode');
-        siteTitle.classList.add('dark-mode');
-      } else {
-        body.classList.remove('dark-mode');
-        header.classList.remove('dark-mode');
-        menuIcon.classList.remove('dark-mode');
-        siteTitle.classList.remove('dark-mode');
-      }
-    }
-
-    applySystemTheme();
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applySystemTheme);
+    // جلب الـ ID من localStorage وعرضه تلقائيًا
+    const userId = localStorage.getItem("userId") || "غير مسجل";
+    const walletDiv = document.getElementById("walletContainer");
+    walletDiv.textContent = "ID: " + userId;
   </script>
 </body>
 </html>
