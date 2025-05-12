@@ -87,6 +87,17 @@
     button:hover {
       background-color: #45a049;
     }
+
+    .error-message, .success-message {
+      color: red;
+      text-align: center;
+      font-size: 14px;
+      display: none;
+    }
+
+    .success-message {
+      color: green;
+    }
   </style>
 </head>
 <body>
@@ -110,7 +121,9 @@
         <option value="Melbet">Melbet</option>
       </select>
 
-      <input type="number" id="userId" placeholder="أدخل ID من 10 أرقام" maxlength="10" />
+      <input type="text" id="userId" placeholder="أدخل ID مكون من 10 أرقام" maxlength="10" oninput="validateId()" />
+      <div class="error-message" id="error-message">يرجى إدخال 10 أرقام فقط.</div>
+      <div class="success-message" id="success-message">ID صحيح! يمكنك متابعة التسجيل.</div>
 
       <button onclick="login()">تسجيل الدخول</button>
     </div>
@@ -124,6 +137,24 @@
         document.getElementById('login-section').style.display = 'block';
       }, 3000);
     };
+
+    // التحقق من ID
+    function validateId() {
+      const userId = document.getElementById('userId').value;
+      const errorMessage = document.getElementById('error-message');
+      const successMessage = document.getElementById('success-message');
+      
+      if (userId.length > 10) {
+        errorMessage.style.display = 'block';
+        successMessage.style.display = 'none';
+      } else if (userId.length === 10) {
+        errorMessage.style.display = 'none';
+        successMessage.style.display = 'block';
+      } else {
+        errorMessage.style.display = 'none';
+        successMessage.style.display = 'none';
+      }
+    }
 
     // تسجيل الدخول
     function login() {
