@@ -53,7 +53,8 @@
 ‏      justify-content: space-between;
 ‏    }
 ‏
-‏    @media screen and (min-width: 1024px), screen and (max-width: 1023px) {
+‏    @media screen and (min-width: 1024px),
+‏    screen and (max-width: 1023px) {
 ‏      body {
 ‏        display: block;
 ‏        width: 100%;
@@ -69,21 +70,9 @@
 ‏    <div>
 ‏      <div class="menu-icon">&#9776;</div>
 ‏      <h1 class="site-title">Mobcash Services</h1>
-‏      <div class="wallet-container">
-‏        ID: <span id="userId">Loading...</span>
-‏      </div>
+‏      <div class="wallet-container">ID: 2749258268</div>
 ‏    </div>
 ‏  </header>
-‏
-‏  <script>
-‏    // استرجاع الـ ID من localStorage
-‏    const userId = localStorage.getItem('userId');
-‏    if (userId) {
-‏      document.getElementById('userId').textContent = userId;
-‏    } else {
-‏      document.getElementById('userId').textContent = 'ID غير متوفر';
-‏    }
-‏  </script>
 ‏</body>
 ‏</html>
 ‏
