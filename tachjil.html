@@ -1,177 +1,111 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>تسجيل الدخول - Mobcash</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Tahoma', sans-serif;
-      background-color: #f0f2f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    html {
+      scroll-behavior: smooth;
     }
-
-    .login-box {
-      background: #fff;
-      padding: 30px 25px;
-      border-radius: 16px;
-      max-width: 400px;
-      width: 100%;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      position: relative;
+    .fade-in {
+      animation: fadeIn 0.6s ease-in-out;
     }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 25px;
-      font-size: 22px;
-      color: #333;
-    }
-
-    select, input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      font-size: 15px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      transition: border 0.3s;
-    }
-
-    input:focus, select:focus {
-      border-color: #4caf50;
-      outline: none;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #4caf50;
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    .message {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 15px;
-      border-radius: 10px;
-      font-size: 14px;
-      margin-top: 10px;
-      display: none;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    .message.success {
-      background-color: #eaf7ea;
-      color: #2e7d32;
-      border: 1px solid #b2dfdb;
-    }
-
-    .message.error {
-      background-color: #fdecea;
-      color: #c62828;
-      border: 1px solid #f5c6cb;
-    }
-
-    .message i {
-      font-size: 18px;
-    }
-
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-<body>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 fade-in">
+    <div class="flex flex-col items-center mb-6">
+      <div class="bg-green-500 text-white p-3 rounded-full">
+        <i data-lucide="log-in" class="w-6 h-6"></i>
+      </div>
+      <h2 class="text-2xl font-bold mt-3">تسجيل الدخول</h2>
+    </div><label class="block mb-2 font-medium">اختر المنصة</label>
+<select id="platform" class="w-full mb-4 px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+  <option value="" disabled selected>اختر المنصة</option>
+  <option value="Mega pari">Mega pari</option>
+  <option value="Linbet">Linbet</option>
+  <option value="Gooobet">Gooobet</option>
+  <option value="1xbet">1xbet</option>
+  <option value="Melbet">Melbet</option>
+</select>
 
-  <div class="login-box">
-    <h2>تسجيل الدخول</h2>
+<label class="block mb-2 font-medium">ID الخاص بك</label>
+<input type="text" id="userId" maxlength="10" placeholder="أدخل ID مكون من 10 أرقام" oninput="validateId()"
+  class="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500 mb-2">
 
-    <select id="platform">
-      <option value="" disabled selected>اختر المنصة</option>
-      <option value="Mega pari">Mega pari</option>
-      <option value="Linbet">Linbet</option>
-      <option value="Gooobet">Gooobet</option>
-      <option value="1xbet">1xbet</option>
-      <option value="Melbet">Melbet</option>
-    </select>
+<div id="message-box" class="text-sm text-center font-medium mb-4 transition-all duration-300"></div>
 
-    <input type="text" id="userId" placeholder="أدخل ID مكون من 10 أرقام" maxlength="10" oninput="validateId()" />
+<button onclick="login()" id="loginBtn"
+  class="w-full py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl transition duration-300 flex items-center justify-center gap-2">
+  <span id="btnText">تسجيل الدخول</span>
+  <svg id="loader" class="hidden animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 000 16z" />
+  </svg>
+</button>
 
-    <div id="message" class="message"><i id="msg-icon">⚠️</i><span id="msg-text"></span></div>
+  </div>  <script>
+    lucide.createIcons();
 
-    <button onclick="login()">تسجيل الدخول</button>
-  </div>
-
-  <script>
-    function showMessage(type, text) {
-      const msgBox = document.getElementById('message');
-      const msgText = document.getElementById('msg-text');
-      const msgIcon = document.getElementById('msg-icon');
-
-      msgBox.className = 'message ' + type;
-      msgText.textContent = text;
-      msgIcon.textContent = type === 'success' ? '✅' : '⚠️';
-      msgBox.style.display = 'flex';
-
-      setTimeout(() => {
-        msgBox.style.display = 'none';
-      }, 3000);
-    }
-
-    function isRepeatedDigits(str) {
-      return /^(\d)\1{9}$/.test(str);
+    function isRepeatedDigits(id) {
+      return /^([0-9])\1{9}$/.test(id);
     }
 
     function validateId() {
       const userId = document.getElementById('userId').value;
+      const messageBox = document.getElementById('message-box');
 
-      if (userId.length === 10) {
-        if (isRepeatedDigits(userId)) {
-          showMessage('error', 'لا يمكن استخدام 10 أرقام متشابهة مثل 0000000000');
-        } else {
-          showMessage('success', 'ID صحيح! يمكنك المتابعة.');
-        }
+      if (userId.length === 0) {
+        messageBox.textContent = '';
+        messageBox.className = '';
+        return;
+      }
+
+      if (!/^[0-9]{1,10}$/.test(userId)) {
+        messageBox.textContent = 'يرجى إدخال أرقام فقط (حتى 10 أرقام).';
+        messageBox.className = 'text-red-500';
+      } else if (userId.length === 10 && isRepeatedDigits(userId)) {
+        messageBox.textContent = 'غير مسموح بكتابة 10 أرقام مكررة متشابهة.';
+        messageBox.className = 'text-red-500';
+      } else if (userId.length === 10) {
+        messageBox.textContent = 'ID صحيح! يمكنك المتابعة.';
+        messageBox.className = 'text-green-500';
+      } else {
+        messageBox.textContent = '';
+        messageBox.className = '';
       }
     }
 
     function login() {
       const platform = document.getElementById('platform').value;
       const userId = document.getElementById('userId').value;
+      const messageBox = document.getElementById('message-box');
 
-      if (!platform || userId.length !== 10) {
-        showMessage('error', 'يرجى اختيار المنصة وإدخال ID مكون من 10 أرقام.');
+      if (!platform || userId.length !== 10 || isRepeatedDigits(userId)) {
+        messageBox.textContent = 'الرجاء اختيار المنصة وكتابة ID صالح مكون من 10 أرقام غير مكررة.';
+        messageBox.className = 'text-red-500';
         return;
       }
 
-      if (isRepeatedDigits(userId)) {
-        showMessage('error', 'لا يمكن استخدام ID مكرر مثل 1111111111.');
-        return;
-      }
+      const btn = document.getElementById('loginBtn');
+      const btnText = document.getElementById('btnText');
+      const loader = document.getElementById('loader');
 
-      // حفظ البيانات
-      localStorage.setItem('platform', platform);
-      localStorage.setItem('userId', userId);
+      btnText.textContent = 'جارٍ التحقق...';
+      loader.classList.remove('hidden');
+      btn.disabled = true;
 
-      // توجيه للصفحة التالية
-      window.location.href = 'home.html';
+      setTimeout(() => {
+        localStorage.setItem('platform', platform);
+        localStorage.setItem('userId', userId);
+        window.location.href = 'home.html';
+      }, 1500);
     }
-  </script>
-
-</body>
+  </script></body>
 </html>
