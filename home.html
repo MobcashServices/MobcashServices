@@ -5,33 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mobcash Services</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .fade-in {
+      animation: fadeIn 1s ease-in-out forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-100 font-sans">
-  <header class="bg-white shadow-md py-3 px-4">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white h-screen w-screen overflow-hidden">
+
+  <!-- الهيدر -->
+  <header class="bg-white dark:bg-gray-800 shadow-md px-4 py-3">
     <div class="flex items-center justify-between">
-      <div class="text-2xl cursor-pointer text-gray-600">&#9776;</div>
-      <h1 class="text-xl font-bold text-center text-gray-800 flex-grow">Mobcash Services</h1>
-      <div id="walletID" class="bg-blue-100 text-blue-900 px-3 py-1 rounded-xl text-sm font-semibold shadow-inner">
-        ID: جاري التوليد...
+      <div class="text-xl cursor-pointer text-gray-700 dark:text-white">&#9776;</div>
+      <h1 class="text-lg font-semibold text-center text-gray-800 dark:text-white flex-1">Mobcash Services</h1>
+      <div class="bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-white px-3 py-1 rounded-xl text-sm font-bold shadow-inner">
+        ID: 2749258268
       </div>
     </div>
   </header>
 
-  <script>
-    // دالة توليد ID مكون من 10 أرقام ولكن غير مكرر (مثل 0000000000 مرفوض)
-    function generateValidID() {
-      let id;
-      do {
-        id = '';
-        for (let i = 0; i < 10; i++) {
-          id += Math.floor(Math.random() * 10);
-        }
-      } while (/^(\d)\1{9}$/.test(id)); // يمنع الأرقام المكررة
-      return id;
-    }
+  <!-- محتوى مبدئي أو شاشة انتظار -->
+  <main class="flex flex-col items-center justify-center h-[calc(100vh-60px)] fade-in px-4 text-center">
+    <div class="w-14 h-14 relative">
+      <div class="absolute w-full h-full border-4 border-gray-300 dark:border-gray-600 rounded-full"></div>
+      <div class="absolute w-full h-full border-t-4 border-green-500 rounded-full animate-spin"></div>
+    </div>
+    <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">جارٍ التحميل أو انتظار العملية...</p>
+  </main>
 
-    // عرض الرقم داخل واجهة المستخدم
-    document.getElementById('walletID').textContent = 'ID: ' + generateValidID();
-  </script>
 </body>
 </html>
