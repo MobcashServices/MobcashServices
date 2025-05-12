@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mobcash Services</title>
   <style>
-    /* الأساسيات */
     body {
       margin: 0;
       padding: 0;
@@ -17,11 +16,14 @@
     header {
       background-color: #fff;
       padding: 12px 16px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+      transition: background-color 0.3s ease;
+    }
+
+    .header-content {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-      transition: background-color 0.3s ease;
     }
 
     .menu-icon {
@@ -47,6 +49,7 @@
       box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: center;
+      user-select: all; /* لتسهيل النسخ */
     }
 
     /* الوضع الليلي */
@@ -68,7 +71,6 @@
       color: #fff;
     }
 
-    /* تأثيرات للعرض */
     @media screen and (min-width: 1024px),
     screen and (max-width: 1023px) {
       body {
@@ -83,15 +85,14 @@
 </head>
 <body>
   <header>
-    <div>
+    <div class="header-content">
       <div class="menu-icon">&#9776;</div>
       <h1 class="site-title">Mobcash Services</h1>
-      <div class="wallet-container">ID: 2749258268</div>
+      <div class="wallet-container" id="walletID">ID: 2749258268</div>
     </div>
   </header>
 
   <script>
-    // التبديل التلقائي بين الوضعين حسب تفضيلات النظام
     function applySystemTheme() {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const body = document.body;
@@ -99,7 +100,6 @@
       const walletContainer = document.querySelector('.wallet-container');
       const menuIcon = document.querySelector('.menu-icon');
 
-      // تطبيق الوضع الداكن إذا كان مفضلًا في النظام
       if (prefersDark) {
         body.classList.add('dark-mode');
         header.classList.add('dark-mode');
@@ -113,10 +113,7 @@
       }
     }
 
-    // تطبيق الوضع الحالي بناءً على تفضيلات النظام
     applySystemTheme();
-
-    // تحديث الوضع إذا تغيرت تفضيلات المستخدم
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applySystemTheme);
   </script>
 </body>
