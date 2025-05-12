@@ -14,11 +14,11 @@
 
     header {
       background-color: #fff;
-      padding: 15px 20px;
+      padding: 12px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
     }
 
     .menu-icon {
@@ -34,14 +34,31 @@
       flex-grow: 1;
     }
 
-    .id-text {
-      font-size: 14px;
-      color: #27ae60; /* اللون الأخضر */
+    .wallet {
+      display: flex;
+      align-items: center;
       background-color: #f9f9f9;
-      padding: 5px 10px;
-      border-radius: 8px;
+      border: 1px solid #ddd;
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+
+    .wallet-icon {
+      font-size: 16px;
+      margin-right: 6px;
+      color: #27ae60;
+    }
+
+    .wallet-label {
+      color: #777;
+      margin-right: 4px;
+    }
+
+    .wallet-id {
+      color: #27ae60;
       font-weight: bold;
-      direction: ltr;
+      letter-spacing: 1px;
     }
 
     header > div {
@@ -68,7 +85,11 @@
     <div>
       <div class="menu-icon">&#9776;</div>
       <h1 class="site-title">Mobcash Services</h1>
-      <div class="id-text">ID: 2749258268</div>
+      <div class="wallet">
+        <div class="wallet-icon">&#128179;</div>
+        <span class="wallet-label">ID:</span>
+        <span class="wallet-id">2749258268</span>
+      </div>
     </div>
   </header>
 </body>
