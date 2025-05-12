@@ -4,68 +4,87 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>تسجيل الدخول - Mobcash</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Tahoma', sans-serif;
-      background-color: #f8f8f8;
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(to bottom, #e3f2fd, #ffffff);
       padding: 20px;
     }
 
     .login-box {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 400px;
-      margin: 60px auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: #ffffff;
+      padding: 30px 25px;
+      border-radius: 15px;
+      max-width: 420px;
+      margin: 80px auto;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .login-box:hover {
+      box-shadow: 0 10px 24px rgba(0,0,0,0.15);
     }
 
     .login-box h2 {
       text-align: center;
-      margin-bottom: 20px;
-      font-size: 20px;
+      margin-bottom: 25px;
+      font-size: 22px;
+      color: #333;
     }
 
     select, input {
       width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
+      padding: 12px;
+      margin-bottom: 18px;
       font-size: 16px;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 10px;
+      transition: border-color 0.2s;
+    }
+
+    select:focus, input:focus {
+      border-color: #4caf50;
+      outline: none;
     }
 
     button {
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       background-color: #4caf50;
       color: white;
       font-size: 16px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
 
     button:hover {
-      background-color: #45a049;
+      background-color: #43a047;
     }
 
     .error-message, .success-message {
-      color: red;
       text-align: center;
       font-size: 14px;
       display: none;
     }
 
-    .success-message {
-      color: green;
+    .error-message { color: #d32f2f; }
+    .success-message { color: #388e3c; }
+
+    .logo {
+      display: block;
+      margin: 0 auto 20px;
+      width: 80px;
     }
   </style>
 </head>
 <body>
 
   <div class="login-box">
+    <img src="https://i.ibb.co/TT5P2fj/logo.png" alt="Mobcash Logo" class="logo" />
     <h2>تسجيل الدخول</h2>
     <select id="platform">
       <option value="" disabled selected>اختر المنصة</option>
@@ -89,7 +108,7 @@
       const errorMessage = document.getElementById('error-message');
       const successMessage = document.getElementById('success-message');
 
-      if (userId.length > 10) {
+      if (userId.length > 10 || /\D/.test(userId)) {
         errorMessage.style.display = 'block';
         successMessage.style.display = 'none';
       } else if (userId.length === 10) {
@@ -112,7 +131,6 @@
 
       localStorage.setItem('platform', platform);
       localStorage.setItem('userId', userId);
-
       window.location.href = 'home.html';
     }
   </script>
