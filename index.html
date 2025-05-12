@@ -1,89 +1,84 @@
-‏<!DOCTYPE html>
-‏<html lang="ar">
-‏<head>
-‏  <meta charset="UTF-8" />
-‏  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-‏  <title>Mobcash Services</title>
-‏  <style>
-‏    body {
-‏      margin: 0;
-‏      padding: 0;
-‏      background-color: #f2f2f2;
-‏      font-family: 'Arial', sans-serif;
-‏    }
-‏
-‏    header {
-‏      background-color: #fff;
-‏      padding: 12px 16px;
-‏      display: flex;
-‏      align-items: center;
-‏      justify-content: space-between;
-‏      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-‏    }
-‏
-‏    .menu-icon {
-‏      font-size: 24px;
-‏      cursor: pointer;
-‏    }
-‏
-‏    .site-title {
-‏      font-size: 18px;
-‏      color: #333;
-‏      margin: 0;
-‏      text-align: center;
-‏      flex-grow: 1;
-‏    }
-‏
-‏    .wallet-container {
-‏      background-color: #eaf2f8;
-‏      padding: 4px 10px;
-‏      border-radius: 12px;
-‏      font-size: 13px;
-‏      color: #2c3e50;
-‏      font-weight: bold;
-‏      box-shadow: inset 0 0 2px rgba(0,0,0,0.1);
-‏      display: flex;
-‏      align-items: center;
-‏    }
-‏
-‏    header > div {
-‏      display: flex;
-‏      align-items: center;
-‏      width: 100%;
-‏      justify-content: space-between;
-‏    }
-‏
-‏    @media screen and (min-width: 1024px), screen and (max-width: 1023px) {
-‏      body {
-‏        display: block;
-‏        width: 100%;
-‏        height: 100vh;
-‏        overflow: hidden;
-‏        position: relative;
-‏      }
-‏    }
-‏  </style>
-‏</head>
-‏<body>
-‏  <header>
-‏    <div>
-‏      <div class="menu-icon">&#9776;</div>
-‏      <h1 class="site-title">Mobcash Services</h1>
-‏      <div class="wallet-container">
-‏        ID: <span id="userId">Loading...</span>
-‏      </div>
-‏    </div>
-‏  </header>
-‏
-‏  <script>
-‏    // استرجاع الـ ID من localStorage
-‏    const userId = localStorage.getItem('userId');
-‏    if (userId) {
-‏      document.getElementById('userId').textContent = userId;
-‏    } else {
-‏      document.getElementById('userId').textContent = 'ID غير متوفر';
-‏    }
-‏  </script>
-‏</body>
-‏</html>
-‏
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تسجيل الدخول - Mobcash</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      padding: 40px 16px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    select, input {
+      padding: 10px;
+      margin: 10px 0;
+      width: 90%;
+      max-width: 300px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <h2>تسجيل الدخول إلى Mobcash</h2>
+
+  <select id="platform">
+    <option value="Mega pari">Mega pari</option>
+    <option value="Linbet">Linbet</option>
+    <option value="Gooobet">Gooobet</option>
+    <option value="1xbet">1xbet</option>
+    <option value="Melbet">Melbet</option>
+  </select><br>
+
+  <input type="text" id="user-id" placeholder="أدخل رقم ID (10 أرقام)" maxlength="10"/><br>
+
+  <button onclick="login()">تسجيل الدخول</button>
+
+  <script>
+    function login() {
+      const selectedPlatform = document.getElementById('platform').value;
+      const userIdInput = document.getElementById('user-id').value.trim();
+
+      if (!/^\d{10}$/.test(userIdInput)) {
+        alert("المرجو إدخال رقم ID مكون من 10 أرقام.");
+        return;
+      }
+
+      // حفظ ID والمنصة
+      localStorage.setItem('userId', userIdInput);
+      localStorage.setItem('platform', selectedPlatform);
+
+      // تحديث قائمة الأرقام المحفوظة
+      let savedIds = JSON.parse(localStorage.getItem('savedIds') || '[]');
+      if (!savedIds.includes(userIdInput)) {
+        savedIds.push(userIdInput);
+        localStorage.setItem('savedIds', JSON.stringify(savedIds));
+      }
+
+      // الانتقال إلى الصفحة الرئيسية
+      window.location.href = 'main.html'; // غيّر الاسم إذا كان مختلفًا
+    }
+  </script>
+</body>
+</html>
