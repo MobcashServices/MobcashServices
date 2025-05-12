@@ -27,6 +27,30 @@
         opacity: 1;
         transform: translateY(0);
       }
+
+      .circle-check {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid #ccc;
+        display: inline-block;
+        margin-left: 10px;
+        transition: background-color 0.3s, border-color 0.3s;
+      }
+
+      .circle-check.valid {
+        border-color: green;
+        background-color: green;
+      }
+
+      .circle-check.invalid {
+        border-color: red;
+        background-color: red;
+      }
+
+      .circle-check.hidden {
+        visibility: hidden;
+      }
     </style>
   </head>
   <body class="bg-gray-100 dark:bg-gray-900 min-h-screen flex items-center justify-center px-4">
@@ -54,9 +78,12 @@
         <label for="userId" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
           أدخل الـ ID (10 أرقام)
         </label>
-        <input type="text" id="userId" maxlength="10" placeholder="مثال: 1234567890"
-          class="w-full px-4 py-2 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-800 dark:bg-gray-700 dark:text-white"
-          oninput="validateId()" />
+        <div class="flex items-center">
+          <input type="text" id="userId" maxlength="10" placeholder="مثال: 1234567890"
+            class="w-full px-4 py-2 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-800 dark:bg-gray-700 dark:text-white"
+            oninput="validateId()" />
+          <div id="checkCircle" class="circle-check hidden"></div>
+        </div>
       </div>
 
       <div id="message" class="fade text-center text-sm mb-4 h-5"></div>
@@ -84,11 +111,19 @@
 
       function validateId() {
         const userId = document.getElementById("userId").value;
+        const checkCircle = document.getElementById("checkCircle");
+
         if (userId.length !== 10) {
+          checkCircle.className = "circle-check invalid";
+          checkCircle.classList.remove("hidden");
           showMessage("يجب إدخال 10 أرقام بالضبط.");
         } else if (isRepeatedDigits(userId)) {
+          checkCircle.className = "circle-check invalid";
+          checkCircle.classList.remove("hidden");
           showMessage("غير مسموح بـ 10 أرقام متشابهة.");
         } else {
+          checkCircle.className = "circle-check valid";
+          checkCircle.classList.remove("hidden");
           showMessage("ID صالح! يمكنك المتابعة.", "success");
         }
       }
