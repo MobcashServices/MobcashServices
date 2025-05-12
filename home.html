@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -53,44 +53,14 @@
       justify-content: space-between;
     }
 
-    .section {
-      padding: 16px;
-    }
-
-    .deposits-title {
-      text-align: center;
-      font-size: 16px;
-      color: #888;
-      margin-bottom: 20px;
-    }
-
-    .refill-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      padding-right: 10px;
-      font-size: 15px;
-      color: #333;
-    }
-
-    .id-badge {
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 4px 8px;
-      font-size: 14px;
-      color: #2c3e50;
-      font-weight: bold;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    }
-
-    @media screen and (min-width: 1024px), screen and (max-width: 1023px) {
+    @media screen and (min-width: 1024px),
+    screen and (max-width: 1023px) {
       body {
         display: block;
         width: 100%;
         height: 100vh;
-        overflow-x: hidden;
+        overflow: hidden;
+        position: relative;
       }
     }
   </style>
@@ -100,44 +70,8 @@
     <div>
       <div class="menu-icon">&#9776;</div>
       <h1 class="site-title">Mobcash Services</h1>
-      <div class="wallet-container">
-        ID: <span id="userId">Loading...</span>
-      </div>
+      <div class="wallet-container">ID: 2749258268</div>
     </div>
   </header>
-
-  <div class="section">
-    <div class="deposits-title">الإيداعات في الحساب</div>
-
-    <div class="refill-row">
-      <div>إعادة تعبئة الحساب:</div>
-      <div id="idList" class="id-list">
-        <!-- ستظهر الأرقام هنا -->
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // عرض ID الحالي
-    const userId = localStorage.getItem('userId');
-    document.getElementById('userId').textContent = userId || 'ID غير متوفر';
-
-    // عرض أرقام الأيدي السابقة
-    const idListElement = document.getElementById('idList');
-    const storedIds = JSON.parse(localStorage.getItem('savedIds') || '[]');
-
-    if (storedIds.length > 0) {
-      storedIds.slice(-10).reverse().forEach(id => {
-        const idItem = document.createElement('span');
-        idItem.className = 'id-badge';
-        idItem.textContent = id;
-        idListElement.appendChild(idItem);
-      });
-    } else {
-      const empty = document.createElement('span');
-      empty.textContent = 'لا توجد أرقام محفوظة.';
-      idListElement.appendChild(empty);
-    }
-  </script>
 </body>
 </html>
