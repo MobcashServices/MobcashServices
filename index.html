@@ -5,29 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobcash Services</title>
     <style>
-        /* جعل العرض يتكيف مع الهاتف فقط */
         body {
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2; /* اللون الرمادي الفاتح للموقع */
+            background-color: #f2f2f2;
             font-family: Arial, sans-serif;
         }
 
-        /* الهيدر باللون الأبيض */
         header {
-            background-color: #fff; /* اللون الأبيض للهيدر */
-            padding: 20px;
-            text-align: center;
+            background-color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 18px; /* تصغير حجم النص */
-            color: #333; /* لون النص في الهيدر */
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
         }
 
-        /* في حال تم فتحه على الحاسوب */
+        .site-title {
+            font-size: 18px;
+            color: #333;
+            margin: 0 auto;
+        }
+
+        /* تثبيت الهيدر */
+        header > * {
+            flex-shrink: 0;
+        }
+
+        /* للتأكد أن الأيقونة في اليسار والاسم في الوسط */
+        .header-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .menu-icon {
+            position: absolute;
+            left: 0;
+        }
+
+        .site-title {
+            width: 100%;
+            text-align: center;
+        }
+
         @media screen and (min-width: 1024px) {
             body {
                 display: block;
@@ -38,7 +65,6 @@
             }
         }
 
-        /* في حال تم فتحه على الهاتف */
         @media screen and (max-width: 1023px) {
             body {
                 display: block;
@@ -52,7 +78,10 @@
 </head>
 <body>
     <header>
-        <h1>Mobcash Services</h1>
+        <div class="header-container">
+            <div class="menu-icon">&#9776;</div> <!-- أيقونة 3 شرطات -->
+            <h1 class="site-title">Mobcash Services</h1>
+        </div>
     </header>
     <!-- الهيكل الفارغ للموقع -->
 </body>
