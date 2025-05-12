@@ -1,1 +1,154 @@
+<!--
+Project: Responsive White Boilerplate
+Description: Minimal white-themed responsive template for all screen sizes.
+Structure:
+  /index.html
+  /css/styles.css
+  /js/script.js
+-->
 
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive White Boilerplate</title>
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <div class="logo">Logo</div>
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <button class="menu-toggle">☰</button>
+    </nav>
+  </header>
+
+  <main class="site-content">
+    <section class="hero">
+      <h1>Welcome</h1>
+      <p>This is a minimal white-themed responsive template.</p>
+    </section>
+
+    <section class="features">
+      <div class="feature">Feature 1</div>
+      <div class="feature">Feature 2</div>
+      <div class="feature">Feature 3</div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Company Name. All rights reserved.</p>
+  </footer>
+
+  <!-- Link to external script -->
+  <script src="js/script.js"></script>
+</body>
+</html>
+
+/* css/styles.css */
+/* Base reset and white background */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  color: #333333;
+}
+
+/* Layout */
+.site-header {
+  background: #fff;
+  padding: 1rem;
+  border-bottom: 1px solid #eaeaea;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+.menu a {
+  text-decoration: none;
+  color: inherit;
+}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.site-content {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+.hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.features {
+  display: flex;
+  gap: 1rem;
+}
+.feature {
+  flex: 1;
+  padding: 1rem;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid #eaeaea;
+  margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .features {
+    flex-direction: column;
+  }
+  .menu {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 60px;
+    right: 1rem;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* js/script.js */
+// Toggle mobile menu
+const toggle = document.querySelector('.menu-toggle');
+const menu = document.querySelector('.menu');
+toggle.addEventListener('click', () => {
+  menu.classList.toggle('open');
+});
