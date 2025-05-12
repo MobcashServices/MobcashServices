@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mobcash Services - الصفحة الرئيسية</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tahoma', sans-serif;
+      background-color: #f8f8f8;
+    }
+
+    /* الهيدر */
+    #header {
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #header h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    #user-info {
+      font-size: 18px;
+      font-weight: bold;
+      color: #4caf50;
+    }
+
+    #user-info span {
+      color: #333;
+    }
+
+    /* محتوى الصفحة */
+    .content {
+      margin: 20px;
+      text-align: center;
+    }
+
+    .box {
+      background-color: white;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 500px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .box h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .box p {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الهيدر -->
+  <div id="header">
+    <h1>Mobcash Services</h1>
+    <div id="user-info">
+      <span>المنصة: </span><span id="platform-name"></span><br/>
+      <span>ID: </span><span id="user-id"></span>
+    </div>
+  </div>
+
+  <!-- محتوى الصفحة -->
+  <div class="content">
+    <div class="box">
+      <h2>مرحباً بك في الموقع!</h2>
+      <p>تم تسجيل دخولك بنجاح إلى المنصة: <span id="platform-display"></span></p>
+      <p>رقم الـ ID الخاص بك هو: <span id="id-display"></span></p>
+    </div>
+  </div>
+
+  <script>
+    // استرجاع المنصة وID من localStorage
+    window.onload = () => {
+      const platform = localStorage.getItem('platform');
+      const userId = localStorage.getItem('userId');
+
+      // عرض البيانات في الصفحة
+      document.getElementById('platform-name').innerText = platform;
+      document.getElementById('user-id').innerText = userId;
+      document.getElementById('platform-display').innerText = platform;
+      document.getElementById('id-display').innerText = userId;
+    };
+  </script>
+
+</body>
+</html>
