@@ -34,6 +34,7 @@
             overflow-x: auto; /* لإظهار إمكانية السحب */
             white-space: nowrap; /* التأكد من أن الروابط في سطر واحد */
             padding: 10px 0;
+            position: relative;
         }
 
         .links-container span {
@@ -41,6 +42,23 @@
             font-size: 16px;
             color: #333;
             cursor: pointer;
+        }
+
+        /* السهم الذي يظهر في بداية القائمة */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            font-size: 20px;
+            color: #333;
+            transform: translateY(-50%);
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        /* عند السحب، السهم يختفي */
+        .links-container:hover .arrow {
+            opacity: 0;
         }
 
         /* في حال تم فتحه على الحاسوب */
@@ -69,8 +87,9 @@
 <body>
     <header>
         <h1>Mobcash Services</h1>
-        <!-- قائمة الروابط القابلة للسحب -->
+        <!-- حاوية الروابط مع السهم في البداية -->
         <div class="links-container">
+            <span class="arrow">&#8594;</span> <!-- السهم -->
             <span>melbet</span>
             <span>1xbet</span>
             <span>gooobet</span>
