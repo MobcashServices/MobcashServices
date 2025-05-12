@@ -27,28 +27,20 @@
             color: #333; /* لون النص في الهيدر */
         }
 
-        /* قائمة الروابط تحت العنوان */
+        /* حاوية الروابط لتكون في سطر واحد مع إمكانية السحب */
         .links-container {
             margin-top: 10px;
-            font-size: 16px;
-            color: #333;
+            display: flex;
+            overflow-x: auto; /* لإظهار إمكانية السحب */
+            white-space: nowrap; /* التأكد من أن الروابط في سطر واحد */
+            padding: 10px 0;
         }
 
         .links-container span {
-            margin: 0 10px;
+            margin: 0 15px;
+            font-size: 16px;
+            color: #333;
             cursor: pointer;
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-
-        .links-container span:hover {
-            transform: translateX(5px);
-        }
-
-        .arrow {
-            margin-left: 5px;
-            font-size: 18px;
-            transition: transform 0.3s ease;
         }
 
         /* في حال تم فتحه على الحاسوب */
@@ -77,13 +69,13 @@
 <body>
     <header>
         <h1>Mobcash Services</h1>
-        <!-- قائمة الروابط مع الأسهم -->
+        <!-- قائمة الروابط القابلة للسحب -->
         <div class="links-container">
-            <span>melbet <span class="arrow">→</span></span>
-            <span>1xbet <span class="arrow">→</span></span>
-            <span>gooobet <span class="arrow">→</span></span>
-            <span>linbet <span class="arrow">→</span></span>
-            <span>megapari <span class="arrow">→</span></span>
+            <span>melbet</span>
+            <span>1xbet</span>
+            <span>gooobet</span>
+            <span>linbet</span>
+            <span>megapari</span>
         </div>
     </header>
     <!-- الهيكل الفارغ للموقع -->
