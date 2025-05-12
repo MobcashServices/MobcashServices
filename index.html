@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       background-color: #f2f2f2;
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
     }
 
     header {
@@ -36,10 +36,15 @@
 
     .wallet-id {
       font-size: 15px;
-      font-weight: bold;
-      color: #27ae60;
+      font-weight: 500;
+      color: #2c3e50; /* أزرق داكن جذاب */
       direction: ltr;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
+    }
+
+    .wallet-id span {
+      color: #888; /* لون رمادي للأحرف ID */
+      margin-right: 3px;
     }
 
     header > div {
@@ -66,7 +71,7 @@
     <div>
       <div class="menu-icon">&#9776;</div>
       <h1 class="site-title">Mobcash Services</h1>
-      <div class="wallet-id">ID: 2749258268</div>
+      <div class="wallet-id"><span>ID:</span>2749258268</div>
     </div>
   </header>
 </body>
