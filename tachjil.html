@@ -4,27 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>تسجيل الدخول - Mobcash</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(to bottom, #e3f2fd, #ffffff);
+      font-family: 'Tahoma', sans-serif;
+      background-color: #f4f4f4;
       padding: 20px;
     }
 
     .login-box {
-      background: #ffffff;
-      padding: 30px 25px;
-      border-radius: 15px;
-      max-width: 420px;
-      margin: 80px auto;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-      transition: all 0.3s ease-in-out;
-    }
-
-    .login-box:hover {
-      box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      max-width: 400px;
+      margin: 60px auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
 
     .login-box h2 {
@@ -37,16 +31,11 @@
     select, input {
       width: 100%;
       padding: 12px;
-      margin-bottom: 18px;
+      margin-bottom: 15px;
       font-size: 16px;
       border: 1px solid #ccc;
-      border-radius: 10px;
-      transition: border-color 0.2s;
-    }
-
-    select:focus, input:focus {
-      border-color: #4caf50;
-      outline: none;
+      border-radius: 8px;
+      box-sizing: border-box;
     }
 
     button {
@@ -54,37 +43,41 @@
       padding: 13px;
       background-color: #4caf50;
       color: white;
-      font-size: 16px;
+      font-size: 17px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s;
     }
 
     button:hover {
-      background-color: #43a047;
+      background-color: #45a049;
     }
 
-    .error-message, .success-message {
+    .message {
+      margin-top: 10px;
       text-align: center;
       font-size: 14px;
+      padding: 10px;
+      border-radius: 8px;
       display: none;
     }
 
-    .error-message { color: #d32f2f; }
-    .success-message { color: #388e3c; }
+    .message.error {
+      background-color: #fdecea;
+      color: #d32f2f;
+      border: 1px solid #f44336;
+    }
 
-    .logo {
-      display: block;
-      margin: 0 auto 20px;
-      width: 80px;
+    .message.success {
+      background-color: #e8f5e9;
+      color: #388e3c;
+      border: 1px solid #4caf50;
     }
   </style>
 </head>
 <body>
 
   <div class="login-box">
-    <img src="https://i.ibb.co/TT5P2fj/logo.png" alt="Mobcash Logo" class="logo" />
     <h2>تسجيل الدخول</h2>
     <select id="platform">
       <option value="" disabled selected>اختر المنصة</option>
@@ -96,27 +89,42 @@
     </select>
 
     <input type="text" id="userId" placeholder="أدخل ID مكون من 10 أرقام" maxlength="10" oninput="validateId()" />
-    <div class="error-message" id="error-message">يرجى إدخال 10 أرقام فقط.</div>
-    <div class="success-message" id="success-message">ID صحيح! يمكنك متابعة التسجيل.</div>
+
+    <div class="message" id="form-message"></div>
 
     <button onclick="login()">تسجيل الدخول</button>
   </div>
 
   <script>
+    function showMessage(type, text) {
+      const messageBox = document.getElementById('form-message');
+      messageBox.className = 'message ' + type;
+      messageBox.textContent = text;
+      messageBox.style.display = 'block';
+    }
+
+    function isRepeatedDigits(id) {
+      return /^(\d)\1{9}$/.test(id); // يتحقق من تكرار نفس الرقم 10 مرات
+    }
+
     function validateId() {
       const userId = document.getElementById('userId').value;
-      const errorMessage = document.getElementById('error-message');
-      const successMessage = document.getElementById('success-message');
+      const msg = document.getElementById('form-message');
 
-      if (userId.length > 10 || /\D/.test(userId)) {
-        errorMessage.style.display = 'block';
-        successMessage.style.display = 'none';
-      } else if (userId.length === 10) {
-        errorMessage.style.display = 'none';
-        successMessage.style.display = 'block';
+      if (!/^\d{0,10}$/.test(userId)) {
+        showMessage('error', 'يُسمح فقط بالأرقام.');
+        return;
+      }
+
+      if (userId.length < 10) {
+        msg.style.display = 'none';
+        return;
+      }
+
+      if (isRepeatedDigits(userId)) {
+        showMessage('error', 'لا يُسمح بإدخال ID مكرر مثل 0000000000.');
       } else {
-        errorMessage.style.display = 'none';
-        successMessage.style.display = 'none';
+        showMessage('success', 'ID صالح! يمكنك المتابعة.');
       }
     }
 
@@ -124,15 +132,31 @@
       const platform = document.getElementById('platform').value;
       const userId = document.getElementById('userId').value;
 
-      if (!platform || userId.length !== 10) {
-        alert("الرجاء اختيار المنصة وكتابة ID مكون من 10 أرقام.");
+      if (!platform) {
+        showMessage('error', 'يرجى اختيار المنصة.');
         return;
       }
 
+      if (!/^\d{10}$/.test(userId)) {
+        showMessage('error', 'يرجى إدخال ID مكون من 10 أرقام فقط.');
+        return;
+      }
+
+      if (isRepeatedDigits(userId)) {
+        showMessage('error', 'لا يُسمح بإدخال ID مكرر مثل 1111111111.');
+        return;
+      }
+
+      // إذا تم التحقق من كل شيء
+      showMessage('success', 'تم التحقق بنجاح، جاري تحويلك...');
       localStorage.setItem('platform', platform);
       localStorage.setItem('userId', userId);
-      window.location.href = 'home.html';
+
+      setTimeout(() => {
+        window.location.href = 'home.html';
+      }, 1000);
     }
   </script>
+
 </body>
 </html>
