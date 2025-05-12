@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تسجيل الدخول - Mobcash</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tahoma', sans-serif;
+      background-color: #f8f8f8;
+      padding: 20px;
+    }
+
+    .login-box {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: 60px auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4caf50;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error-message, .success-message {
+      color: red;
+      text-align: center;
+      font-size: 14px;
+      display: none;
+    }
+
+    .success-message {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>تسجيل الدخول</h2>
+    <select id="platform">
+      <option value="" disabled selected>اختر المنصة</option>
+      <option value="Mega pari">Mega pari</option>
+      <option value="Linbet">Linbet</option>
+      <option value="Gooobet">Gooobet</option>
+      <option value="1xbet">1xbet</option>
+      <option value="Melbet">Melbet</option>
+    </select>
+
+    <input type="text" id="userId" placeholder="أدخل ID مكون من 10 أرقام" maxlength="10" oninput="validateId()" />
+    <div class="error-message" id="error-message">يرجى إدخال 10 أرقام فقط.</div>
+    <div class="success-message" id="success-message">ID صحيح! يمكنك متابعة التسجيل.</div>
+
+    <button onclick="login()">تسجيل الدخول</button>
+  </div>
+
+  <script>
+    function validateId() {
+      const userId = document.getElementById('userId').value;
+      const errorMessage = document.getElementById('error-message');
+      const successMessage = document.getElementById('success-message');
+
+      if (userId.length > 10) {
+        errorMessage.style.display = 'block';
+        successMessage.style.display = 'none';
+      } else if (userId.length === 10) {
+        errorMessage.style.display = 'none';
+        successMessage.style.display = 'block';
+      } else {
+        errorMessage.style.display = 'none';
+        successMessage.style.display = 'none';
+      }
+    }
+
+    function login() {
+      const platform = document.getElementById('platform').value;
+      const userId = document.getElementById('userId').value;
+
+      if (!platform || userId.length !== 10) {
+        alert("الرجاء اختيار المنصة وكتابة ID مكون من 10 أرقام.");
+        return;
+      }
+
+      localStorage.setItem('platform', platform);
+      localStorage.setItem('userId', userId);
+
+      window.location.href = 'home.html';
+    }
+  </script>
+</body>
+</html>
