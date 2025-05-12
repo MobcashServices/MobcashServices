@@ -40,7 +40,7 @@
     }
 
     .wallet-container {
-      background-color: #eaf2f8;
+      background-color: #eaf2f8 !important; /* يبقى دائمًا أبيض مزرق */
       padding: 4px 10px;
       border-radius: 12px;
       font-size: 13px;
@@ -49,7 +49,7 @@
       box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: center;
-      user-select: all; /* لتسهيل النسخ */
+      user-select: all;
     }
 
     /* الوضع الليلي */
@@ -60,11 +60,6 @@
 
     header.dark-mode {
       background-color: #1f1f1f;
-    }
-
-    .wallet-container.dark-mode {
-      background-color: #333;
-      color: #fff;
     }
 
     .menu-icon.dark-mode {
@@ -97,18 +92,16 @@
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const body = document.body;
       const header = document.querySelector('header');
-      const walletContainer = document.querySelector('.wallet-container');
       const menuIcon = document.querySelector('.menu-icon');
 
       if (prefersDark) {
         body.classList.add('dark-mode');
         header.classList.add('dark-mode');
-        walletContainer.classList.add('dark-mode');
         menuIcon.classList.add('dark-mode');
+        // المحفظة تبقى بوضعها العادي
       } else {
         body.classList.remove('dark-mode');
         header.classList.remove('dark-mode');
-        walletContainer.classList.remove('dark-mode');
         menuIcon.classList.remove('dark-mode');
       }
     }
