@@ -35,6 +35,7 @@
             white-space: nowrap; /* التأكد من أن الروابط في سطر واحد */
             padding: 10px 0;
             position: relative;
+            background-color: #f2f2f2;
         }
 
         .links-container span {
@@ -44,8 +45,8 @@
             cursor: pointer;
         }
 
-        /* السهم الذي يظهر في بداية القائمة */
-        .arrow {
+        /* السهم الذي يظهر في البداية على اليسار */
+        .arrow-left {
             position: absolute;
             top: 50%;
             left: 10px;
@@ -53,12 +54,45 @@
             color: #333;
             transform: translateY(-50%);
             cursor: pointer;
+            opacity: 0.5;
+            pointer-events: none; /* يمنع التفاعل مع السهم */
             transition: opacity 0.3s ease;
         }
 
-        /* عند السحب، السهم يختفي */
-        .links-container:hover .arrow {
+        /* تأثير الضبابية على اليسار */
+        .arrow-left::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 100%;
+            background: linear-gradient(to left, rgba(255, 255, 255, 0.8), transparent);
+        }
+
+        /* السهم الذي يظهر عند السحب من اليمين */
+        .arrow-right {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            font-size: 20px;
+            color: #333;
+            transform: translateY(-50%);
+            cursor: pointer;
             opacity: 0;
+            pointer-events: none; /* يمنع التفاعل مع السهم */
+            transition: opacity 0.3s ease;
+        }
+
+        /* عند السحب، السهم الأيسر يختفي */
+        .links-container:hover .arrow-left {
+            opacity: 0;
+        }
+
+        /* عندما نصل إلى آخر عنصر، يظهر السهم الأيمن */
+        .links-container.scrolled .arrow-right {
+            opacity: 1;
+            pointer-events: auto; /* السماح بالتفاعل مع السهم */
         }
 
         /* في حال تم فتحه على الحاسوب */
@@ -89,14 +123,27 @@
         <h1>Mobcash Services</h1>
         <!-- حاوية الروابط مع السهم في البداية -->
         <div class="links-container">
-            <span class="arrow">&#8594;</span> <!-- السهم -->
+            <span class="arrow-left">&#8592;</span> <!-- السهم في اليسار -->
             <span>melbet</span>
             <span>1xbet</span>
             <span>gooobet</span>
             <span>linbet</span>
             <span>megapari</span>
+            <span class="arrow-right">&#8594;</span> <!-- السهم في اليمين -->
         </div>
     </header>
-    <!-- الهيكل الفارغ للموقع -->
+
+    <script>
+        // إضافة حدث للتحقق إذا كانت الحاوية قد تم سحبها إلى آخر خيار
+        const linksContainer = document.querySelector('.links-container');
+        linksContainer.addEventListener('scroll', function() {
+            if (linksContainer.scrollLeft + linksContainer.clientWidth >= linksContainer.scrollWidth) {
+                // عند الوصول إلى آخر عنصر، أضف class لعرض السهم الأيمن
+                linksContainer.classList.add('scrolled');
+            } else {
+                linksContainer.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 </html>
