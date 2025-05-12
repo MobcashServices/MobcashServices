@@ -50,12 +50,21 @@
       user-select: all;
     }
 
+    /* البطاقة */
+    .card {
+      background-color: #fff;
+      margin: 16px auto;
+      padding: 16px;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      width: 90%;
+      max-width: 500px;
+    }
+
     .action-buttons {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       gap: 12px;
-      margin: 20px auto;
-      padding: 0 16px;
     }
 
     .action-button {
@@ -95,7 +104,7 @@
 
     @media screen and (max-width: 480px) {
       .action-buttons {
-        flex-direction: column;
+        flex-direction: column-reverse;
       }
     }
   </style>
@@ -109,20 +118,24 @@
     </div>
   </header>
 
-  <!-- الأزرار بعد الهيدر -->
-  <div class="action-buttons">
-    <button class="action-button recharge">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7H3V5h18v2zm0 4H8v2h13v-2zm0 4H3v2h18v-2z"/></svg>
-      Recharger le compte
-    </button>
-    <button class="action-button withdraw">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7H3V5h18v2zm-9 4l-4 4h3v4h2v-4h3l-4-4zm9 4H17v2h4v-2z"/></svg>
-      Retirer des fonds
-    </button>
+  <!-- البطاقة البيضاء التي تحتوي على الزرين -->
+  <div class="card">
+    <div class="action-buttons">
+      <!-- الزر الأخضر يسار -->
+      <button class="action-button recharge">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7H3V5h18v2zm0 4H8v2h13v-2zm0 4H3v2h18v-2z"/></svg>
+        Recharger le compte
+      </button>
+
+      <!-- الزر الأحمر يمين -->
+      <button class="action-button withdraw">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7H3V5h18v2zm-9 4l-4 4h3v4h2v-4h3l-4-4zm9 4H17v2h4v-2z"/></svg>
+        Retirer des fonds
+      </button>
+    </div>
   </div>
 
   <script>
-    // عرض الـ ID من التخزين المحلي
     const userId = localStorage.getItem("userId") || "غير مسجل";
     document.getElementById("walletContainer").textContent = "ID: " + userId;
   </script>
