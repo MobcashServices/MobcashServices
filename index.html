@@ -1,176 +1,37 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mobcash Services</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Tahoma', sans-serif;
-      background-color: #f8f8f8;
+<input type="text" id="idInput" maxlength="10" placeholder="أدخل ID مكون من 10 أرقام" oninput="checkIdLength(this)">
+<div id="idStatus" style="color: green; font-size: 14px; margin-top: 4px;"></div>
+
+<script>
+  function checkIdLength(input) {
+    const status = document.getElementById('idStatus');
+    if (input.value.length === 10) {
+      status.textContent = 'جاري التحقق من الـ ID...';
+    } else {
+      status.textContent = '';
     }
+  }
 
-    /* شاشة التحميل */
-    #splash {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      z-index: 999;
-    }
+  function login() {
+    const idInput = document.getElementById('idInput');
+    const id = idInput.value.trim();
 
-    #splash h1 {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
+    if (/^\d{10}$/.test(id)) {
+      // حفظ ID الحالي
+      localStorage.setItem('userId', id);
 
-    .loader {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #4caf50;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg);}
-      100% { transform: rotate(360deg);}
-    }
-
-    /* واجهة تسجيل الدخول */
-    #login-section {
-      display: none;
-      padding: 20px;
-    }
-
-    .login-box {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 400px;
-      margin: 60px auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .login-box h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 20px;
-    }
-
-    select, input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #4caf50;
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    .error-message, .success-message {
-      color: red;
-      text-align: center;
-      font-size: 14px;
-      display: none;
-    }
-
-    .success-message {
-      color: green;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- شاشة التحميل -->
-  <div id="splash">
-    <h1>Mobcash Services</h1>
-    <div class="loader"></div>
-  </div>
-
-  <!-- واجهة تسجيل الدخول -->
-  <div id="login-section">
-    <div class="login-box">
-      <h2>تسجيل الدخول</h2>
-      <select id="platform">
-        <option value="" disabled selected>اختر المنصة</option>
-        <option value="Mega pari">Mega pari</option>
-        <option value="Linbet">Linbet</option>
-        <option value="Gooobet">Gooobet</option>
-        <option value="1xbet">1xbet</option>
-        <option value="Melbet">Melbet</option>
-      </select>
-
-      <input type="text" id="userId" placeholder="أدخل ID مكون من 10 أرقام" maxlength="10" oninput="validateId()" />
-      <div class="error-message" id="error-message">يرجى إدخال 10 أرقام فقط.</div>
-      <div class="success-message" id="success-message">ID صحيح! يمكنك متابعة التسجيل.</div>
-
-      <button onclick="login()">تسجيل الدخول</button>
-    </div>
-  </div>
-
-  <script>
-    // إخفاء شاشة التحميل بعد 3 ثواني
-    window.onload = () => {
-      setTimeout(() => {
-        document.getElementById('splash').style.display = 'none';
-        document.getElementById('login-section').style.display = 'block';
-      }, 3000);
-    };
-
-    // التحقق من ID
-    function validateId() {
-      const userId = document.getElementById('userId').value;
-      const errorMessage = document.getElementById('error-message');
-      const successMessage = document.getElementById('success-message');
-      
-      if (userId.length > 10) {
-        errorMessage.style.display = 'block';
-        successMessage.style.display = 'none';
-      } else if (userId.length === 10) {
-        errorMessage.style.display = 'none';
-        successMessage.style.display = 'block';
-      } else {
-        errorMessage.style.display = 'none';
-        successMessage.style.display = 'none';
-      }
-    }
-
-    // تسجيل الدخول
-    function login() {
-      const platform = document.getElementById('platform').value;
-      const userId = document.getElementById('userId').value;
-
-      if (!platform || userId.length !== 10) {
-        alert("الرجاء اختيار المنصة وكتابة ID مكون من 10 أرقام.");
-        return;
+      // حفظ ضمن قائمة الأرقام
+      let savedIds = JSON.parse(localStorage.getItem('savedIds') || '[]');
+      if (!savedIds.includes(id)) {
+        savedIds.push(id);
+        localStorage.setItem('savedIds', JSON.stringify(savedIds));
       }
 
-      localStorage.setItem('platform', platform);
-      localStorage.setItem('userId', userId);
-
-      window.location.href = 'home.html';
+      // الانتقال إلى الصفحة الرئيسية
+      window.location.href = 'index.html'; // أو home.html حسب اسم الملف
+    } else {
+      alert("المرجو إدخال ID مكون من 10 أرقام فقط.");
     }
-  </script>
-</body>
-</html>
+  }
+</script>
+
+<button onclick="login()">تسجيل الدخول</button>
