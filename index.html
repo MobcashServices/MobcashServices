@@ -24,20 +24,17 @@
         .menu-icon {
             font-size: 24px;
             cursor: pointer;
+            position: absolute;
+            left: 20px;
         }
 
         .site-title {
             font-size: 18px;
             color: #333;
             margin: 0 auto;
+            text-align: center;
         }
 
-        /* تثبيت الهيدر */
-        header > * {
-            flex-shrink: 0;
-        }
-
-        /* للتأكد أن الأيقونة في اليسار والاسم في الوسط */
         .header-container {
             display: flex;
             align-items: center;
@@ -45,14 +42,17 @@
             position: relative;
         }
 
-        .menu-icon {
-            position: absolute;
-            left: 0;
-        }
-
-        .site-title {
-            width: 100%;
-            text-align: center;
+        /* بطاقة المعرف */
+        .id-card {
+            background-color: #fff;
+            color: #333;
+            width: fit-content;
+            margin: 30px auto;
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-size: 20px;
+            letter-spacing: 2px;
         }
 
         @media screen and (min-width: 1024px) {
@@ -79,10 +79,12 @@
 <body>
     <header>
         <div class="header-container">
-            <div class="menu-icon">&#9776;</div> <!-- أيقونة 3 شرطات -->
+            <div class="menu-icon">&#9776;</div>
             <h1 class="site-title">Mobcash Services</h1>
         </div>
     </header>
-    <!-- الهيكل الفارغ للموقع -->
+
+    <!-- بطاقة المعرف -->
+    <div class="id-card">7349051287</div>
 </body>
 </html>
