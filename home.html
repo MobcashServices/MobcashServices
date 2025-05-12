@@ -37,10 +37,11 @@
       margin: 0;
       text-align: center;
       flex-grow: 1;
+      transition: color 0.3s ease;
     }
 
     .wallet-container {
-      background-color: #eaf2f8 !important; /* يبقى دائمًا أبيض مزرق */
+      background-color: #eaf2f8 !important;
       padding: 4px 10px;
       border-radius: 12px;
       font-size: 13px;
@@ -66,6 +67,10 @@
       color: #fff;
     }
 
+    .site-title.dark-mode {
+      color: #fff;
+    }
+
     @media screen and (min-width: 1024px),
     screen and (max-width: 1023px) {
       body {
@@ -82,8 +87,8 @@
   <header>
     <div class="header-content">
       <div class="menu-icon">&#9776;</div>
-      <h1 class="site-title">Mobcash Services</h1>
-      <div class="wallet-container" id="walletID">ID: 2749258268</div>
+      <h1 class="site-title" id="siteTitle">Mobcash Services</h1>
+      <div class="wallet-container">ID: 2749258268</div>
     </div>
   </header>
 
@@ -92,17 +97,19 @@
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const body = document.body;
       const header = document.querySelector('header');
+      const siteTitle = document.getElementById('siteTitle');
       const menuIcon = document.querySelector('.menu-icon');
 
       if (prefersDark) {
         body.classList.add('dark-mode');
         header.classList.add('dark-mode');
         menuIcon.classList.add('dark-mode');
-        // المحفظة تبقى بوضعها العادي
+        siteTitle.classList.add('dark-mode');
       } else {
         body.classList.remove('dark-mode');
         header.classList.remove('dark-mode');
         menuIcon.classList.remove('dark-mode');
+        siteTitle.classList.remove('dark-mode');
       }
     }
 
