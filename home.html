@@ -1,99 +1,88 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mobcash Services - الصفحة الرئيسية</title>
+  <title>Mobcash Services</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Tahoma', sans-serif;
-      background-color: #f8f8f8;
+      padding: 0;
+      background-color: #f2f2f2;
+      font-family: 'Arial', sans-serif;
     }
 
-    /* الهيدر */
-    #header {
-      background-color: white;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    header {
+      background-color: #fff;
+      padding: 12px 16px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .site-title {
+      font-size: 18px;
+      color: #333;
+      margin: 0;
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    .wallet-container {
+      background-color: #eaf2f8;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #2c3e50;
+      font-weight: bold;
+      box-shadow: inset 0 0 2px rgba(0,0,0,0.1);
+      display: flex;
       align-items: center;
     }
 
-    #header h1 {
-      font-size: 20px;
-      margin: 0;
+    header > div {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
     }
 
-    #user-info {
-      font-size: 18px;
-      font-weight: bold;
-      color: #4caf50;
-    }
-
-    #user-info span {
-      color: #333;
-    }
-
-    /* محتوى الصفحة */
-    .content {
-      margin: 20px;
-      text-align: center;
-    }
-
-    .box {
-      background-color: white;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 500px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .box h2 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-
-    .box p {
-      font-size: 18px;
+    @media screen and (min-width: 1024px), screen and (max-width: 1023px) {
+      body {
+        display: block;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- الهيدر -->
-  <div id="header">
-    <h1>Mobcash Services</h1>
-    <div id="user-info">
-      <span>المنصة: </span><span id="platform-name"></span><br/>
-      <span>ID: </span><span id="user-id"></span>
+  <header>
+    <div>
+      <div class="menu-icon">&#9776;</div>
+      <h1 class="site-title">Mobcash Services</h1>
+      <div class="wallet-container">
+        ID: <span id="userId">Loading...</span>
+      </div>
     </div>
-  </div>
-
-  <!-- محتوى الصفحة -->
-  <div class="content">
-    <div class="box">
-      <h2>مرحباً بك في الموقع!</h2>
-      <p>تم تسجيل دخولك بنجاح إلى المنصة: <span id="platform-display"></span></p>
-      <p>رقم الـ ID الخاص بك هو: <span id="id-display"></span></p>
-    </div>
-  </div>
+  </header>
 
   <script>
-    // استرجاع المنصة وID من localStorage
-    window.onload = () => {
-      const platform = localStorage.getItem('platform');
-      const userId = localStorage.getItem('userId');
-
-      // عرض البيانات في الصفحة
-      document.getElementById('platform-name').innerText = platform;
-      document.getElementById('user-id').innerText = userId;
-      document.getElementById('platform-display').innerText = platform;
-      document.getElementById('id-display').innerText = userId;
-    };
+    // استرجاع الـ ID من localStorage
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      document.getElementById('userId').textContent = userId;
+    } else {
+      document.getElementById('userId').textContent = 'ID غير متوفر';
+    }
   </script>
-
 </body>
 </html>
