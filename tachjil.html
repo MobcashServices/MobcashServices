@@ -8,20 +8,24 @@
     body {
       margin: 0;
       font-family: 'Tahoma', sans-serif;
-      background-color: #f4f4f4;
-      padding: 20px;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
     .login-box {
-      background: white;
-      padding: 25px;
-      border-radius: 14px;
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 16px;
       max-width: 400px;
-      margin: 60px auto;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      position: relative;
     }
 
-    .login-box h2 {
+    h2 {
       text-align: center;
       margin-bottom: 25px;
       font-size: 22px;
@@ -32,21 +36,27 @@
       width: 100%;
       padding: 12px;
       margin-bottom: 15px;
-      font-size: 16px;
+      font-size: 15px;
       border: 1px solid #ccc;
-      border-radius: 8px;
-      box-sizing: border-box;
+      border-radius: 10px;
+      transition: border 0.3s;
+    }
+
+    input:focus, select:focus {
+      border-color: #4caf50;
+      outline: none;
     }
 
     button {
       width: 100%;
-      padding: 13px;
+      padding: 12px;
       background-color: #4caf50;
       color: white;
-      font-size: 17px;
+      font-size: 16px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
 
     button:hover {
@@ -54,24 +64,36 @@
     }
 
     .message {
-      margin-top: 10px;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 15px;
+      border-radius: 10px;
       font-size: 14px;
-      padding: 10px;
-      border-radius: 8px;
+      margin-top: 10px;
       display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .message.success {
+      background-color: #eaf7ea;
+      color: #2e7d32;
+      border: 1px solid #b2dfdb;
     }
 
     .message.error {
       background-color: #fdecea;
-      color: #d32f2f;
-      border: 1px solid #f44336;
+      color: #c62828;
+      border: 1px solid #f5c6cb;
     }
 
-    .message.success {
-      background-color: #e8f5e9;
-      color: #388e3c;
-      border: 1px solid #4caf50;
+    .message i {
+      font-size: 18px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -79,6 +101,7 @@
 
   <div class="login-box">
     <h2>تسجيل الدخول</h2>
+
     <select id="platform">
       <option value="" disabled selected>اختر المنصة</option>
       <option value="Mega pari">Mega pari</option>
@@ -90,41 +113,40 @@
 
     <input type="text" id="userId" placeholder="أدخل ID مكون من 10 أرقام" maxlength="10" oninput="validateId()" />
 
-    <div class="message" id="form-message"></div>
+    <div id="message" class="message"><i id="msg-icon">⚠️</i><span id="msg-text"></span></div>
 
     <button onclick="login()">تسجيل الدخول</button>
   </div>
 
   <script>
     function showMessage(type, text) {
-      const messageBox = document.getElementById('form-message');
-      messageBox.className = 'message ' + type;
-      messageBox.textContent = text;
-      messageBox.style.display = 'block';
+      const msgBox = document.getElementById('message');
+      const msgText = document.getElementById('msg-text');
+      const msgIcon = document.getElementById('msg-icon');
+
+      msgBox.className = 'message ' + type;
+      msgText.textContent = text;
+      msgIcon.textContent = type === 'success' ? '✅' : '⚠️';
+      msgBox.style.display = 'flex';
+
+      setTimeout(() => {
+        msgBox.style.display = 'none';
+      }, 3000);
     }
 
-    function isRepeatedDigits(id) {
-      return /^(\d)\1{9}$/.test(id); // يتحقق من تكرار نفس الرقم 10 مرات
+    function isRepeatedDigits(str) {
+      return /^(\d)\1{9}$/.test(str);
     }
 
     function validateId() {
       const userId = document.getElementById('userId').value;
-      const msg = document.getElementById('form-message');
 
-      if (!/^\d{0,10}$/.test(userId)) {
-        showMessage('error', 'يُسمح فقط بالأرقام.');
-        return;
-      }
-
-      if (userId.length < 10) {
-        msg.style.display = 'none';
-        return;
-      }
-
-      if (isRepeatedDigits(userId)) {
-        showMessage('error', 'لا يُسمح بإدخال ID مكرر مثل 0000000000.');
-      } else {
-        showMessage('success', 'ID صالح! يمكنك المتابعة.');
+      if (userId.length === 10) {
+        if (isRepeatedDigits(userId)) {
+          showMessage('error', 'لا يمكن استخدام 10 أرقام متشابهة مثل 0000000000');
+        } else {
+          showMessage('success', 'ID صحيح! يمكنك المتابعة.');
+        }
       }
     }
 
@@ -132,29 +154,22 @@
       const platform = document.getElementById('platform').value;
       const userId = document.getElementById('userId').value;
 
-      if (!platform) {
-        showMessage('error', 'يرجى اختيار المنصة.');
-        return;
-      }
-
-      if (!/^\d{10}$/.test(userId)) {
-        showMessage('error', 'يرجى إدخال ID مكون من 10 أرقام فقط.');
+      if (!platform || userId.length !== 10) {
+        showMessage('error', 'يرجى اختيار المنصة وإدخال ID مكون من 10 أرقام.');
         return;
       }
 
       if (isRepeatedDigits(userId)) {
-        showMessage('error', 'لا يُسمح بإدخال ID مكرر مثل 1111111111.');
+        showMessage('error', 'لا يمكن استخدام ID مكرر مثل 1111111111.');
         return;
       }
 
-      // إذا تم التحقق من كل شيء
-      showMessage('success', 'تم التحقق بنجاح، جاري تحويلك...');
+      // حفظ البيانات
       localStorage.setItem('platform', platform);
       localStorage.setItem('userId', userId);
 
-      setTimeout(() => {
-        window.location.href = 'home.html';
-      }, 1000);
+      // توجيه للصفحة التالية
+      window.location.href = 'home.html';
     }
   </script>
 
