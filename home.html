@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -7,14 +7,16 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 0;
       background-color: #f2f2f2;
+      font-family: 'Arial', sans-serif;
+      direction: rtl;
     }
 
     header {
-      background: #ffffff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      background-color: #fff;
       padding: 10px 16px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
     }
 
     .header-content {
@@ -26,66 +28,65 @@
     .menu-icon {
       font-size: 24px;
       cursor: pointer;
-      color: #2c3e50;
+      color: #333;
     }
 
     .site-title {
+      text-align: center;
+      flex-grow: 1;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .title-main {
       font-size: 18px;
       font-weight: bold;
       color: #1a1a1a;
-      text-align: center;
-      flex-grow: 1;
     }
 
-    .profile-section {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .title-sub {
+      font-size: 13px;
+      color: #555;
+      font-weight: normal;
     }
 
     .profile-info {
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      font-size: 13px;
-      color: #34495e;
-      user-select: all;
-      line-height: 1.2;
+      align-items: center;
+      gap: 3px;
     }
 
     .profile-icon {
-      width: 46px;
-      height: 46px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      background: #e0e0e0; /* رمادي ناعم */
+      background-color: #ccc;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 20px;
+      color: #fff;
     }
 
-    .profile-icon svg {
-      width: 24px;
-      height: 24px;
-      fill: #555;
+    .user-id {
+      font-size: 12px;
+      color: #333;
+      font-weight: bold;
+      user-select: all;
     }
 
-    @media (max-width: 600px) {
-      .site-title {
-        font-size: 16px;
-      }
+    .profile-label {
+      font-size: 11px;
+      color: #666;
+    }
 
-      .profile-icon {
-        width: 40px;
-        height: 40px;
-      }
-
-      .profile-icon svg {
-        width: 20px;
-        height: 20px;
-      }
-
-      .profile-info {
-        font-size: 12px;
+    @media screen and (max-width: 1023px) {
+      body {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
       }
     }
   </style>
@@ -93,31 +94,28 @@
 <body>
   <header>
     <div class="header-content">
-      <!-- الملف الشخصي في أقصى اليمين -->
-      <div class="profile-section">
-        <div class="profile-icon">
-          <!-- SVG أيقونة بسيطة -->
-          <svg viewBox="0 0 24 24">
-            <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
-          </svg>
-        </div>
-        <div class="profile-info">
-          <div id="userIdDisplay">ID: </div>
-          <div>الملف الشخصي</div>
-        </div>
+      <!-- أيقونة الإعدادات -->
+      <div class="menu-icon">&#9881;</div>
+
+      <!-- اسم الموقع -->
+      <div class="site-title">
+        <span class="title-main">Mobcash</span><br>
+        <span class="title-sub">Services</span>
       </div>
 
-      <!-- عنوان الموقع في الوسط -->
-      <div class="site-title">Mobcash Services</div>
-
-      <!-- أيقونة القائمة في أقصى اليسار -->
-      <div class="menu-icon">&#9776;</div>
+      <!-- الملف الشخصي + ID -->
+      <div class="profile-info">
+        <div class="profile-icon">&#128100;</div>
+        <div class="user-id" id="walletContainer">ID: </div>
+        <div class="profile-label">الملف الشخصي</div>
+      </div>
     </div>
   </header>
 
   <script>
+    // جلب الـ ID من localStorage وعرضه تلقائيًا
     const userId = localStorage.getItem("userId") || "غير مسجل";
-    document.getElementById("userIdDisplay").textContent = "ID: " + userId;
+    document.getElementById("walletContainer").textContent = "ID: " + userId;
   </script>
 </body>
 </html>
