@@ -38,16 +38,22 @@
     }
 
     .wallet-container {
-      background-color: #eaf2f8;
-      padding: 4px 10px;
-      border-radius: 12px;
+      background-color: #f0f0f0;
+      padding: 6px 12px;
+      border-radius: 20px;
       font-size: 13px;
       color: #2c3e50;
       font-weight: bold;
-      box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: center;
+      gap: 6px;
       user-select: all;
+    }
+
+    .wallet-container img {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
     }
 
     @media screen and (min-width: 1024px),
@@ -67,15 +73,17 @@
     <div class="header-content">
       <div class="menu-icon">&#9776;</div>
       <h1 class="site-title" id="siteTitle">Mobcash Services</h1>
-      <div class="wallet-container" id="walletContainer">ID: </div>
+      <div class="wallet-container" id="walletContainer">
+        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon"/>
+        <span id="userIdDisplay">ID:</span>
+      </div>
     </div>
   </header>
 
   <script>
     // جلب الـ ID من localStorage وعرضه تلقائيًا
     const userId = localStorage.getItem("userId") || "غير مسجل";
-    const walletDiv = document.getElementById("walletContainer");
-    walletDiv.textContent = "ID: " + userId;
+    document.getElementById("userIdDisplay").textContent = "ID: " + userId;
   </script>
 </body>
 </html>
