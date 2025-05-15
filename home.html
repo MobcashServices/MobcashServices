@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mobcash Services</title>
   <style>
     body {
@@ -10,6 +10,7 @@
       padding: 0;
       background-color: #f2f2f2;
       font-family: 'Arial', sans-serif;
+      direction: rtl; /* لجعل المحتوى عربي يبدأ من اليمين */
     }
 
     header {
@@ -19,57 +20,65 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      direction: rtl; /* لأن المحتوى عربي ونريد أن يكون اليمين هو البداية */
     }
 
+    /* الأيقونة اليسارية (القائمة) */
     .menu-icon {
-      font-size: 24px;
+      font-size: 26px;
       cursor: pointer;
       color: #333;
       flex-shrink: 0;
     }
 
+    /* العنوان في الوسط */
     .site-title {
-      font-size: 18px;
+      font-size: 20px;
       color: #333;
-      margin: 0 16px;
+      margin: 0;
       flex-grow: 1;
       text-align: center;
+      user-select: none;
     }
 
-    .profile-wrapper {
+    /* الحاوية اليمنى التي تحتوي على (ID + الملف الشخصي) و أيقونة الملف الشخصي */
+    .profile-section {
       display: flex;
       align-items: center;
       gap: 12px;
-      min-width: 160px;
+      min-width: 200px;
     }
 
+    /* النص الخاص بالملف الشخصي والـ ID */
     .profile-info {
       text-align: right;
       line-height: 1.2;
       color: #444;
       font-size: 13px;
       user-select: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .profile-info .user-id {
       font-weight: 600;
       font-size: 15px;
       color: #222;
-      margin-bottom: 2px;
       user-select: text; /* يمكن نسخ الـ ID */
     }
 
     .profile-info .profile-text {
-      color: #3a7bd5; /* لون أخضر-أزرق مشابه للصورة */
+      color: #3a7bd5; /* لون مميز للملف الشخصي */
       font-weight: 500;
       font-size: 12px;
+      margin-top: 2px;
       user-select: none;
     }
 
+    /* الأيقونة الدائرية للملف الشخصي */
     .profile-icon {
-      width: 46px;
-      height: 46px;
+      width: 50px;
+      height: 50px;
       background-color: #d9d9d9;
       border-radius: 50%;
       display: flex;
@@ -78,38 +87,45 @@
       cursor: pointer;
       flex-shrink: 0;
       box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+      transition: background-color 0.3s ease;
+    }
+
+    .profile-icon:hover {
+      background-color: #c0c0c0;
     }
 
     .profile-icon svg {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       fill: #757575;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="menu-icon" title="القائمة">&#9776;</div>
-    <h1 class="site-title">Mobcash Services</h1>
 
-    <div class="profile-wrapper">
-      <div class="profile-info">
-        <div class="user-id" id="userIdDisplay">id: 1153951123</div>
-        <div class="profile-text">الملف الشخصي</div>
-      </div>
-      <div class="profile-icon" title="الملف الشخصي">
-        <!-- أيقونة ملف شخصي SVG مثل الصورة -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-        </svg>
-      </div>
+<header>
+  <div class="menu-icon" title="القائمة">&#9776;</div>
+  <h1 class="site-title">Mobcash Services</h1>
+
+  <div class="profile-section">
+    <div class="profile-info">
+      <div class="user-id" id="userIdDisplay">id: 1153951123</div>
+      <div class="profile-text">الملف الشخصي</div>
     </div>
-  </header>
+    <div class="profile-icon" title="الملف الشخصي">
+      <!-- أيقونة ملف شخصي SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+      </svg>
+    </div>
+  </div>
+</header>
 
-  <script>
-    // تحديث رقم ID تلقائيًا من localStorage
-    const userId = localStorage.getItem("userId") || "غير مسجل";
-    document.getElementById("userIdDisplay").textContent = "id: " + userId;
-  </script>
+<script>
+  // جلب الـ ID من localStorage وعرضه تلقائيًا
+  const userId = localStorage.getItem("userId") || "غير مسجل";
+  document.getElementById("userIdDisplay").textContent = "id: " + userId;
+</script>
+
 </body>
 </html>
