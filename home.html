@@ -54,16 +54,19 @@
     }
 
     .profile-icon {
-      width: 48px;
-      height: 48px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
-      background: #cccccc; /* اللون الرمادي البسيط */
+      background: #e0e0e0; /* رمادي ناعم */
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      color: #444;
-      box-shadow: none; /* بدون ظل */
+    }
+
+    .profile-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: #555;
     }
 
     @media (max-width: 600px) {
@@ -72,9 +75,13 @@
       }
 
       .profile-icon {
-        width: 42px;
-        height: 42px;
-        font-size: 20px;
+        width: 40px;
+        height: 40px;
+      }
+
+      .profile-icon svg {
+        width: 20px;
+        height: 20px;
       }
 
       .profile-info {
@@ -88,7 +95,12 @@
     <div class="header-content">
       <!-- الملف الشخصي في أقصى اليمين -->
       <div class="profile-section">
-        <div class="profile-icon">&#128100;</div>
+        <div class="profile-icon">
+          <!-- SVG أيقونة بسيطة -->
+          <svg viewBox="0 0 24 24">
+            <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+          </svg>
+        </div>
         <div class="profile-info">
           <div id="userIdDisplay">ID: </div>
           <div>الملف الشخصي</div>
