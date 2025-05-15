@@ -19,74 +19,89 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      direction: rtl; /* لأن المحتوى عربي ونريد أن يكون اليمين هو البداية */
     }
 
     .menu-icon {
       font-size: 24px;
       cursor: pointer;
+      color: #333;
+      flex-shrink: 0;
     }
 
     .site-title {
       font-size: 18px;
       color: #333;
-      margin: 0;
+      margin: 0 16px;
       flex-grow: 1;
       text-align: center;
     }
 
-    .profile-container {
+    .profile-wrapper {
       display: flex;
       align-items: center;
-      gap: 10px;
-      direction: rtl; /* لأن المحتوى عربي والايقونة على اليمين */
+      gap: 12px;
+      min-width: 160px;
     }
 
     .profile-info {
       text-align: right;
-      font-size: 12px;
-      color: #444;
       line-height: 1.2;
+      color: #444;
+      font-size: 13px;
+      user-select: none;
     }
 
     .profile-info .user-id {
-      font-weight: bold;
-      font-size: 14px;
+      font-weight: 600;
+      font-size: 15px;
       color: #222;
       margin-bottom: 2px;
+      user-select: text; /* يمكن نسخ الـ ID */
+    }
+
+    .profile-info .profile-text {
+      color: #3a7bd5; /* لون أخضر-أزرق مشابه للصورة */
+      font-weight: 500;
+      font-size: 12px;
+      user-select: none;
     }
 
     .profile-icon {
-      width: 40px;
-      height: 40px;
-      background-color: #cfcfcf;
+      width: 46px;
+      height: 46px;
+      background-color: #d9d9d9;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
       flex-shrink: 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.12);
     }
 
-    .profile-icon img {
-      width: 22px;
-      height: 22px;
-      opacity: 0.7;
+    .profile-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: #757575;
     }
-
   </style>
 </head>
 <body>
   <header>
-    <div class="menu-icon">&#9776;</div>
+    <div class="menu-icon" title="القائمة">&#9776;</div>
     <h1 class="site-title">Mobcash Services</h1>
 
-    <div class="profile-container">
+    <div class="profile-wrapper">
       <div class="profile-info">
         <div class="user-id" id="userIdDisplay">id: 1153951123</div>
         <div class="profile-text">الملف الشخصي</div>
       </div>
       <div class="profile-icon" title="الملف الشخصي">
-        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User Icon" />
+        <!-- أيقونة ملف شخصي SVG مثل الصورة -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+        </svg>
       </div>
     </div>
   </header>
