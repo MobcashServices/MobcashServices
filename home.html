@@ -1,125 +1,125 @@
-‏<!DOCTYPE html>  
-‏<html lang="ar" dir="rtl">  
-‏<head>  
-‏  <meta charset="UTF-8" />  
-‏  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
-‏  <title>Mobcash Services</title>  
-‏  <style>  
-‏    body {  
-‏      margin: 0;  
-‏      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
-‏      background-color: #f2f2f2;  
-‏    }  
-‏  
-‏    header {  
-‏      background: #ffffff;  
-‏      box-shadow: 0 2px 6px rgba(0,0,0,0.08);  
-‏      padding: 10px 16px;  
-‏    }  
-‏  
-‏    .header-content {  
-‏      display: flex;  
-‏      align-items: center;  
-‏      justify-content: space-between;  
-‏    }  
-‏  
-‏    .menu-icon {  
-‏      font-size: 24px;  
-‏      cursor: pointer;  
-‏      color: #2c3e50;  
-‏    }  
-‏  
-‏    .site-title {  
-‏      font-size: 18px;  
-‏      font-weight: bold;  
-‏      color: #1a1a1a;  
-‏      text-align: center;  
-‏      flex-grow: 1;  
-‏      line-height: 1.2;  /* لتنسيق السطرين */ 
-‏    }  
-‏  
-‏    .profile-section {  
-‏      display: flex;  
-‏      align-items: center;  
-‏      gap: 10px;  
-‏    }  
-‏  
-‏    .profile-info {  
-‏      display: flex;  
-‏      flex-direction: column;  
-‏      align-items: flex-end;  
-‏      font-size: 13px;  
-‏      color: #34495e;  
-‏      user-select: all;  
-‏      line-height: 1.2;  
-‏    }  
-‏  
-‏    .profile-icon {  
-‏      width: 46px;  
-‏      height: 46px;  
-‏      border-radius: 50%;  
-‏      background: #e0e0e0; /* رمادي ناعم */  
-‏      display: flex;  
-‏      align-items: center;  
-‏      justify-content: center;  
-‏    }  
-‏  
-‏    .profile-icon svg {  
-‏      width: 24px;  
-‏      height: 24px;  
-‏      fill: #555;  
-‏    }  
-‏  
-‏    @media (max-width: 600px) {  
-‏      .site-title {  
-‏        font-size: 16px;  
-‏      }  
-‏  
-‏      .profile-icon {  
-‏        width: 40px;  
-‏        height: 40px;  
-‏      }  
-‏  
-‏      .profile-icon svg {  
-‏        width: 20px;  
-‏        height: 20px;  
-‏      }  
-‏  
-‏      .profile-info {  
-‏        font-size: 12px;  
-‏      }  
-‏    }  
-‏  </style>  
-‏</head>  
-‏<body>  
-‏  <header>  
-‏    <div class="header-content">  
-‏      <!-- الملف الشخصي في أقصى اليمين -->  
-‏      <div class="profile-section">  
-‏        <div class="profile-icon">  
-‏          <!-- SVG أيقونة بسيطة -->  
-‏          <svg viewBox="0 0 24 24">  
-‏            <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>  
-‏          </svg>  
-‏        </div>  
-‏        <div class="profile-info">  
-‏          <div id="userIdDisplay">ID: </div>  
-‏          <div>الملف الشخصي</div>  
-‏        </div>  
-‏      </div>  
-‏  
-‏      <!-- عنوان الموقع في الوسط، مع كسر السطر -->  
-‏      <div class="site-title">Mobcash<br>Services</div>  
-‏  
-‏      <!-- أيقونة القائمة في أقصى اليسار -->  
-‏      <div class="menu-icon">&#9776;</div>  
-‏    </div>  
-‏  </header>  
-‏  
-‏  <script>  
-‏    const userId = localStorage.getItem("userId") || "غير مسجل";  
-‏    document.getElementById("userIdDisplay").textContent = "ID: " + userId;  
-‏  </script>  
-‏</body>  
-‏</html>
-‏
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mobcash Services</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    header {
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      padding: 10px 16px;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+      color: #2c3e50;
+    }
+
+    .site-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1a1a1a;
+      text-align: center;
+      flex-grow: 1;
+      line-height: 1.2;
+    }
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-size: 13px;
+      color: #34495e;
+      user-select: all;
+      line-height: 1.2;
+    }
+
+    .profile-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: #555;
+    }
+
+    @media (max-width: 600px) {
+      .site-title {
+        font-size: 16px;
+      }
+
+      .profile-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .profile-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .profile-info {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <!-- الملف الشخصي -->
+      <div class="profile-section">
+        <div class="profile-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+          </svg>
+        </div>
+        <div class="profile-info">
+          <div id="userIdDisplay">ID: </div>
+          <div>الملف الشخصي</div>
+        </div>
+      </div>
+
+      <!-- عنوان الموقع -->
+      <div class="site-title">Mobcash<br>Services</div>
+
+      <!-- أيقونة القائمة -->
+      <div class="menu-icon">&#9776;</div>
+    </div>
+  </header>
+
+  <script>
+    const userId = localStorage.getItem("userId") || "غير مسجل";
+    document.getElementById("userIdDisplay").textContent = "ID: " + userId;
+  </script>
+
+</body>
+</html>
