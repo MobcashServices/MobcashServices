@@ -79,7 +79,7 @@
     .profile-icon svg {
       width: 28px;
       height: 28px;
-      fill: #bbb;
+      fill: #c2c2c2;
     }
 
     @media (max-width: 600px) {
@@ -110,16 +110,12 @@
       <!-- الملف الشخصي -->
       <div class="profile-section">
         <div class="profile-icon">
-          <!-- أيقونة مخصصة: رأس + كتف بيضوي -->
+          <!-- SVG مخصص: رأس + جسم بيضاوي ممتلئ -->
           <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
             <!-- الرأس -->
-            <circle cx="32" cy="20" r="12" />
-            <!-- الكتف البيضوي -->
-            <path d="M16,48 
-                     Q32,58 48,48 
-                     Q50,45 48,42 
-                     Q32,54 16,42 
-                     Q14,45 16,48Z" />
+            <circle cx="32" cy="20" r="10" />
+            <!-- الجسم: شكل بيضاوي ممتلئ بعرض أكبر وحواف ناعمة -->
+            <ellipse cx="32" cy="48" rx="18" ry="10" />
           </svg>
         </div>
         <div class="profile-info">
