@@ -41,23 +41,34 @@
     .profile-section {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .profile-info {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      font-size: 12px;
-      color: #5a5a5a;
-      line-height: 1.3;
+      font-size: 13px;
+      line-height: 1.2;
       user-select: all;
-      margin-bottom: 2px;
+    }
+
+    #userIdDisplay {
+      color: #444;
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .profile-label {
+      color: #2e7d32;
+      font-weight: bold;
+      font-size: 13px;
+      margin-right: 2px;
     }
 
     .profile-icon {
-      width: 42px;
-      height: 42px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       background-color: #e0e0e0;
       display: flex;
@@ -66,9 +77,9 @@
     }
 
     .profile-icon svg {
-      width: 24px;
-      height: 24px;
-      fill: #888;
+      width: 28px;
+      height: 28px;
+      fill: #bbb;
     }
 
     @media (max-width: 600px) {
@@ -77,17 +88,17 @@
       }
 
       .profile-icon {
-        width: 38px;
-        height: 38px;
+        width: 40px;
+        height: 40px;
       }
 
       .profile-icon svg {
-        width: 22px;
-        height: 22px;
+        width: 24px;
+        height: 24px;
       }
 
       .profile-info {
-        font-size: 11px;
+        font-size: 12px;
       }
     }
   </style>
@@ -98,20 +109,18 @@
     <div class="header-content">
       <!-- الملف الشخصي -->
       <div class="profile-section">
-        <div class="profile-info">
-          <div id="userIdDisplay">id: </div>
-          <div>الملف الشخصي</div>
-        </div>
         <div class="profile-icon">
-          <!-- SVG دقيق بشكل دائري وناعم -->
+          <!-- SVG أيقونة -->
           <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
             <!-- الرأس -->
             <circle cx="32" cy="20" r="12"/>
-            <!-- الكتف بشكل بيضوي ناعم وممتلئ -->
-            <path d="M16,48 
-                     Q32,34 48,48 
-                     Q32,60 16,48Z" />
+            <!-- الكتف بشكل بيضاوي ناعم -->
+            <path d="M16,50 Q32,36 48,50 A16,10 0 0,1 16,50Z" />
           </svg>
+        </div>
+        <div class="profile-info">
+          <div id="userIdDisplay">id: </div>
+          <div class="profile-label">الملف الشخصي</div>
         </div>
       </div>
 
