@@ -58,16 +58,16 @@
       width: 46px;
       height: 46px;
       border-radius: 50%;
-      background-color: #b0b0b0;
+      background-color: #e0e0e0;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .profile-icon svg {
-      width: 24px;
-      height: 24px;
-      fill: #ffffff;
+      width: 26px;
+      height: 26px;
+      fill: #555;
     }
 
     @media (max-width: 600px) {
@@ -81,8 +81,8 @@
       }
 
       .profile-icon svg {
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
       }
 
       .profile-info {
@@ -98,14 +98,14 @@
       <!-- الملف الشخصي -->
       <div class="profile-section">
         <div class="profile-icon">
-          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <!-- SVG المحسن -->
+          <svg viewBox="0 0 64 64">
             <!-- الرأس -->
-            <circle cx="32" cy="20" r="12" />
-            <!-- الجسم بمنحنى سفلي -->
-            <path d="M16,46
-                     Q32,60 48,46
-                     C48,36 40,30 32,30
-                     C24,30 16,36 16,46Z"/>
+            <circle cx="32" cy="20" r="12"/>
+            <!-- الجسم المحسن بمنحنى ناعم -->
+            <path d="M16,50
+                     Q32,38 48,50
+                     A16,10 0 0,1 16,50Z" />
           </svg>
         </div>
         <div class="profile-info">
