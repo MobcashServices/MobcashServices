@@ -41,22 +41,23 @@
     .profile-section {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .profile-info {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      font-size: 13px;
-      color: #34495e;
+      font-size: 12px;
+      color: #5a5a5a;
+      line-height: 1.3;
       user-select: all;
-      line-height: 1.1;
+      margin-bottom: 2px;
     }
 
     .profile-icon {
-      width: 46px;
-      height: 46px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background-color: #e0e0e0;
       display: flex;
@@ -65,8 +66,9 @@
     }
 
     .profile-icon svg {
-      width: 28px;
-      height: 28px;
+      width: 24px;
+      height: 24px;
+      fill: #888;
     }
 
     @media (max-width: 600px) {
@@ -75,17 +77,17 @@
       }
 
       .profile-icon {
-        width: 40px;
-        height: 40px;
+        width: 38px;
+        height: 38px;
       }
 
       .profile-icon svg {
-        width: 24px;
-        height: 24px;
+        width: 22px;
+        height: 22px;
       }
 
       .profile-info {
-        font-size: 12px;
+        font-size: 11px;
       }
     }
   </style>
@@ -96,18 +98,20 @@
     <div class="header-content">
       <!-- الملف الشخصي -->
       <div class="profile-section">
-        <div class="profile-icon">
-          <!-- SVG برأس وكتف بيضوي -->
-          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <!-- الرأس -->
-            <circle cx="32" cy="20" r="12" fill="#f2f2f2"/>
-            <!-- الكتف بيضوي الشكل -->
-            <ellipse cx="32" cy="50" rx="22" ry="10" fill="#f2f2f2"/>
-          </svg>
-        </div>
         <div class="profile-info">
           <div id="userIdDisplay">id: </div>
-          <div style="margin-right: 0;">الملف الشخصي</div>
+          <div>الملف الشخصي</div>
+        </div>
+        <div class="profile-icon">
+          <!-- SVG دقيق بشكل دائري وناعم -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <!-- الرأس -->
+            <circle cx="32" cy="20" r="12"/>
+            <!-- الكتف بشكل بيضوي ناعم وممتلئ -->
+            <path d="M16,48 
+                     Q32,34 48,48 
+                     Q32,60 16,48Z" />
+          </svg>
         </div>
       </div>
 
