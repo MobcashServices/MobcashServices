@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accent</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #f1f4f9;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .account-box {
+      background: #f1f4f9;
+      padding: 16px;
+      border-radius: 16px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 12px;
+      text-align: right;
+    }
+
+    .option-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    }
+
+    .option-text {
+      flex-grow: 1;
+      text-align: right;
+      font-size: 16px;
+      color: #222;
+      margin-right: 10px;
+    }
+
+    .icon-container {
+      background: #f3c301;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-container::before {
+      content: '+';
+      font-size: 20px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .option-card:nth-child(3) .icon-container::before {
+      content: '-';
+    }
+
+    .arrow {
+      color: #888;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="account-box">
+    <div class="section-title">إدارة الحساب</div>
+
+    <div class="option-card">
+      <div class="arrow">&lt;</div>
+      <div class="option-text">إجراء الإيداع</div>
+      <div class="icon-container"></div>
+    </div>
+
+    <div class="option-card">
+      <div class="arrow">&lt;</div>
+      <div class="option-text">السحب من الحساب</div>
+      <div class="icon-container"></div>
+    </div>
+  </div>
+</body>
+</html>
