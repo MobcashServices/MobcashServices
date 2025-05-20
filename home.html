@@ -113,8 +113,6 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      flex-grow: 1;
-      justify-content: flex-start;
     }
 
     .icon-circle {
@@ -146,16 +144,6 @@
       font-size: 22px;
       color: #888;
       padding-right: 6px;
-    }
-
-    /* الخط الفاصل الرقيق بين الإيداع والسحب */
-    .divider-vertical {
-      width: 1px;
-      background-color: #ddd;
-      height: 44px;
-      margin: 0 8px;
-      align-self: center;
-      flex-shrink: 0;
     }
 
     @media (max-width: 600px) {
@@ -218,9 +206,9 @@
   <div class="account-management">
     <div class="section-title">إدارة الحساب</div>
 
-    <!-- بطاقة الإيداع والسحب معاً -->
-    <div class="card" style="padding: 14px 0;">
-      <div class="card-right" style="width: 48%; padding-left: 16px;">
+    <!-- إجراء الإيداع -->
+    <div class="card">
+      <div class="card-right">
         <div class="icon-circle">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M12 5v14M5 12h14"/>
@@ -228,10 +216,12 @@
         </div>
         <div class="card-text">إجراء الإيداع</div>
       </div>
+      <div class="arrow">&#x276E;</div>
+    </div>
 
-      <div class="divider-vertical"></div>
-
-      <div class="card-right" style="width: 48%; padding-right: 16px;">
+    <!-- السحب من الحساب -->
+    <div class="card">
+      <div class="card-right">
         <div class="icon-circle">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M5 12h14"/>
@@ -239,8 +229,8 @@
         </div>
         <div class="card-text">السحب من الحساب</div>
       </div>
+      <div class="arrow">&#x276E;</div>
     </div>
-
   </div>
 
   <script>
@@ -249,4 +239,4 @@
   </script>
 
 </body>
-  </html>
+</html>
