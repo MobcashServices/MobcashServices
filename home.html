@@ -79,7 +79,61 @@
     .profile-icon svg {
       width: 28px;
       height: 28px;
-      fill: #ffffff; /* لون الرأس والكتف أبيض تمامًا */
+      fill: #ffffff;
+    }
+
+    .account-management {
+      padding: 20px 16px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      color: #7f8c8d;
+      margin-bottom: 12px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .card-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon-circle {
+      background-color: #f1c40f;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-circle svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    .card-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: #2c3e50;
+    }
+
+    .arrow {
+      font-size: 18px;
+      color: #555;
     }
 
     @media (max-width: 600px) {
@@ -100,6 +154,10 @@
       .profile-info {
         font-size: 12px;
       }
+
+      .card-text {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
@@ -107,14 +165,10 @@
 
   <header>
     <div class="header-content">
-      <!-- الملف الشخصي -->
       <div class="profile-section">
         <div class="profile-icon">
-          <!-- SVG: رأس + جسم بيضاوي ممتلئ -->
           <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <!-- الرأس -->
             <circle cx="32" cy="20" r="10" />
-            <!-- الجسم البيضاوي الممتلئ -->
             <ellipse cx="32" cy="48" rx="18" ry="10" />
           </svg>
         </div>
@@ -123,14 +177,41 @@
           <div class="profile-label">الملف الشخصي</div>
         </div>
       </div>
-
-      <!-- عنوان الموقع -->
       <div class="site-title">Mobcash<br>Services</div>
-
-      <!-- أيقونة القائمة -->
       <div class="menu-icon">&#9776;</div>
     </div>
   </header>
+
+  <!-- إدارة الحساب -->
+  <div class="account-management">
+    <div class="section-title">إدارة الحساب</div>
+
+    <!-- إجراء الإيداع -->
+    <div class="card">
+      <div class="card-right">
+        <div class="icon-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="card-text">إجراء الإيداع</div>
+      </div>
+      <div class="arrow">&#x276E;</div>
+    </div>
+
+    <!-- السحب من الحساب -->
+    <div class="card">
+      <div class="card-right">
+        <div class="icon-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M5 12h14" stroke="#fff" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="card-text">السحب من الحساب</div>
+      </div>
+      <div class="arrow">&#x276E;</div>
+    </div>
+  </div>
 
   <script>
     const userId = localStorage.getItem("userId") || "غير مسجل";
