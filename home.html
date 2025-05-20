@@ -89,51 +89,73 @@
     .section-title {
       font-size: 14px;
       color: #7f8c8d;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      font-weight: bold;
     }
 
     .card {
       background-color: #ffffff;
-      border-radius: 12px;
-      margin-bottom: 12px;
-      padding: 12px;
+      border-radius: 14px;
+      margin-bottom: 16px;
+      padding: 14px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
     }
 
     .card-right {
       display: flex;
       align-items: center;
       gap: 12px;
+      flex-grow: 1;
+      justify-content: flex-start;
     }
 
     .icon-circle {
       background-color: #f1c40f;
-      width: 36px;
-      height: 36px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
 
     .icon-circle svg {
-      width: 20px;
-      height: 20px;
-      fill: #fff;
+      width: 22px;
+      height: 22px;
+      stroke: #fff;
+      stroke-width: 2.5;
+      fill: none;
     }
 
     .card-text {
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 15.5px;
+      font-weight: 600;
       color: #2c3e50;
     }
 
     .arrow {
-      font-size: 18px;
-      color: #555;
+      font-size: 22px;
+      color: #888;
+      padding-right: 6px;
+    }
+
+    /* الخط الفاصل الرقيق بين الإيداع والسحب */
+    .divider-vertical {
+      width: 1px;
+      background-color: #ddd;
+      height: 44px;
+      margin: 0 8px;
+      align-self: center;
+      flex-shrink: 0;
     }
 
     @media (max-width: 600px) {
@@ -157,6 +179,16 @@
 
       .card-text {
         font-size: 14px;
+      }
+
+      .icon-circle {
+        width: 40px;
+        height: 40px;
+      }
+
+      .icon-circle svg {
+        width: 20px;
+        height: 20px;
       }
     }
   </style>
@@ -186,31 +218,29 @@
   <div class="account-management">
     <div class="section-title">إدارة الحساب</div>
 
-    <!-- إجراء الإيداع -->
-    <div class="card">
-      <div class="card-right">
+    <!-- بطاقة الإيداع والسحب معاً -->
+    <div class="card" style="padding: 14px 0;">
+      <div class="card-right" style="width: 48%; padding-left: 16px;">
         <div class="icon-circle">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2" fill="none"/>
+            <path d="M12 5v14M5 12h14"/>
           </svg>
         </div>
         <div class="card-text">إجراء الإيداع</div>
       </div>
-      <div class="arrow">&#x276E;</div>
-    </div>
 
-    <!-- السحب من الحساب -->
-    <div class="card">
-      <div class="card-right">
+      <div class="divider-vertical"></div>
+
+      <div class="card-right" style="width: 48%; padding-right: 16px;">
         <div class="icon-circle">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M5 12h14" stroke="#fff" stroke-width="2" fill="none"/>
+            <path d="M5 12h14"/>
           </svg>
         </div>
         <div class="card-text">السحب من الحساب</div>
       </div>
-      <div class="arrow">&#x276E;</div>
     </div>
+
   </div>
 
   <script>
@@ -219,4 +249,4 @@
   </script>
 
 </body>
-</html>
+  </html>
