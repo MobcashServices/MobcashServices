@@ -164,43 +164,56 @@
       font-size: 16px;
     }
 
-    .recommended-title {
+    /* Recommended methods section */
+    .recommended-section {
+      background-color: #a5d6a7;
+      padding: 20px 10px;
       text-align: center;
-      font-size: 16px;
-      font-weight: bold;
-      color: black;
-      margin: 30px 0 10px;
     }
 
-    .recommended-methods-row {
+    .recommended-section h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #000;
+      font-size: 18px;
+    }
+
+    .bank-cards {
       display: flex;
       justify-content: center;
-      gap: 12px;
-      margin-bottom: 30px;
-      padding: 0 10px;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
-    .recommended-box {
+    .bank-card {
       width: 100px;
-      border-radius: 10px;
+      background-color: #ffffff;
+      border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      font-weight: 500;
-      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    .top-half {
-      background-color: white;
-      color: #333;
-      text-align: center;
-      padding: 12px 6px;
+    .bank-card .logo-section {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
+      padding: 8px;
     }
 
-    .bottom-half {
-      background-color: #66bb6a;
+    .bank-card .logo-section img {
+      max-width: 80%;
+      max-height: 100%;
+    }
+
+    .bank-card .name-section {
+      background-color: #388e3c;
       color: white;
       text-align: center;
-      padding: 10px 6px;
+      padding: 8px 0;
+      font-size: 14px;
+      font-weight: bold;
     }
 
     @media (max-width: 600px) {
@@ -239,6 +252,10 @@
       .icon-circle img {
         width: 110%;
         height: 110%;
+      }
+
+      .bank-card {
+        width: 90px;
       }
     }
   </style>
@@ -282,25 +299,31 @@
         <div class="arrow-icon">›</div>
       </div>
     </div>
+  </main>
 
-    <!-- قسم الطرق الموصى بها -->
-    <div class="recommended-title">الطرق الموصى بها</div>
-    <div class="recommended-methods-row">
-      <div class="recommended-box">
-        <div class="top-half">BMCE</div>
-        <div class="bottom-half">مستحسن</div>
+  <section class="recommended-section">
+    <h2>الطرق الموصى بها</h2>
+    <div class="bank-cards">
+      <div class="bank-card">
+        <div class="logo-section">
+          <img src="https://i.ibb.co/dKDkHnD/bmce.png" alt="BMCE">
+        </div>
+        <div class="name-section">BMCE</div>
       </div>
-      <div class="recommended-box">
-        <div class="top-half">Attijari</div>
-        <div class="bottom-half">مستحسن</div>
+      <div class="bank-card">
+        <div class="logo-section">
+          <img src="https://i.ibb.co/zNcdQxh/attijari.png" alt="Attijari">
+        </div>
+        <div class="name-section">Attijari</div>
       </div>
-      <div class="recommended-box">
-        <div class="top-half">CIH</div>
-        <div class="bottom-half">مستحسن</div>
+      <div class="bank-card">
+        <div class="logo-section">
+          <img src="https://i.ibb.co/SrqzDg3/cih.png" alt="CIH">
+        </div>
+        <div class="name-section">CIH</div>
       </div>
     </div>
-
-  </main>
+  </section>
 
   <script>
     const userId = localStorage.getItem("userId") || "غير مسجل";
@@ -308,4 +331,4 @@
   </script>
 
 </body>
-  </html>
+          </html>
