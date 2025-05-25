@@ -132,12 +132,24 @@
       background-color: #fff;
       box-shadow: 0 0 8px rgba(0,0,0,0.12);
       overflow: hidden;
+      transition: transform 0.3s ease;
     }
 
     .icon-circle img {
       width: 110%;
       height: 110%;
       object-fit: contain;
+      filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+      transition: filter 0.3s ease;
+    }
+
+    .option-item:hover .icon-circle {
+      transform: scale(1.1);
+      box-shadow: 0 0 12px rgba(0, 128, 0, 0.6);
+    }
+
+    .option-item:hover .icon-circle img {
+      filter: drop-shadow(0 0 5px rgba(0,128,0,0.8));
     }
 
     .option-text {
@@ -152,55 +164,56 @@
       font-size: 16px;
     }
 
-    /* القسم الجديد: الطرق الموصى بها */
+    /* Recommended methods section */
     .recommended-section {
-      background-color: #d0e6cd;
-      padding: 25px 10px;
+      background-color: #a5d6a7;
+      padding: 20px 10px;
       text-align: center;
     }
 
     .recommended-section h2 {
       margin-top: 0;
-      margin-bottom: 24px;
-      color: #1a1a1a;
-      font-size: 20px;
-      font-weight: bold;
+      margin-bottom: 20px;
+      color: #000;
+      font-size: 18px;
     }
 
     .bank-cards {
       display: flex;
       justify-content: center;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
     .bank-card {
-      width: 110px;
-      height: 110px;
-      background-color: white;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #ccc;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      width: 100px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    .bank-card .top-half {
-      flex: 1;
-      background-color: #fff;
-    }
-
-    .bank-card .bottom-half {
-      background-color: #4caf50;
-      height: 35px;
+    .bank-card .logo-section {
+      background-color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 60px;
+      padding: 8px;
     }
 
-    .bank-card .bottom-half span {
+    .bank-card .logo-section img {
+      max-width: 80%;
+      max-height: 100%;
+    }
+
+    .bank-card .name-section {
+      background-color: #388e3c;
       color: white;
-      font-weight: bold;
+      text-align: center;
+      padding: 8px 0;
       font-size: 14px;
+      font-weight: bold;
     }
 
     @media (max-width: 600px) {
@@ -208,17 +221,41 @@
         font-size: 16px;
       }
 
+      .profile-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .profile-icon svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .profile-info {
+        font-size: 12px;
+      }
+
+      .account-header {
+        font-size: 14px;
+      }
+
+      .option-text {
+        font-size: 14px;
+      }
+
+      .icon-circle {
+        width: 32px;
+        height: 32px;
+        margin-left: 8px;
+      }
+
+      .icon-circle img {
+        width: 110%;
+        height: 110%;
+      }
+
       .bank-card {
         width: 90px;
-        height: 100px;
-      }
-
-      .bank-card .bottom-half {
-        height: 30px;
-      }
-
-      .bank-card .bottom-half span {
-        font-size: 13px;
       }
     }
   </style>
@@ -248,12 +285,16 @@
     <div class="account-header">إدارة الحساب</div>
     <div class="account-option">
       <div class="option-item">
-        <div class="icon-circle"></div>
+        <div class="icon-circle">
+          <img src="https://i.ibb.co/nS2x140/A825-BDBC-18-A3-4-D5-C-9-E17-6-F994-F30-B307-removebg-preview.png" alt="إيداع" />
+        </div>
         <div class="option-text">إجراء الإيداع</div>
         <div class="arrow-icon">›</div>
       </div>
       <div class="option-item">
-        <div class="icon-circle"></div>
+        <div class="icon-circle">
+          <img src="https://i.ibb.co/rRDF6BbH/9-FD1-E7-E9-36-EE-4530-AC26-5-B1976634666-removebg-preview.png" alt="سحب" />
+        </div>
         <div class="option-text">السحب من الحساب</div>
         <div class="arrow-icon">›</div>
       </div>
@@ -264,16 +305,22 @@
     <h2>الطرق الموصى بها</h2>
     <div class="bank-cards">
       <div class="bank-card">
-        <div class="top-half"></div>
-        <div class="bottom-half"><span>BMCE</span></div>
+        <div class="logo-section">
+          <img src="https://i.ibb.co/dKDkHnD/bmce.png" alt="BMCE">
+        </div>
+        <div class="name-section">BMCE</div>
       </div>
       <div class="bank-card">
-        <div class="top-half"></div>
-        <div class="bottom-half"><span>Attijari</span></div>
+        <div class="logo-section">
+          <img src="https://i.ibb.co/zNcdQxh/attijari.png" alt="Attijari">
+        </div>
+        <div class="name-section">Attijari</div>
       </div>
       <div class="bank-card">
-        <div class="top-half"></div>
-        <div class="bottom-half"><span>CIH</span></div>
+        <div class="logo-section">
+          <img src="https://i.ibb.co/SrqzDg3/cih.png" alt="CIH">
+        </div>
+        <div class="name-section">CIH</div>
       </div>
     </div>
   </section>
@@ -284,4 +331,4 @@
   </script>
 
 </body>
-  </html>
+</html>
