@@ -128,6 +128,27 @@
       align-items: center;
       justify-content: center;
       margin-left: 12px;
+      background-color: #fff;
+      box-shadow: 0 0 8px rgba(0,0,0,0.12);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .icon-circle img {
+      width: 70%;
+      height: 70%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+      transition: filter 0.3s ease;
+    }
+
+    .option-item:hover .icon-circle {
+      transform: scale(1.1);
+      box-shadow: 0 0 12px rgba(0, 128, 0, 0.6);
+    }
+
+    .option-item:hover .icon-circle img {
+      filter: drop-shadow(0 0 5px rgba(0,128,0,0.8));
     }
 
     .option-text {
@@ -140,11 +161,6 @@
     .arrow-icon {
       color: #888;
       font-size: 16px;
-    }
-
-    svg.plus-icon, svg.minus-icon {
-      width: 24px;
-      height: 24px;
     }
 
     @media (max-width: 600px) {
@@ -172,6 +188,17 @@
 
       .option-text {
         font-size: 14px;
+      }
+
+      .icon-circle {
+        width: 32px;
+        height: 32px;
+        margin-left: 8px;
+      }
+
+      .icon-circle img {
+        width: 70%;
+        height: 70%;
       }
     }
   </style>
@@ -202,23 +229,14 @@
     <div class="account-option">
       <div class="option-item">
         <div class="icon-circle">
-          <!-- أيقونة + خضراء -->
-          <svg class="plus-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-            <circle cx="32" cy="32" r="30" fill="#4caf50"/>
-            <line x1="32" y1="20" x2="32" y2="44" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-            <line x1="20" y1="32" x2="44" y2="32" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-          </svg>
+          <img src="https://i.ibb.co/nS2x140/A825-BDBC-18-A3-4-D5-C-9-E17-6-F994-F30-B307-removebg-preview.png" alt="إيداع" />
         </div>
         <div class="option-text">إجراء الإيداع</div>
         <div class="arrow-icon">›</div>
       </div>
       <div class="option-item">
         <div class="icon-circle">
-          <!-- أيقونة - حمراء -->
-          <svg class="minus-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-            <circle cx="32" cy="32" r="30" fill="#f44336"/>
-            <line x1="20" y1="32" x2="44" y2="32" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-          </svg>
+          <img src="https://i.ibb.co/rRDF6BbH/9-FD1-E7-E9-36-EE-4530-AC26-5-B1976634666-removebg-preview.png" alt="سحب" />
         </div>
         <div class="option-text">السحب من الحساب</div>
         <div class="arrow-icon">›</div>
@@ -232,4 +250,4 @@
   </script>
 
 </body>
-</html>
+          </html>
