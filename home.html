@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #e0e0e0;
+      background-color: #f2f2f2;
     }
 
     header {
@@ -82,63 +82,63 @@
       fill: #ffffff;
     }
 
-    main {
-      background-color: #e0e0e0;
-      padding: 20px 16px;
+    .account-section {
+      background-color: #f2f2f2;
+      padding: 25px 15px;
     }
 
-    .section-title {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 10px;
-      margin-right: 8px;
-    }
-
-    .account-box {
-      background-color: #ffffff;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    .account-header {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 16px;
     }
 
     .account-option {
+      background-color: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .option-item {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      color: #000;
-      font-size: 15px;
-      border-bottom: 1px solid #e0e0e0;
+      padding: 14px;
+      cursor: pointer;
     }
 
-    .account-option:last-child {
-      border-bottom: none;
+    .option-item:not(:last-child) {
+      border-bottom: 1px solid #dcdcdc;
     }
 
-    .option-icon {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .circle-icon {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
+    .icon-circle {
+      width: 36px;
+      height: 36px;
       background-color: #e0e0e0;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-left: 12px;
     }
 
-    .circle-icon img {
-      width: 18px;
-      height: 18px;
+    .icon-circle span {
+      color: orange;
+      font-size: 18px;
     }
 
-    .arrow {
-      font-size: 16px;
+    .option-text {
+      flex-grow: 1;
+      color: #000;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .arrow-icon {
       color: #888;
+      font-size: 16px;
     }
 
     @media (max-width: 600px) {
@@ -158,6 +158,14 @@
 
       .profile-info {
         font-size: 12px;
+      }
+
+      .account-header {
+        font-size: 16px;
+      }
+
+      .option-text {
+        font-size: 14px;
       }
     }
   </style>
@@ -183,26 +191,18 @@
     </div>
   </header>
 
-  <main>
-    <div class="section-title">إدارة الحساب</div>
-    <div class="account-box">
-      <div class="account-option">
-        <div class="option-icon">
-          <div class="circle-icon">
-            <img src="https://i.ibb.co/zX4dXZ5/deposit-icon.png" alt="إيداع">
-          </div>
-          إجراء الإيداع
-        </div>
-        <div class="arrow">‹</div>
+  <main class="account-section">
+    <div class="account-header">إدارة الحساب</div>
+    <div class="account-option">
+      <div class="option-item">
+        <div class="icon-circle"><span>+</span></div>
+        <div class="option-text">إجراء الإيداع</div>
+        <div class="arrow-icon">›</div>
       </div>
-      <div class="account-option">
-        <div class="option-icon">
-          <div class="circle-icon">
-            <img src="https://i.ibb.co/vzwZJh9/withdraw-icon.png" alt="سحب">
-          </div>
-          السحب من الحساب
-        </div>
-        <div class="arrow">‹</div>
+      <div class="option-item">
+        <div class="icon-circle"><span>-</span></div>
+        <div class="option-text">السحب من الحساب</div>
+        <div class="arrow-icon">›</div>
       </div>
     </div>
   </main>
