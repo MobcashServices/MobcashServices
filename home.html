@@ -1,130 +1,220 @@
-<!DOCTYPE html>    
-<html lang="ar" dir="rtl">    
-<head>    
-  <meta charset="UTF-8" />    
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>    
-  <title>Mobcash Services</title>    
-  <style>    
-    body {    
-      margin: 0;    
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
-      background-color: #f2f2f2;    
-    }    
-    
-    header {    
-      background-color: #ffffff;    
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);    
-      padding: 10px 16px;    
-    }    
-    
-    .header-content {    
-      display: flex;    
-      align-items: center;    
-      justify-content: space-between;    
-    }    
-    
-    .menu-icon {    
-      font-size: 24px;    
-      cursor: pointer;    
-      color: #2c3e50;    
-    }    
-    
-    .site-title {    
-      font-size: 18px;    
-      font-weight: bold;    
-      color: #1a1a1a;    
-      text-align: center;    
-      flex-grow: 1;    
-      line-height: 1.2;    
-    }    
-    
-    .profile-section {    
-      display: flex;    
-      align-items: center;    
-      gap: 10px;    
-    }    
-    
-    .profile-info {    
-      display: flex;    
-      flex-direction: column;    
-      align-items: flex-end;    
-      font-size: 13px;    
-      line-height: 1.2;    
-      user-select: all;    
-    }    
-    
-    #userIdDisplay {    
-      color: #444;    
-      font-weight: 500;    
-      font-size: 13px;    
-    }    
-    
-    .profile-label {    
-      color: #2e7d32;    
-      font-weight: bold;    
-      font-size: 13px;    
-      margin-right: 2px;    
-    }    
-    
-    .profile-icon {    
-      width: 46px;    
-      height: 46px;    
-      border-radius: 50%;    
-      background-color: #e0e0e0;    
-      display: flex;    
-      align-items: center;    
-      justify-content: center;    
-    }    
-    
-    .profile-icon svg {    
-      width: 28px;    
-      height: 28px;    
-      fill: #ffffff;    
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mobcash Services</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f2f2;
     }
 
-    @media (max-width: 600px) {    
-      .site-title {    
-        font-size: 16px;    
-      }    
-      .profile-icon {    
-        width: 40px;    
-        height: 40px;    
-      }    
-      .profile-icon svg {    
-        width: 24px;    
-        height: 24px;    
-      }    
-      .profile-info {    
-        font-size: 12px;    
-      }    
-    }    
-  </style>    
-</head>    
-<body>    
-    
-  <header>    
-    <div class="header-content">    
-      <div class="profile-section">    
-        <div class="profile-icon">    
-          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">    
-            <circle cx="32" cy="20" r="10" />    
-            <ellipse cx="32" cy="48" rx="18" ry="10" />    
-          </svg>    
-        </div>    
-        <div class="profile-info">    
-          <div id="userIdDisplay">id: </div>    
-          <div class="profile-label">الملف الشخصي</div>    
-        </div>    
-      </div>    
-      <div class="site-title">Mobcash<br>Services</div>    
-      <div class="menu-icon">&#9776;</div>    
-    </div>    
-  </header>    
+    header {
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      padding: 10px 16px;
+    }
 
-  <script>    
-    const userId = localStorage.getItem("userId") || "غير مسجل";    
-    document.getElementById("userIdDisplay").textContent = "id: " + userId;    
-  </script>    
-    
-</body>    
-</html>
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+      color: #2c3e50;
+    }
+
+    .site-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1a1a1a;
+      text-align: center;
+      flex-grow: 1;
+      line-height: 1.2;
+    }
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-size: 13px;
+      line-height: 1.2;
+      user-select: all;
+    }
+
+    #userIdDisplay {
+      color: #444;
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .profile-label {
+      color: #2e7d32;
+      font-weight: bold;
+      font-size: 13px;
+      margin-right: 2px;
+    }
+
+    .profile-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-icon svg {
+      width: 28px;
+      height: 28px;
+      fill: #ffffff;
+    }
+
+    /* قسم إدارة الحساب */
+    .account-section {
+      background-color: #f7f9fb;
+      padding: 20px 16px 8px;
+    }
+
+    .account-title {
+      color: #7f8c8d;
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .account-card {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .account-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid #e0e0e0;
+      cursor: pointer;
+    }
+
+    .account-option:last-child {
+      border-bottom: none;
+    }
+
+    .option-icon {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon-circle {
+      width: 32px;
+      height: 32px;
+      background-color: #f1f1f1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-circle img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .option-text {
+      color: #000;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .arrow {
+      color: #888;
+      font-size: 18px;
+    }
+
+    @media (max-width: 600px) {
+      .site-title {
+        font-size: 16px;
+      }
+      .profile-icon {
+        width: 40px;
+        height: 40px;
+      }
+      .profile-icon svg {
+        width: 24px;
+        height: 24px;
+      }
+      .profile-info {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="profile-section">
+        <div class="profile-icon">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="20" r="10" />
+            <ellipse cx="32" cy="48" rx="18" ry="10" />
+          </svg>
+        </div>
+        <div class="profile-info">
+          <div id="userIdDisplay">id: </div>
+          <div class="profile-label">الملف الشخصي</div>
+        </div>
+      </div>
+      <div class="site-title">Mobcash<br>Services</div>
+      <div class="menu-icon">&#9776;</div>
+    </div>
+  </header>
+
+  <!-- قسم إدارة الحساب -->
+  <div class="account-section">
+    <div class="account-title">إدارة الحساب</div>
+    <div class="account-card">
+      <div class="account-option">
+        <div class="option-icon">
+          <div class="icon-circle" style="background-color: #f8f4ed;">
+            <img src="https://img.icons8.com/ios-filled/50/ffa500/plus-math.png" alt="إيداع"/>
+          </div>
+          <div class="option-text">إجراء الإيداع</div>
+        </div>
+        <div class="arrow">›</div>
+      </div>
+      <div class="account-option">
+        <div class="option-icon">
+          <div class="icon-circle" style="background-color: #f8f4ed;">
+            <img src="https://img.icons8.com/ios-filled/50/ffa500/money-withdrawal.png" alt="سحب"/>
+          </div>
+          <div class="option-text">السحب من الحساب</div>
+        </div>
+        <div class="arrow">›</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const userId = localStorage.getItem("userId") || "غير مسجل";
+    document.getElementById("userIdDisplay").textContent = "id: " + userId;
+  </script>
+
+</body>
+            </html>
