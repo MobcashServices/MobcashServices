@@ -79,7 +79,6 @@
     .profile-icon svg {
       width: 28px;
       height: 28px;
-      fill: #ffffff;
     }
 
     .account-section {
@@ -124,7 +123,6 @@
     .icon-circle {
       width: 38px;
       height: 38px;
-      background-color: #e0e0e0;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -144,9 +142,9 @@
       font-size: 16px;
     }
 
-    .icon-circle svg {
-      width: 22px;
-      height: 22px;
+    svg.plus-icon, svg.minus-icon {
+      width: 24px;
+      height: 24px;
     }
 
     @media (max-width: 600px) {
@@ -185,8 +183,8 @@
       <div class="profile-section">
         <div class="profile-icon">
           <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="20" r="10" />
-            <ellipse cx="32" cy="48" rx="18" ry="10" />
+            <circle cx="32" cy="20" r="10" fill="#666"/>
+            <ellipse cx="32" cy="48" rx="18" ry="10" fill="#999"/>
           </svg>
         </div>
         <div class="profile-info">
@@ -204,9 +202,11 @@
     <div class="account-option">
       <div class="option-item">
         <div class="icon-circle">
-          <svg class="plus-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 5H21V19H3V5Z" fill="#4caf50"/>
-            <path d="M12 8V16M8 12H16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <!-- أيقونة + خضراء -->
+          <svg class="plus-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="30" fill="#4caf50"/>
+            <line x1="32" y1="20" x2="32" y2="44" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+            <line x1="20" y1="32" x2="44" y2="32" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="option-text">إجراء الإيداع</div>
@@ -214,9 +214,10 @@
       </div>
       <div class="option-item">
         <div class="icon-circle">
-          <svg class="minus-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 5H21V19H3V5Z" fill="#f44336"/>
-            <path d="M16 12H8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <!-- أيقونة - حمراء -->
+          <svg class="minus-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="30" fill="#f44336"/>
+            <line x1="20" y1="32" x2="44" y2="32" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="option-text">السحب من الحساب</div>
