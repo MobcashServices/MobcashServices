@@ -107,10 +107,17 @@
       align-items: center;
       padding: 14px;
       cursor: pointer;
+      position: relative;
     }
 
-    .option-item:not(:last-child) {
-      border-bottom: 1px solid #dcdcdc;
+    .option-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 64px;
+      right: 0;
+      height: 1px;
+      background-color: #dcdcdc;
     }
 
     .icon-circle {
@@ -197,7 +204,7 @@
       <div class="option-item">
         <div class="icon-circle">
           <!-- أيقونة زائد -->
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <circle cx="12" cy="12" r="10" fill="#e8f5e9"/>
             <path d="M12 8v8M8 12h8" stroke="#2e7d32" stroke-width="2" stroke-linecap="round"/>
           </svg>
@@ -209,7 +216,7 @@
       <div class="option-item">
         <div class="icon-circle">
           <!-- أيقونة ناقص -->
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <circle cx="12" cy="12" r="10" fill="#e8f5e9"/>
             <path d="M8 12h8" stroke="#2e7d32" stroke-width="2" stroke-linecap="round"/>
           </svg>
@@ -226,4 +233,4 @@
   </script>
 
 </body>
-          </html>
+              </html>
