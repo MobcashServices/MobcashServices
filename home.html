@@ -101,7 +101,6 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
       overflow: hidden;
       position: relative;
-      margin-bottom: 20px;
     }
 
     .option-item {
@@ -165,27 +164,43 @@
       font-size: 16px;
     }
 
-    .recommended-methods {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 10px;
-      padding: 5px 0 20px;
-    }
-
-    .method-item {
-      background-color: #e6f2e6;
-      border-radius: 10px;
+    .recommended-title {
       text-align: center;
-      padding: 10px 5px;
+      font-size: 16px;
+      font-weight: bold;
+      color: black;
+      margin: 30px 0 10px;
     }
 
-    .method-item img {
-      max-width: 60px;
-      margin-bottom: 8px;
+    .recommended-methods-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 30px;
+      padding: 0 10px;
     }
 
-    .method-item div {
-      font-size: 13px;
+    .recommended-box {
+      width: 100px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .top-half {
+      background-color: white;
+      color: #333;
+      text-align: center;
+      padding: 12px 6px;
+    }
+
+    .bottom-half {
+      background-color: #66bb6a;
+      color: white;
+      text-align: center;
+      padding: 10px 6px;
     }
 
     @media (max-width: 600px) {
@@ -268,18 +283,23 @@
       </div>
     </div>
 
-    <div class="account-header">الطرق الموصى بها</div>
-    <div class="recommended-methods">
-      <div class="method-item"><img src="https://via.placeholder.com/60" alt="BMCE"><div>BMCE</div></div>
-      <div class="method-item"><img src="https://via.placeholder.com/60" alt="Attijari"><div>Attijari</div></div>
-      <div class="method-item"><img src="https://via.placeholder.com/60" alt="CIH"><div>CIH</div></div>
-      <div class="method-item"><img src="https://via.placeholder.com/60" alt="SGMA"><div>Société Générale</div></div>
-      <div class="method-item"><img src="https://via.placeholder.com/60" alt="We Pay"><div>We Pay</div></div>
-      <div class="method-item"><img src="https://via.placeholder.com/60" alt="Lbankalik"><div>Lbankalik</div></div>
-      <div class="method-item"><img src="https://via.placeholder.com/60" alt="CFG"><div>CFG Bank</div></div>
-      <div class="method-item"><img src="https://via.placeholder.com/60" alt="BANK-e"><div>BANK-e</div></div>
-      <div class="method-item"><img src="https://via.placeholder.com/60" alt="CDM"><div>CDM</div></div>
+    <!-- قسم الطرق الموصى بها -->
+    <div class="recommended-title">الطرق الموصى بها</div>
+    <div class="recommended-methods-row">
+      <div class="recommended-box">
+        <div class="top-half">BMCE</div>
+        <div class="bottom-half">مستحسن</div>
+      </div>
+      <div class="recommended-box">
+        <div class="top-half">Attijari</div>
+        <div class="bottom-half">مستحسن</div>
+      </div>
+      <div class="recommended-box">
+        <div class="top-half">CIH</div>
+        <div class="bottom-half">مستحسن</div>
+      </div>
     </div>
+
   </main>
 
   <script>
@@ -288,4 +308,4 @@
   </script>
 
 </body>
-          </html>
+  </html>
