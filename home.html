@@ -101,6 +101,7 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
       overflow: hidden;
       position: relative;
+      margin-bottom: 20px;
     }
 
     .option-item {
@@ -162,6 +163,29 @@
     .arrow-icon {
       color: #888;
       font-size: 16px;
+    }
+
+    .recommended-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+      padding: 5px 0 20px;
+    }
+
+    .method-item {
+      background-color: #e6f2e6;
+      border-radius: 10px;
+      text-align: center;
+      padding: 10px 5px;
+    }
+
+    .method-item img {
+      max-width: 60px;
+      margin-bottom: 8px;
+    }
+
+    .method-item div {
+      font-size: 13px;
     }
 
     @media (max-width: 600px) {
@@ -243,6 +267,19 @@
         <div class="arrow-icon">›</div>
       </div>
     </div>
+
+    <div class="account-header">الطرق الموصى بها</div>
+    <div class="recommended-methods">
+      <div class="method-item"><img src="https://via.placeholder.com/60" alt="BMCE"><div>BMCE</div></div>
+      <div class="method-item"><img src="https://via.placeholder.com/60" alt="Attijari"><div>Attijari</div></div>
+      <div class="method-item"><img src="https://via.placeholder.com/60" alt="CIH"><div>CIH</div></div>
+      <div class="method-item"><img src="https://via.placeholder.com/60" alt="SGMA"><div>Société Générale</div></div>
+      <div class="method-item"><img src="https://via.placeholder.com/60" alt="We Pay"><div>We Pay</div></div>
+      <div class="method-item"><img src="https://via.placeholder.com/60" alt="Lbankalik"><div>Lbankalik</div></div>
+      <div class="method-item"><img src="https://via.placeholder.com/60" alt="CFG"><div>CFG Bank</div></div>
+      <div class="method-item"><img src="https://via.placeholder.com/60" alt="BANK-e"><div>BANK-e</div></div>
+      <div class="method-item"><img src="https://via.placeholder.com/60" alt="CDM"><div>CDM</div></div>
+    </div>
   </main>
 
   <script>
@@ -251,4 +288,4 @@
   </script>
 
 </body>
-  </html>
+          </html>
