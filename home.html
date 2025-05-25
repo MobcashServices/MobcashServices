@@ -3,185 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mobcash Services</title>
+  <title>محفظة Mobcash</title>
   <style>
+    :root {
+      --main-green: #2e7d32;
+      --light-green: #e8f5e9;
+      --text-dark: #212121;
+      --text-light: #666;
+      --card-radius: 16px;
+    }
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f2f2f2;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: #f4f6f5;
     }
 
     header {
-      background-color: #ffffff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      padding: 10px 16px;
-    }
-
-    .header-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .menu-icon {
-      font-size: 24px;
-      cursor: pointer;
-      color: #2c3e50;
-    }
-
-    .site-title {
-      font-size: 18px;
-      font-weight: bold;
-      color: #1a1a1a;
+      background-color: var(--main-green);
+      color: white;
+      padding: 20px 16px;
       text-align: center;
-      flex-grow: 1;
-      line-height: 1.2;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
     }
 
-    .profile-section {
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    .balance-card {
+      background: white;
+      border-radius: var(--card-radius);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      margin: -40px 16px 20px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .balance-card h2 {
+      margin: 0 0 8px;
+      color: var(--text-dark);
+      font-size: 20px;
+    }
+
+    .balance-card p {
+      margin: 0;
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    .actions {
       display: flex;
-      align-items: center;
-      gap: 10px;
+      justify-content: space-around;
+      padding: 0 16px;
     }
 
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      font-size: 13px;
-      line-height: 1.2;
-      user-select: all;
-    }
-
-    #userIdDisplay {
-      color: #444;
-      font-weight: 500;
-      font-size: 13px;
-    }
-
-    .profile-label {
-      color: #2e7d32;
-      font-weight: bold;
-      font-size: 13px;
-      margin-right: 2px;
-    }
-
-    .profile-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background-color: #e0e0e0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .profile-icon svg {
-      width: 28px;
-      height: 28px;
-      fill: #ffffff;
-    }
-
-    .account-section {
-      background-color: #f2f2f2;
-      padding: 25px 15px;
-    }
-
-    .account-header {
-      font-size: 18px;
-      font-weight: bold;
-      color: #333;
-      margin-bottom: 16px;
-    }
-
-    .account-option {
-      background-color: #fff;
-      border-radius: 14px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      overflow: hidden;
-      margin-bottom: 14px;
-      position: relative;
-    }
-
-    .option-item {
-      display: flex;
-      align-items: center;
-      padding: 14px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .option-item:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      right: 64px; /* يبدأ الخط من بعد الأيقونة */
-      left: 0;
-      height: 1px;
-      background-color: #dcdcdc;
-    }
-
-    .icon-circle {
-      width: 38px;
-      height: 38px;
-      background-color: #e0e0e0;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-left: 12px;
-    }
-
-    .option-text {
-      flex-grow: 1;
-      color: #000;
+    .action-btn {
+      background-color: var(--main-green);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 20px;
       font-size: 15px;
+      cursor: pointer;
+      flex: 1;
+      margin: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.3s;
+    }
+
+    .action-btn:hover {
+      background-color: #256328;
+    }
+
+    .icon {
+      font-size: 18px;
+    }
+
+    .transactions {
+      padding: 16px;
+    }
+
+    .transactions h3 {
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+
+    .transaction-item {
+      background: white;
+      border-radius: var(--card-radius);
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .transaction-item .label {
       font-weight: 500;
+      color: var(--text-dark);
     }
 
-    .arrow-icon {
-      color: #888;
-      font-size: 16px;
-    }
-
-    .icon-circle svg {
-      width: 22px;
-      height: 22px;
-    }
-
-    .plus-icon {
-      fill: #4caf50;
-    }
-
-    .minus-icon {
-      fill: #f44336;
+    .transaction-item .amount {
+      color: var(--main-green);
+      font-weight: bold;
     }
 
     @media (max-width: 600px) {
-      .site-title {
-        font-size: 16px;
-      }
-
-      .profile-icon {
-        width: 40px;
-        height: 40px;
-      }
-
-      .profile-icon svg {
-        width: 24px;
-        height: 24px;
-      }
-
-      .profile-info {
-        font-size: 12px;
-      }
-
-      .account-header {
-        font-size: 16px;
-      }
-
-      .option-text {
+      .action-btn {
         font-size: 14px;
+        padding: 12px;
       }
     }
   </style>
@@ -189,57 +127,38 @@
 <body>
 
   <header>
-    <div class="header-content">
-      <div class="profile-section">
-        <div class="profile-icon">
-          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="20" r="10" />
-            <ellipse cx="32" cy="48" rx="18" ry="10" />
-          </svg>
-        </div>
-        <div class="profile-info">
-          <div id="userIdDisplay">id: </div>
-          <div class="profile-label">الملف الشخصي</div>
-        </div>
-      </div>
-      <div class="site-title">Mobcash<br>Services</div>
-      <div class="menu-icon">&#9776;</div>
-    </div>
+    <h1>محفظة Mobcash</h1>
   </header>
 
-  <main class="account-section">
-    <div class="account-header">إدارة الحساب</div>
-    <div class="account-option">
-      <div class="option-item">
-        <div class="icon-circle">
-          <svg class="plus-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-            <rect x="12" y="12" width="24" height="18" rx="2" ry="2" fill="#2e7d32"/>
-            <circle cx="36" cy="36" r="10" fill="#2e7d32"/>
-            <line x1="36" y1="32" x2="36" y2="40" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-            <line x1="32" y1="36" x2="40" y2="36" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="option-text">إجراء الإيداع</div>
-        <div class="arrow-icon">›</div>
-      </div>
-      <div class="option-item">
-        <div class="icon-circle">
-          <svg class="minus-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-            <rect x="12" y="12" width="24" height="18" rx="2" ry="2" fill="#d32f2f"/>
-            <circle cx="36" cy="36" r="10" fill="#d32f2f"/>
-            <line x1="32" y1="36" x2="40" y2="36" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="option-text">السحب من الحساب</div>
-        <div class="arrow-icon">›</div>
-      </div>
+  <div class="balance-card">
+    <h2>رصيدك الحالي: 250.00 درهم</h2>
+    <p>رقم المستخدم: <span id="userId">غير مسجل</span></p>
+  </div>
+
+  <div class="actions">
+    <button class="action-btn" onclick="alert('إيداع')">
+      <span class="icon">+</span> إيداع
+    </button>
+    <button class="action-btn" onclick="alert('سحب')">
+      <span class="icon">−</span> سحب
+    </button>
+  </div>
+
+  <div class="transactions">
+    <h3>آخر المعاملات</h3>
+    <div class="transaction-item">
+      <div class="label">إيداع من البطاقة</div>
+      <div class="amount">+ 100.00</div>
     </div>
-  </main>
+    <div class="transaction-item">
+      <div class="label">سحب إلى بنك</div>
+      <div class="amount" style="color:#d32f2f;">− 50.00</div>
+    </div>
+  </div>
 
   <script>
-    const userId = localStorage.getItem("userId") || "غير مسجل";
-    document.getElementById("userIdDisplay").textContent = "id: " + userId;
+    document.getElementById("userId").textContent = localStorage.getItem("userId") || "غير مسجل";
   </script>
 
 </body>
-    </html>
+</html>
