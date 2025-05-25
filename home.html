@@ -163,40 +163,77 @@
       color: #888;  
       font-size: 16px;  
     }  
+
+    /* قسم الطرق الموصى بها */  
+    .recommended-section {  
+      background-color: #8cae88;  
+      padding: 20px 10px;  
+      margin-top: 25px;  
+    }  
+  
+    .recommended-section h3 {  
+      text-align: center;  
+      margin-bottom: 20px;  
+      font-weight: bold;  
+      font-size: 16px;  
+      color: #1a1a1a;  
+    }  
+  
+    .banks-container {  
+      display: flex;  
+      justify-content: center;  
+      gap: 12px;  
+      flex-wrap: wrap;  
+    }  
+  
+    .bank-box {  
+      background-color: #ffffff;  
+      border-radius: 8px;  
+      overflow: hidden;  
+      width: 100px;  
+      text-align: center;  
+    }  
+  
+    .bank-box img {  
+      max-width: 100%;  
+      height: 40px;  
+      object-fit: contain;  
+      padding: 10px;  
+    }  
+  
+    .bank-label {  
+      background-color: #4e7b5b;  
+      color: white;  
+      font-weight: bold;  
+      padding: 6px 0;  
+    }  
   
     @media (max-width: 600px) {  
       .site-title {  
         font-size: 16px;  
       }  
-  
       .profile-icon {  
         width: 40px;  
         height: 40px;  
       }  
-  
       .profile-icon svg {  
         width: 24px;  
         height: 24px;  
       }  
-  
       .profile-info {  
         font-size: 12px;  
       }  
-  
       .account-header {  
         font-size: 14px;  
       }  
-  
       .option-text {  
         font-size: 14px;  
       }  
-  
       .icon-circle {  
         width: 32px;  
         height: 32px;  
         margin-left: 8px;  
       }  
-  
       .icon-circle img {  
         width: 110%;  
         height: 110%;  
@@ -243,6 +280,26 @@
         <div class="arrow-icon">›</div>  
       </div>  
     </div>  
+
+    <!-- قسم الطرق الموصى بها -->
+    <div class="recommended-section">
+      <h3>الطرق الموصى بها</h3>
+      <div class="banks-container">
+        <div class="bank-box">
+          <img src="https://i.ibb.co/3yhyzQX/bmce.png" alt="BMCE">
+          <div class="bank-label">BMCE</div>
+        </div>
+        <div class="bank-box">
+          <img src="https://i.ibb.co/ZKJJcSx/attijari.png" alt="Attijari">
+          <div class="bank-label">Attijari</div>
+        </div>
+        <div class="bank-box">
+          <img src="https://i.ibb.co/5nnW4gJ/cih.png" alt="CIH">
+          <div class="bank-label">CIH</div>
+        </div>
+      </div>
+    </div>
+
   </main>  
   
   <script>  
@@ -251,4 +308,4 @@
   </script>  
   
 </body>  
-</html>
+        </html>
