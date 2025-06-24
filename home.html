@@ -169,12 +169,12 @@
       background-color: #8aa981;
       padding: 20px 10px;
       margin-top: 20px;
-      border-radius: 0;  /* حواف حادة */
-      width: 100vw;
+      border-radius: 0;          /* حواف حادة */
+      width: 100vw;             /* عرض كامل */
       position: relative;
       left: 50%;
+      margin-left: -50vw;       /* تمديد خارج الحاوية */
       right: 50%;
-      margin-left: -50vw;
       margin-right: -50vw;
     }
 
@@ -228,24 +228,6 @@
       font-weight: 500;
     }
 
-    .recommended-divider {
-      width: 30px;
-      background: #6d8f57;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .recommended-divider span {
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-
     @media (max-width: 600px) {
       .site-title { font-size: 16px; }
       .profile-icon { width: 40px; height: 40px; }
@@ -282,6 +264,7 @@
 
 <main class="account-section">
   <div class="account-header">إدارة الحساب</div>
+
   <div class="account-option">
     <div class="option-item">
       <div class="icon-circle">
@@ -309,10 +292,6 @@
           <img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png" alt="Al Barid" />
         </div>
         <div class="caption">Al&nbsp;Barid</div>
-      </div>
-
-      <div class="recommended-divider">
-        <span>موصى بها</span>
       </div>
 
       <div class="bank-card">
