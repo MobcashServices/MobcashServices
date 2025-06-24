@@ -10,21 +10,25 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f2f2f2;
     }
+
     header {
       background-color: #ffffff;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
       padding: 10px 16px;
     }
+
     .header-content {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+
     .menu-icon {
       font-size: 24px;
       cursor: pointer;
       color: #2c3e50;
     }
+
     .site-title {
       font-size: 18px;
       font-weight: bold;
@@ -33,11 +37,35 @@
       flex-grow: 1;
       line-height: 1.2;
     }
+
     .profile-section {
       display: flex;
       align-items: center;
       gap: 10px;
     }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-size: 13px;
+      line-height: 1.2;
+      user-select: all;
+    }
+
+    #userIdDisplay {
+      color: #444;
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .profile-label {
+      color: #2e7d32;
+      font-weight: bold;
+      font-size: 13px;
+      margin-right: 2px;
+    }
+
     .profile-icon {
       width: 46px;
       height: 46px;
@@ -47,34 +75,17 @@
       align-items: center;
       justify-content: center;
     }
+
     .profile-icon svg {
       width: 28px;
       height: 28px;
-    }
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      font-size: 13px;
-      line-height: 1.2;
-      user-select: all;
-    }
-    #userIdDisplay {
-      color: #444;
-      font-weight: 500;
-      font-size: 13px;
-    }
-    .profile-label {
-      color: #2e7d32;
-      font-weight: bold;
-      font-size: 13px;
-      margin-right: 2px;
     }
 
     .account-section {
       background-color: #f2f2f2;
       padding: 20px 15px 10px;
     }
+
     .account-header {
       font-size: 15px;
       font-weight: 500;
@@ -83,6 +94,7 @@
       padding-right: 2px;
       text-align: right;
     }
+
     .account-option {
       background-color: #fff;
       border-radius: 14px;
@@ -90,6 +102,7 @@
       overflow: hidden;
       position: relative;
     }
+
     .option-item {
       display: flex;
       align-items: center;
@@ -97,6 +110,7 @@
       cursor: pointer;
       position: relative;
     }
+
     .option-item:not(:last-child)::after {
       content: "";
       position: absolute;
@@ -106,6 +120,7 @@
       height: 1px;
       background-color: #dcdcdc;
     }
+
     .icon-circle {
       width: 38px;
       height: 38px;
@@ -115,10 +130,11 @@
       justify-content: center;
       margin-left: 12px;
       background-color: #fff;
-      box-shadow: 0 0 8px rgba(0,0,0,0.12);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.12);
       overflow: hidden;
       transition: transform 0.3s ease;
     }
+
     .icon-circle img {
       width: 110%;
       height: 110%;
@@ -126,47 +142,55 @@
       filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
       transition: filter 0.3s ease;
     }
+
     .option-item:hover .icon-circle {
       transform: scale(1.1);
       box-shadow: 0 0 12px rgba(0, 128, 0, 0.6);
     }
+
     .option-item:hover .icon-circle img {
       filter: drop-shadow(0 0 5px rgba(0,128,0,0.8));
     }
+
     .option-text {
       flex-grow: 1;
       color: #000;
       font-size: 15px;
       font-weight: 500;
     }
+
     .arrow-icon {
       color: #888;
       font-size: 16px;
     }
 
-    /* الطرق الموصى بها */
+    /* ✅ قسم الطرق الموصى بها */
     .recommended-section {
       background-color: #8aa981;
       padding: 20px 10px;
       margin-top: 20px;
       border-radius: 6px;
     }
+
     .recommended-title {
-      margin: 0 0 20px;
-      text-align: center;
+      font-family: system-ui, sans-serif;
+      font-size: 20px;
+      font-weight: 700;
       color: #000;
-      font-size: 18px;
-      font-weight: 600;
+      text-align: center;
+      margin-bottom: 20px;
     }
+
     .recommended-wrapper {
       display: flex;
       justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
     }
+
     .bank-card {
       border: 1px solid #ccc;
-      background: #fff;
+      background-color: #fff;
       display: flex;
       flex-direction: column;
       height: 90px;
@@ -174,11 +198,13 @@
       border-radius: 4px;
       overflow: hidden;
     }
+
     .bank-card img {
       max-height: 28px;
       max-width: 90%;
       object-fit: contain;
     }
+
     .bank-card .logo-box {
       flex: 1;
       display: flex;
@@ -186,8 +212,9 @@
       justify-content: center;
       padding: 4px;
     }
+
     .bank-card .caption {
-      background: #3e723a;
+      background-color: #3e723a;
       color: #fff;
       text-align: center;
       font-size: 13px;
@@ -203,6 +230,7 @@
       align-items: center;
       justify-content: center;
     }
+
     .recommended-divider span {
       writing-mode: vertical-rl;
       transform: rotate(180deg);
@@ -213,38 +241,15 @@
     }
 
     @media (max-width: 600px) {
-      .site-title {
-        font-size: 16px;
-      }
-      .profile-icon {
-        width: 40px;
-        height: 40px;
-      }
-      .profile-icon svg {
-        width: 24px;
-        height: 24px;
-      }
-      .profile-info {
-        font-size: 12px;
-      }
-      .account-header {
-        font-size: 14px;
-      }
-      .option-text {
-        font-size: 14px;
-      }
-      .icon-circle {
-        width: 32px;
-        height: 32px;
-        margin-left: 8px;
-      }
-      .bank-card {
-        width: 90px;
-        height: 88px;
-      }
-      .recommended-wrapper {
-        gap: 8px;
-      }
+      .site-title { font-size: 16px; }
+      .profile-icon { width: 40px; height: 40px; }
+      .profile-icon svg { width: 24px; height: 24px; }
+      .profile-info { font-size: 12px; }
+      .account-header { font-size: 14px; }
+      .option-text { font-size: 14px; }
+      .icon-circle { width: 32px; height: 32px; margin-left: 8px; }
+      .bank-card { width: 90px; height: 88px; }
+      .recommended-wrapper { gap: 8px; }
     }
   </style>
 </head>
@@ -288,10 +293,11 @@
     </div>
   </div>
 
+  <!-- ✅ الطرق الموصى بها -->
   <section class="recommended-section">
     <h3 class="recommended-title">الطرق الموصى بها</h3>
-
     <div class="recommended-wrapper">
+
       <div class="bank-card">
         <div class="logo-box">
           <img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png" alt="Al Barid" />
@@ -316,6 +322,7 @@
         </div>
         <div class="caption">CIH</div>
       </div>
+
     </div>
   </section>
 </main>
