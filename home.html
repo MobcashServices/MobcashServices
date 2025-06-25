@@ -4,325 +4,178 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mobcash Services</title>
+
   <style>
-    /* تجنُّب التمرير الأفقي الذي سبّبه امتداد القسم الأخضر */
-    html, body {
-      margin: 0;
-      overflow-x: hidden;
+    /* منع التمرير الأفقي */
+    html, body { margin: 0; overflow-x: hidden; }
+    body       { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f2f2f2; }
+
+    /* ░░░░░ Header ░░░░░ */
+    header              { background:#fff; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:10px 16px; }
+    .header-content     { display:flex; align-items:center; justify-content:space-between; }
+    .menu-icon          { font-size:24px; cursor:pointer; color:#2c3e50; }
+    .site-title         { font-size:18px; font-weight:bold; color:#1a1a1a; text-align:center; flex-grow:1; line-height:1.2; }
+    .profile-section    { display:flex; align-items:center; gap:10px; }
+    .profile-icon       { width:46px; height:46px; border-radius:50%; background:#e0e0e0; display:flex; align-items:center; justify-content:center; }
+    .profile-icon svg   { width:28px; height:28px; }
+    .profile-info       { display:flex; flex-direction:column; align-items:flex-end; font-size:13px; line-height:1.2; user-select:all; }
+    #userIdDisplay      { color:#444; font-weight:500; }
+    .profile-label      { color:#2e7d32; font-weight:bold; margin-right:2px; }
+
+    /* ░░░░░ account list ░░░░░ */
+    .account-section    { background:#f2f2f2; padding:20px 15px 10px; }
+    .account-header     { font-size:15px; font-weight:500; color:#888; margin-bottom:8px; text-align:right; }
+    .account-option     { background:#fff; border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.05); overflow:hidden; position:relative; }
+    .option-item        { display:flex; align-items:center; padding:14px; cursor:pointer; position:relative; }
+    .option-item:not(:last-child)::after{content:"";position:absolute;bottom:0;right:64px;left:0;height:1px;background:#dcdcdc;}
+    .icon-circle        { width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-left:12px; background:#fff; box-shadow:0 0 8px rgba(0,0,0,.12); overflow:hidden; transition:transform .3s ease;}
+    .icon-circle img    { width:110%; height:110%; object-fit:contain; filter:drop-shadow(0 0 2px rgba(0,0,0,.3)); transition:filter .3s ease;}
+    .option-item:hover .icon-circle      { transform:scale(1.1); box-shadow:0 0 12px rgba(0,128,0,.6);}
+    .option-item:hover .icon-circle img  { filter:drop-shadow(0 0 5px rgba(0,128,0,.8));}
+    .option-text        { flex-grow:1; color:#000; font-size:15px; font-weight:500; }
+    .arrow-icon         { color:#888; font-size:16px; }
+
+    /* ░░░░░ الطرق الموصى بها ░░░░░ */
+    .recommended-section{
+      background:#8aa981;           /* الهيكل الأخضر */
+      padding:10px 10px 25px;       /* padding-bottom أكبر لتجنّب التشابك */
+      margin-top:20px;
+      width:100vw; position:relative; left:50%; margin-left:-50vw;  /* تمديد بعرض الشاشة */
+      display:flex; flex-direction:column; align-items:center;
+      height:130px; box-sizing:border-box; /* ارتفاع محسوب */
+    }
+    .recommended-title{
+      font-family:system-ui,Arial,sans-serif;
+      font-size:18px; color:#1a1a1a; margin:0 0 10px; line-height:1.1; font-weight:normal;
+    }
+    .recommended-wrapper{
+      display:flex; justify-content:center; gap:12px; flex-wrap:nowrap; max-width:360px;
     }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f2f2f2;
-    }
+    /* ░ بطاقة بنك (تصميم جديد + حركة) ░ */
+    .bank-card          { width:110px; background:#9db194; box-shadow:0 2px 6px rgba(0,0,0,.1); }
+    .top-section        { background:#fff; height:40px; display:flex; justify-content:center; align-items:center; padding:2px; perspective:600px; }
+    .top-section img    { max-width:100%; max-height:25px; object-fit:contain; transform-style:preserve-3d; transition:transform .4s ease; }
+    .bottom-section     { background:#3e723a; color:#fff; text-align:center; padding:8px 0; font-size:13px; }
 
-    header {
-      background-color: #ffffff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      padding: 10px 16px;
+    /* حركة الرجوع للخلف */
+    @keyframes goBack   {
+      0%{transform:translateZ(0);}
+      50%{transform:translateZ(-80px);}
+      100%{transform:translateZ(0);}
     }
+    .animate-back       { animation:goBack .5s ease; }
 
-    .header-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .menu-icon {
-      font-size: 24px;
-      cursor: pointer;
-      color: #2c3e50;
-    }
-
-    .site-title {
-      font-size: 18px;
-      font-weight: bold;
-      color: #1a1a1a;
-      text-align: center;
-      flex-grow: 1;
-      line-height: 1.2;
-    }
-
-    .profile-section {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      font-size: 13px;
-      line-height: 1.2;
-      user-select: all;
-    }
-
-    #userIdDisplay {
-      color: #444;
-      font-weight: 500;
-      font-size: 13px;
-    }
-
-    .profile-label {
-      color: #2e7d32;
-      font-weight: bold;
-      font-size: 13px;
-      margin-right: 2px;
-    }
-
-    .profile-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background-color: #e0e0e0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .profile-icon svg {
-      width: 28px;
-      height: 28px;
-    }
-
-    .account-section {
-      background-color: #f2f2f2;
-      padding: 20px 15px 10px;
-    }
-
-    .account-header {
-      font-size: 15px;
-      font-weight: 500;
-      color: #888;
-      margin-bottom: 8px;
-      text-align: right;
-    }
-
-    .account-option {
-      background-color: #fff;
-      border-radius: 14px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .option-item {
-      display: flex;
-      align-items: center;
-      padding: 14px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .option-item:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      right: 64px;
-      left: 0;
-      height: 1px;
-      background-color: #dcdcdc;
-    }
-
-    .icon-circle {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-left: 12px;
-      background-color: #fff;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.12);
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
-
-    .icon-circle img {
-      width: 110%;
-      height: 110%;
-      object-fit: contain;
-      filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
-      transition: filter 0.3s ease;
-    }
-
-    .option-item:hover .icon-circle {
-      transform: scale(1.1);
-      box-shadow: 0 0 12px rgba(0, 128, 0, 0.6);
-    }
-
-    .option-item:hover .icon-circle img {
-      filter: drop-shadow(0 0 5px rgba(0,128,0,0.8));
-    }
-
-    .option-text {
-      flex-grow: 1;
-      color: #000;
-      font-size: 15px;
-      font-weight: 500;
-    }
-
-    .arrow-icon {
-      color: #888;
-      font-size: 16px;
-    }
-
-    /* ✅ قسم الطرق الموصى بها (تعديل زيادة ارتفاع) */
-    .recommended-section {
-      background-color: #8aa981;
-      padding: 10px 10px 25px; /* زيادة البادينغ السفلي */
-      margin-top: 20px;
-      border-radius: 0;
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      margin-left: -50vw;
-      right: 50%;
-      margin-right: -50vw;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 130px; /* زيادة الارتفاع */
-      box-sizing: border-box;
-    }
-
-    .recommended-title {
-      font-family: system-ui, Arial, sans-serif;
-      font-size: 18px;
-      font-weight: normal;
-      color: #1a1a1a;
-      text-align: center;
-      margin: 0 0 10px 0;
-      line-height: 1.1;
-    }
-
-    .recommended-wrapper {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: nowrap;
-      max-width: 360px;
-    }
-
-    .bank-card {
-      border: 1px solid #ccc;
-      background-color: #fff;
-      display: flex;
-      flex-direction: column;
-      height: 80px;
-      width: 90px;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .bank-card img {
-      max-height: 22px;
-      max-width: 80%;
-      object-fit: contain;
-      margin: auto;
-    }
-
-    .bank-card .logo-box {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 3px;
-    }
-
-    .bank-card .caption {
-      background-color: #3e723a;
-      color: #fff;
-      text-align: center;
-      font-size: 12px;
-      padding: 4px 0;
-      font-weight: 500;
-    }
-
-    @media (max-width: 600px) {
-      .site-title { font-size: 16px; }
-      .profile-icon { width: 40px; height: 40px; }
-      .profile-icon svg { width: 24px; height: 24px; }
-      .profile-info { font-size: 12px; }
-      .account-header { font-size: 14px; }
-      .option-text { font-size: 14px; }
-      .icon-circle { width: 32px; height: 32px; margin-left: 8px; }
-      .bank-card { width: 80px; height: 75px; }
-      .recommended-wrapper { gap: 8px; max-width: 280px; }
+    /* ░ استجابة شاشات صغيرة ░ */
+    @media(max-width:600px){
+      .site-title{font-size:16px;}
+      .profile-icon{width:40px;height:40px;} .profile-icon svg{width:24px;height:24px;}
+      .profile-info{font-size:12px;} .account-header{font-size:14px;}
+      .icon-circle{width:32px;height:32px;margin-left:8px;} .option-text{font-size:14px;}
+      .bank-card{width:95px;} .recommended-wrapper{gap:8px;max-width:280px;}
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="header-content">
-    <div class="profile-section">
-      <div class="profile-icon">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="32" cy="20" r="10" fill="#ffffff"/>
-          <ellipse cx="32" cy="48" rx="18" ry="10" fill="#ffffff"/>
-        </svg>
-      </div>
-      <div class="profile-info">
-        <div id="userIdDisplay">id: </div>
-        <div class="profile-label">الملف الشخصي</div>
-      </div>
-    </div>
-    <div class="site-title">Mobcash<br>Services</div>
-    <div class="menu-icon">&#9776;</div>
-  </div>
-</header>
-
-<main class="account-section">
-  <div class="account-header">إدارة الحساب</div>
-  <div class="account-option">
-    <div class="option-item">
-      <div class="icon-circle">
-        <img src="https://i.ibb.co/nS2x140/A825-BDBC-18-A3-4-D5-C-9-E17-6-F994-F30-B307-removebg-preview.png" alt="إيداع" />
-      </div>
-      <div class="option-text">إجراء الإيداع</div>
-      <div class="arrow-icon">›</div>
-    </div>
-    <div class="option-item">
-      <div class="icon-circle">
-        <img src="https://i.ibb.co/rRDF6BbH/9-FD1-E7-E9-36-EE-4530-AC26-5-B1976634666-removebg-preview.png" alt="سحب" />
-      </div>
-      <div class="option-text">السحب من الحساب</div>
-      <div class="arrow-icon">›</div>
-    </div>
-  </div>
-
-  <!-- ✅ الطرق الموصى بها -->
-  <section class="recommended-section">
-    <h3 class="recommended-title">الطرق الموصى بها</h3>
-    <div class="recommended-wrapper">
-      <div class="bank-card">
-        <div class="logo-box">
-          <img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png" alt="Al Barid" />
+  <!-- ░░ Header ░░ -->
+  <header>
+    <div class="header-content">
+      <div class="profile-section">
+        <div class="profile-icon">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="20" r="10" fill="#ffffff"/>
+            <ellipse cx="32" cy="48" rx="18" ry="10" fill="#ffffff"/>
+          </svg>
         </div>
-        <div class="caption">Al&nbsp;Barid</div>
-      </div>
-      <div class="bank-card">
-        <div class="logo-box">
-          <img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari" />
+        <div class="profile-info">
+          <div id="userIdDisplay">id: </div>
+          <div class="profile-label">الملف الشخصي</div>
         </div>
-        <div class="caption">Attijari</div>
       </div>
-      <div class="bank-card">
-        <div class="logo-box">
-          <img src="https://i.postimg.cc/g07jHhK5/cih.png" alt="CIH" />
+      <div class="site-title">Mobcash<br>Services</div>
+      <div class="menu-icon">&#9776;</div>
+    </div>
+  </header>
+
+  <!-- ░░ محتوى ░░ -->
+  <main class="account-section">
+
+    <div class="account-header">إدارة الحساب</div>
+    <div class="account-option">
+      <div class="option-item">
+        <div class="icon-circle">
+          <img src="https://i.ibb.co/nS2x140/A825-BDBC-18-A3-4-D5-C-9-E17-6-F994-F30-B307-removebg-preview.png" alt="إيداع">
         </div>
-        <div class="caption">CIH</div>
+        <div class="option-text">إجراء الإيداع</div>
+        <div class="arrow-icon">›</div>
+      </div>
+      <div class="option-item">
+        <div class="icon-circle">
+          <img src="https://i.ibb.co/rRDF6BbH/9-FD1-E7-E9-36-EE-4530-AC26-5-B1976634666-removebg-preview.png" alt="سحب">
+        </div>
+        <div class="option-text">السحب من الحساب</div>
+        <div class="arrow-icon">›</div>
       </div>
     </div>
-  </section>
-</main>
 
-<script>
-  const userId = localStorage.getItem("userId") || "غير مسجل";
-  document.getElementById("userIdDisplay").textContent = "id: " + userId;
-</script>
+    <!-- ░░ الطرق الموصى بها ░░ -->
+    <section class="recommended-section">
+      <h3 class="recommended-title">الطرق الموصى بها</h3>
 
+      <div class="recommended-wrapper">
+        <!-- Al Barid -->
+        <div class="bank-card">
+          <div class="top-section">
+            <img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png" alt="Al Barid">
+          </div>
+          <div class="bottom-section">Al&nbsp;Barid</div>
+        </div>
+
+        <!-- Attijari -->
+        <div class="bank-card">
+          <div class="top-section">
+            <img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari">
+          </div>
+          <div class="bottom-section">Attijari</div>
+        </div>
+
+        <!-- CIH -->
+        <div class="bank-card">
+          <div class="top-section">
+            <img src="https://i.postimg.cc/g07jHhK5/cih.png" alt="CIH">
+          </div>
+          <div class="bottom-section">CIH</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ░░ JavaScript ░░ -->
+  <script>
+    /* إظهار id المحفوظ (إن وجد) */
+    const userId = localStorage.getItem("userId") || "غير مسجل";
+    document.getElementById("userIdDisplay").textContent = "id: " + userId;
+
+    /* إضافة حركة الرجوع للخلف عند الضغط أو اللمس على شعار أي بنك */
+    const logos = document.querySelectorAll('.top-section img');
+    logos.forEach(img => {
+      const triggerAnimation = () => {
+        img.classList.add('animate-back');
+        setTimeout(() => img.classList.remove('animate-back'), 500);
+      };
+      img.addEventListener('click', triggerAnimation);
+      img.addEventListener('touchstart', triggerAnimation, {passive:true});
+    });
+
+    /* يمكن أيضًا تشغيل الحركة بالكيبورد (اختياري) */
+    window.addEventListener('keydown', () => {
+      logos.forEach(img => {
+        img.classList.add('animate-back');
+        setTimeout(() => img.classList.remove('animate-back'), 500);
+      });
+    });
+  </script>
 </body>
 </html>
