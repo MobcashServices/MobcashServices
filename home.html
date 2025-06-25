@@ -25,7 +25,7 @@
     /* ░░░░░ account list ░░░░░ */
     .account-section    { background:#f2f2f2; padding:20px 15px 10px; }
     .account-header     { font-size:15px; font-weight:500; color:#888; margin-bottom:8px; text-align:right; }
-    .account-option     { background:#fff; border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.05); overflow:hidden; position:relative; }
+    .account-option     { background:#fff; border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.05); overflow:hidden; }
     .option-item        { display:flex; align-items:center; padding:14px; cursor:pointer; position:relative; }
     .option-item:not(:last-child)::after{content:"";position:absolute;bottom:0;right:64px;left:0;height:1px;background:#dcdcdc;}
     .icon-circle        { width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-left:12px; background:#fff; box-shadow:0 0 8px rgba(0,0,0,.12); overflow:hidden; transition:transform .3s ease;}
@@ -35,13 +35,20 @@
     .option-text        { flex-grow:1; color:#000; font-size:15px; font-weight:500; }
     .arrow-icon         { color:#888; font-size:16px; }
 
+    /* ░░░░░ Toast ░░░░░ */
+    .toast{
+      position:fixed; bottom:24px; left:50%; transform:translate(-50%,20px);
+      background:#f44336; color:#fff; padding:12px 20px; border-radius:8px;
+      font-size:14px; opacity:0; pointer-events:none; z-index:1000;
+      transition:opacity .4s ease, transform .4s ease;
+      box-shadow:0 4px 12px rgba(0,0,0,.2);
+    }
+    .toast.show{ opacity:1; transform:translate(-50%,0); }
+
     /* ░░░░░ الطرق الموصى بها ░░░░░ */
     .recommended-section{
-      background:#8aa981;                 /* أخضر يملأ الحواف */
-      padding:10px 10px 25px;
-      margin:20px -15px 0;                /* يزيل هوامش account-section الجانبية */
-      width:calc(100% + 30px);            /* يملأ عرض الصفحة بالكامل */
-      border-radius:0;                    /* بدون حواف مستديرة */
+      background:#8aa981; padding:10px 10px 25px; margin:20px -15px 0;
+      width:calc(100% + 30px); border-radius:0;
       display:flex; flex-direction:column; align-items:center; box-sizing:border-box;
     }
     .recommended-title  { font-family:system-ui,Arial,sans-serif; font-size:18px; color:#1a1a1a; margin:0 0 10px; }
@@ -68,12 +75,14 @@
       .profile-info{font-size:12px;} .account-header{font-size:14px;}
       .icon-circle{width:32px;height:32px;margin-left:8px;} .option-text{font-size:14px;}
       .bank-card{width:95px;} .recommended-wrapper{gap:8px;max-width:280px;}
-      /* عند الشاشات الصغيرة يجب إزالة الهوامش بنفس الطريقة */
       .recommended-section{margin:20px -15px 0; width:calc(100% + 30px);}
     }
   </style>
 </head>
 <body>
+
+  <!-- ░░ Toast ░░ -->
+  <div id="toast" class="toast"></div>
 
   <!-- ░░ Header ░░ -->
   <header>
@@ -100,14 +109,17 @@
 
     <div class="account-header">إدارة الحساب</div>
     <div class="account-option">
-      <div class="option-item">
+      <!-- إجراء الإيداع -->
+      <div class="option-item" id="deposit-option">
         <div class="icon-circle">
           <img src="https://i.ibb.co/nS2x140/A825-BDBC-18-A3-4-D5-C-9-E17-6-F994-F30-B307-removebg-preview.png" alt="إيداع">
         </div>
         <div class="option-text">إجراء الإيداع</div>
         <div class="arrow-icon">›</div>
       </div>
-      <div class="option-item">
+
+      <!-- السحب من الحساب -->
+      <div class="option-item" id="withdraw-option">
         <div class="icon-circle">
           <img src="https://i.ibb.co/rRDF6BbH/9-FD1-E7-E9-36-EE-4530-AC26-5-B1976634666-removebg-preview.png" alt="سحب">
         </div>
@@ -155,18 +167,29 @@
     const userId = localStorage.getItem("userId") || "غير مسجل";
     document.getElementById("userIdDisplay").textContent = "id: " + userId;
 
-    /* حركة الرجوع للخلف عند المرور أو الضغط على البطاقة نفسها */
+    /* حركة الشعارات عند التفاعل */
     document.querySelectorAll('.bank-card').forEach(card => {
       const logo = card.querySelector('.top-section img');
-
       const animate = () => {
         logo.classList.add('animate-back');
         setTimeout(() => logo.classList.remove('animate-back'), 500);
       };
-
       card.addEventListener('click', animate);
       card.addEventListener('touchstart', animate, { passive: true });
       card.addEventListener('mouseenter', animate);
+    });
+
+    /* نظام التوست الاحترافي */
+    const toast  = document.getElementById('toast');
+    function showToast(message){
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(()=> toast.classList.remove('show'), 3000);  /* يختفي بعد 3 ثواني */
+    }
+
+    /* رسالة عند الضغط على السحب */
+    document.getElementById('withdraw-option').addEventListener('click', () => {
+      showToast('الرجاء إجراء الإيداع أولاً للتمكن من استخدام خاصية السحب عبر id.');
     });
   </script>
 </body>
