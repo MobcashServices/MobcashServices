@@ -279,84 +279,25 @@
       </div>
     </div>
 
-    <section class="recommended-section">
+    <section class="recommended-section" id="recommended">
       <h3 class="recommended-title">الطرق الموصى بها</h3>
       <div class="recommended-wrapper">
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png" alt="Al Barid">
-          </div>
-          <div class="bottom-section">Al Barid</div>
-        </div>
-
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari">
-          </div>
-          <div class="bottom-section">Attijari</div>
-        </div>
-
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://i.postimg.cc/g07jHhK5/cih.png" alt="CIH">
-          </div>
-          <div class="bottom-section">CIH</div>
-        </div>
-
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://i.postimg.cc/kXPdP0B6/cash-plus-mobcash.png" alt="Cash Plus">
-          </div>
-          <div class="bottom-section">Cash Plus</div>
-        </div>
-
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://i.postimg.cc/Gm528FQW/barid-pay-mobcash.png" alt="Barid Pay">
-          </div>
-          <div class="bottom-section">Barid Pay</div>
-        </div>
-
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://i.postimg.cc/Vs2dDQbJ/banque-populaire-mobcah.png" alt="Banque Populaire">
-          </div>
-          <div class="bottom-section">Banque Populaire</div>
-        </div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png" alt="Al Barid"></div><div class="bottom-section">Al Barid</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari"></div><div class="bottom-section">Attijari</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/g07jHhK5/cih.png" alt="CIH"></div><div class="bottom-section">CIH</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/kXPdP0B6/cash-plus-mobcash.png" alt="Cash Plus"></div><div class="bottom-section">Cash Plus</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Gm528FQW/barid-pay-mobcash.png" alt="Barid Pay"></div><div class="bottom-section">Barid Pay</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Vs2dDQbJ/banque-populaire-mobcah.png" alt="Banque Populaire"></div><div class="bottom-section">Banque Populaire</div></div>
       </div>
     </section>
 
-    <!-- النسخة المؤقتة المضافة -->
     <section class="recommended-section">
       <h3 class="recommended-title">خدمات إضافية</h3>
       <div class="recommended-wrapper">
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://via.placeholder.com/100x30?text=صورة" alt="مؤقت">
-          </div>
-          <div class="bottom-section">اسم مؤقت 1</div>
-        </div>
-
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://via.placeholder.com/100x30?text=صورة" alt="مؤقت">
-          </div>
-          <div class="bottom-section">اسم مؤقت 2</div>
-        </div>
-
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://via.placeholder.com/100x30?text=صورة" alt="مؤقت">
-          </div>
-          <div class="bottom-section">اسم مؤقت 3</div>
-        </div>
-
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://via.placeholder.com/100x30?text=صورة" alt="مؤقت">
-          </div>
-          <div class="bottom-section">اسم مؤقت 4</div>
-        </div>
+        <div class="bank-card"><div class="top-section"><img src="https://via.placeholder.com/100x30?text=صورة" alt="مؤقت"></div><div class="bottom-section">اسم مؤقت 1</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://via.placeholder.com/100x30?text=صورة" alt="مؤقت"></div><div class="bottom-section">اسم مؤقت 2</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://via.placeholder.com/100x30?text=صورة" alt="مؤقت"></div><div class="bottom-section">اسم مؤقت 3</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://via.placeholder.com/100x30?text=صورة" alt="مؤقت"></div><div class="bottom-section">اسم مؤقت 4</div></div>
       </div>
     </section>
 
@@ -386,6 +327,11 @@
 
     document.getElementById('withdraw-option').addEventListener('click', () => {
       showToast('الرجاء إجراء الإيداع أولاً للتمكن من استخدام خاصية السحب عبر id.');
+    });
+
+    // تمرير إلى قسم الطرق الموصى بها
+    document.getElementById('deposit-option').addEventListener('click', () => {
+      document.getElementById('recommended').scrollIntoView({ behavior: 'smooth' });
     });
   </script>
 </body>
