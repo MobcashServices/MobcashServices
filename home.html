@@ -35,14 +35,15 @@
     .option-text        { flex-grow:1; color:#000; font-size:15px; font-weight:500; }
     .arrow-icon         { color:#888; font-size:16px; }
 
-    /* ░░░░░ الطرق الموصى بها ░░░░░ */
+    /* ░░░░░ الطرق الموصى بها ░░░░░ (متزنة الآن) */
     .recommended-section{
-      background:#8aa981;           /* الهيكل الأخضر */
-      padding:10px 10px 25px;       /* padding-bottom أكبر لتجنّب التشابك */
+      background:#8aa981;               /* اللون الأخضر */
+      padding:10px 10px 25px;           /* تباعد علوي/جانبي وسفلي أكبر قليلاً */
       margin-top:20px;
-      width:100vw; position:relative; left:50%; margin-left:-50vw;  /* تمديد بعرض الشاشة */
+      border-radius:12px;               /* حواف ناعمة لدمجه مع التصميم */
+      width:100%;                       /* اتزان - داخل حدود الصفحة */
       display:flex; flex-direction:column; align-items:center;
-      height:130px; box-sizing:border-box; /* ارتفاع محسوب */
+      box-sizing:border-box;
     }
     .recommended-title{
       font-family:system-ui,Arial,sans-serif;
@@ -52,7 +53,7 @@
       display:flex; justify-content:center; gap:12px; flex-wrap:nowrap; max-width:360px;
     }
 
-    /* ░ بطاقة بنك (تصميم جديد + حركة) ░ */
+    /* ░ بطاقة بنك (تصميم + حركة) ░ */
     .bank-card          { width:110px; background:#9db194; box-shadow:0 2px 6px rgba(0,0,0,.1); }
     .top-section        { background:#fff; height:40px; display:flex; justify-content:center; align-items:center; padding:2px; perspective:600px; }
     .top-section img    { max-width:100%; max-height:25px; object-fit:contain; transform-style:preserve-3d; transition:transform .4s ease; }
@@ -158,24 +159,22 @@
     const userId = localStorage.getItem("userId") || "غير مسجل";
     document.getElementById("userIdDisplay").textContent = "id: " + userId;
 
-    /* إضافة حركة الرجوع للخلف عند الضغط أو اللمس على شعار أي بنك */
+    /* إضافة حركة الرجوع للخلف عند الضغط/اللمس على شعارات البنوك */
     const logos = document.querySelectorAll('.top-section img');
     logos.forEach(img => {
-      const triggerAnimation = () => {
+      const animate = () => {
         img.classList.add('animate-back');
         setTimeout(() => img.classList.remove('animate-back'), 500);
       };
-      img.addEventListener('click', triggerAnimation);
-      img.addEventListener('touchstart', triggerAnimation, {passive:true});
+      img.addEventListener('click', animate);
+      img.addEventListener('touchstart', animate, {passive:true});
     });
 
-    /* يمكن أيضًا تشغيل الحركة بالكيبورد (اختياري) */
-    window.addEventListener('keydown', () => {
-      logos.forEach(img => {
-        img.classList.add('animate-back');
-        setTimeout(() => img.classList.remove('animate-back'), 500);
-      });
-    });
+    /* تشغيل الحركة بالكيبورد (اختياري) */
+    window.addEventListener('keydown', () => logos.forEach(logo => {
+      logo.classList.add('animate-back');
+      setTimeout(() => logo.classList.remove('animate-back'), 500);
+    }));
   </script>
 </body>
 </html>
