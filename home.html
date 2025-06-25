@@ -37,9 +37,12 @@
 
     /* ░░░░░ الطرق الموصى بها ░░░░░ */
     .recommended-section{
-      background:#8aa981; padding:10px 10px 25px; margin-top:20px;
-      border-radius:12px; width:100%; display:flex; flex-direction:column; align-items:center;
-      box-sizing:border-box;
+      background:#8aa981;                 /* أخضر يملأ الحواف */
+      padding:10px 10px 25px;
+      margin:20px -15px 0;                /* يزيل هوامش account-section الجانبية */
+      width:calc(100% + 30px);            /* يملأ عرض الصفحة بالكامل */
+      border-radius:0;                    /* بدون حواف مستديرة */
+      display:flex; flex-direction:column; align-items:center; box-sizing:border-box;
     }
     .recommended-title  { font-family:system-ui,Arial,sans-serif; font-size:18px; color:#1a1a1a; margin:0 0 10px; }
     .recommended-wrapper{ display:flex; justify-content:center; gap:12px; flex-wrap:nowrap; max-width:360px; }
@@ -51,12 +54,12 @@
     .bottom-section     { background:#3e723a; color:#fff; text-align:center; padding:8px 0; font-size:13px; }
 
     /* حركة الرجوع للخلف */
-    @keyframes goBack   {
-      0%   { transform:translateZ(0);   }
-      50%  { transform:translateZ(-80px);}
-      100% { transform:translateZ(0);   }
+    @keyframes goBack{
+      0%{transform:translateZ(0);}
+      50%{transform:translateZ(-80px);}
+      100%{transform:translateZ(0);}
     }
-    .animate-back       { animation:goBack .5s ease; }
+    .animate-back{ animation:goBack .5s ease; }
 
     /* ░ استجابة شاشات صغيرة ░ */
     @media(max-width:600px){
@@ -65,6 +68,8 @@
       .profile-info{font-size:12px;} .account-header{font-size:14px;}
       .icon-circle{width:32px;height:32px;margin-left:8px;} .option-text{font-size:14px;}
       .bank-card{width:95px;} .recommended-wrapper{gap:8px;max-width:280px;}
+      /* عند الشاشات الصغيرة يجب إزالة الهوامش بنفس الطريقة */
+      .recommended-section{margin:20px -15px 0; width:calc(100% + 30px);}
     }
   </style>
 </head>
@@ -150,7 +155,7 @@
     const userId = localStorage.getItem("userId") || "غير مسجل";
     document.getElementById("userIdDisplay").textContent = "id: " + userId;
 
-    /* حركة الرجوع للخلف عند المرور بالماوس أو الضغط (لكل بطاقة بمفردها) */
+    /* حركة الرجوع للخلف عند المرور أو الضغط على البطاقة نفسها */
     document.querySelectorAll('.bank-card').forEach(card => {
       const logo = card.querySelector('.top-section img');
 
@@ -159,15 +164,10 @@
         setTimeout(() => logo.classList.remove('animate-back'), 500);
       };
 
-      /* الضغط بالماوس/اللمس */
       card.addEventListener('click', animate);
       card.addEventListener('touchstart', animate, { passive: true });
-
-      /* المرور بالماوس */
       card.addEventListener('mouseenter', animate);
     });
-
-    /* أزلنا أي حركة تلقائية أو جماعية (لا keydown ولا تشغيل تلقائي) */
   </script>
 </body>
 </html>
