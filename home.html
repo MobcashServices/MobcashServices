@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mobcash Services</title>
   <style>
-    body {
+    /* تجنُّب التمرير الأفقي الذي سبّبه امتداد القسم الأخضر */
+    html, body {
       margin: 0;
+      overflow-x: hidden;
+    }
+
+    body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f2f2f2;
     }
@@ -91,7 +96,6 @@
       font-weight: 500;
       color: #888;
       margin-bottom: 8px;
-      padding-right: 2px;
       text-align: right;
     }
 
@@ -164,7 +168,7 @@
       font-size: 16px;
     }
 
-    /* ✅ قسم الطرق الموصى بها */
+    /* ✅ قسم الطرق الموصى بها (يمتد بعرض الشاشة) */
     .recommended-section {
       background-color: #8aa981;
       padding: 20px 10px;
