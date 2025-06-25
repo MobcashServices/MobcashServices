@@ -32,20 +32,20 @@
     .option-text        { flex-grow:1; color:#000; font-size:15px; font-weight:500; }
     .arrow-icon         { color:#888; font-size:16px; }
 
-    .toast{
+    .toast {
       position:fixed; bottom:24px; left:50%; transform:translate(-50%,20px);
       background:#f44336; color:#fff; padding:12px 20px; border-radius:8px;
       font-size:14px; opacity:0; pointer-events:none; z-index:1000;
       transition:opacity .4s ease, transform .4s ease;
       box-shadow:0 4px 12px rgba(0,0,0,.2);
     }
-    .toast.show{ opacity:1; transform:translate(-50%,0); }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
 
-    .recommended-section{
+    .recommended-section {
       background:#8aa981; padding:10px 10px 25px; margin:20px -15px 0;
       width:calc(100% + 30px); box-sizing:border-box;
     }
-    .recommended-title  { font-family:system-ui,Arial,sans-serif; font-size:18px; color:#1a1a1a; margin:0 0 10px; text-align: center; }
+    .recommended-title { font-family:system-ui,Arial,sans-serif; font-size:18px; color:#1a1a1a; margin:0 0 10px; text-align: center; }
 
     .recommended-wrapper {
       display: grid;
@@ -64,7 +64,7 @@
       display: flex;
       flex-direction: column;
       height: 100px;
-      border-radius: 0; /* حواف حادة */
+      border-radius: 0;
     }
 
     .top-section {
@@ -88,10 +88,12 @@
     .bottom-section {
       background: #3e723a;
       color: #fff;
-      text-align: center;
-      font-size: 13px;
-      padding: 4px 0;
       height: 40%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      text-align: center;
     }
 
     @media (max-width: 600px) {
@@ -167,7 +169,6 @@
       <h3 class="recommended-title">الطرق الموصى بها</h3>
 
       <div class="recommended-wrapper">
-        <!-- Al Barid -->
         <div class="bank-card">
           <div class="top-section">
             <img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png" alt="Al Barid">
@@ -175,7 +176,6 @@
           <div class="bottom-section">Al Barid</div>
         </div>
 
-        <!-- Attijari -->
         <div class="bank-card">
           <div class="top-section">
             <img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari">
@@ -183,7 +183,6 @@
           <div class="bottom-section">Attijari</div>
         </div>
 
-        <!-- CIH -->
         <div class="bank-card">
           <div class="top-section">
             <img src="https://i.postimg.cc/g07jHhK5/cih.png" alt="CIH">
@@ -209,7 +208,7 @@
       card.addEventListener('mouseenter', animate);
     });
 
-    const toast  = document.getElementById('toast');
+    const toast = document.getElementById('toast');
     function showToast(message){
       toast.textContent = message;
       toast.classList.add('show');
