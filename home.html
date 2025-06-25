@@ -4,250 +4,198 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mobcash Services</title>
-
   <style>
-    html, body { margin: 0; overflow-x: hidden; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f2f2f2; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f2f2;
+    }
 
     header {
-      background:#fff;
-      box-shadow:0 2px 6px rgba(0,0,0,.08);
-      padding:10px 16px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      padding: 10px 16px;
     }
+
     .header-content {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
+
     .menu-icon {
-      font-size:24px;
-      cursor:pointer;
-      color:#2c3e50;
-    }
-    .site-title {
-      font-size:18px;
-      font-weight:bold;
-      color:#1a1a1a;
-      text-align:center;
-      flex-grow:1;
-      line-height:1.2;
-    }
-    .profile-section {
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .profile-icon {
-      width:46px;
-      height:46px;
-      border-radius:50%;
-      background:#e0e0e0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .profile-icon svg {
-      width:28px;
-      height:28px;
-    }
-    .profile-info {
-      display:flex;
-      flex-direction:column;
-      align-items:flex-end;
-      font-size:13px;
-      line-height:1.2;
-      user-select:all;
-    }
-    #userIdDisplay { color:#444; font-weight:500; }
-    .profile-label { color:#2e7d32; font-weight:bold; margin-right:2px; }
-
-    .account-section {
-      background:#f2f2f2;
-      padding:20px 15px 10px;
-    }
-    .account-header {
-      font-size:15px;
-      font-weight:500;
-      color:#888;
-      margin-bottom:8px;
-      text-align:right;
-    }
-    .account-option {
-      background:#fff;
-      border-radius:14px;
-      box-shadow:0 2px 6px rgba(0,0,0,.05);
-      overflow:hidden;
-    }
-    .option-item {
-      display:flex;
-      align-items:center;
-      padding:14px;
-      cursor:pointer;
-      position:relative;
-    }
-    .option-item:not(:last-child)::after {
-      content:"";
-      position:absolute;
-      bottom:0;
-      right:64px;
-      left:0;
-      height:1px;
-      background:#dcdcdc;
-    }
-    .icon-circle {
-      width:38px;
-      height:38px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin-left:12px;
-      background:#fff;
-      box-shadow:0 0 8px rgba(0,0,0,.12);
-      overflow:hidden;
-      transition:transform .3s ease;
-    }
-    .icon-circle img {
-      width:110%;
-      height:110%;
-      object-fit:contain;
-      filter:drop-shadow(0 0 2px rgba(0,0,0,.3));
-      transition:filter .3s ease;
-    }
-    .option-item:hover .icon-circle {
-      transform:scale(1.1);
-      box-shadow:0 0 12px rgba(0,128,0,.6);
-    }
-    .option-item:hover .icon-circle img {
-      filter:drop-shadow(0 0 5px rgba(0,128,0,.8));
-    }
-    .option-text {
-      flex-grow:1;
-      color:#000;
-      font-size:15px;
-      font-weight:500;
-    }
-    .arrow-icon {
-      color:#888;
-      font-size:16px;
-    }
-
-    .toast {
-      position:fixed;
-      bottom:24px;
-      left:50%;
-      transform:translate(-50%,20px);
-      background:#f44336;
-      color:#fff;
-      padding:12px 20px;
-      border-radius:8px;
-      font-size:14px;
-      opacity:0;
-      pointer-events:none;
-      z-index:1000;
-      transition:opacity .4s ease, transform .4s ease;
-      box-shadow:0 4px 12px rgba(0,0,0,.2);
-    }
-    .toast.show {
-      opacity:1;
-      transform:translate(-50%,0);
-    }
-
-    .recommended-section {
-      background:#8aa981;
-      padding:10px 10px 25px;
-      margin:20px -15px 0;
-      width:calc(100% + 30px);
-      box-sizing:border-box;
-    }
-    .recommended-title {
-      font-family:system-ui,Arial,sans-serif;
-      font-size:18px;
-      color:#1a1a1a;
-      margin:0 0 10px;
-      text-align: center;
-    }
-
-    .recommended-wrapper {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 12px;
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .bank-card {
-      background: #9db194;
-      box-shadow: 0 2px 6px rgba(0,0,0,.1);
+      font-size: 24px;
       cursor: pointer;
-      overflow: hidden;
+      color: #2c3e50;
+    }
+
+    .site-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1a1a1a;
+      text-align: center;
+      flex-grow: 1;
+      line-height: 1.2;
+    }
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-info {
       display: flex;
       flex-direction: column;
-      height: 100px;
-      border-radius: 0;
-    }
-
-    .top-section {
-      background: #fff;
-      height: 55%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 5px;
-      perspective: 600px;
-    }
-
-    .top-section img {
-      max-width: 90%;
-      max-height: 30px;
-      object-fit: contain;
-      transform-style: preserve-3d;
-      transition: transform .4s ease;
-    }
-
-    .bottom-section {
-      background: #3e723a;
-      color: #fff;
-      height: 45%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-end;
       font-size: 13px;
-      text-align: center;
+      line-height: 1.2;
+      user-select: all;
+    }
+
+    #userIdDisplay {
+      color: #444;
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .profile-label {
+      color: #2e7d32;
+      font-weight: bold;
+      font-size: 13px;
+      margin-right: 2px;
+    }
+
+    .profile-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-icon svg {
+      width: 28px;
+      height: 28px;
+      fill: #ffffff;
+    }
+
+    .account-section {
+      background-color: #f2f2f2;
+      padding: 25px 15px;
+    }
+
+    .account-header {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 16px;
+    }
+
+    .account-option {
+      background-color: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      padding: 14px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .option-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 64px; /* يبدأ الخط بعد الأيقونة اليمنى */
+      left: 0;
+      height: 1px;
+      background-color: #dcdcdc;
+    }
+
+    .icon-circle {
+      width: 38px;
+      height: 38px;
+      background-color: #e0e0e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 12px;
+      overflow: hidden;
+    }
+
+    .icon-circle img,
+    .icon-circle svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .plus-icon {
+      fill: #4caf50;
+    }
+
+    .minus-icon {
+      fill: #f44336;
+    }
+
+    .option-text {
+      flex-grow: 1;
+      color: #000;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .arrow-icon {
+      color: #888;
+      font-size: 16px;
     }
 
     @media (max-width: 600px) {
-      .bank-card { height: 90px; }
-      .bottom-section { font-size: 12px; }
-      .recommended-wrapper {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
+      .site-title {
+        font-size: 16px;
       }
-    }
 
-    @keyframes goBack {
-      0% { transform: translateZ(0); }
-      50% { transform: translateZ(-80px); }
-      100% { transform: translateZ(0); }
-    }
+      .profile-icon {
+        width: 40px;
+        height: 40px;
+      }
 
-    .animate-back {
-      animation: goBack 0.5s ease;
+      .profile-icon svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .profile-info {
+        font-size: 12px;
+      }
+
+      .account-header {
+        font-size: 16px;
+      }
+
+      .option-text {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <div id="toast" class="toast"></div>
 
   <header>
     <div class="header-content">
       <div class="profile-section">
         <div class="profile-icon">
           <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="20" r="10" fill="#ffffff"/>
-            <ellipse cx="32" cy="48" rx="18" ry="10" fill="#ffffff"/>
+            <circle cx="32" cy="20" r="10" />
+            <ellipse cx="32" cy="48" rx="18" ry="10" />
           </svg>
         </div>
         <div class="profile-info">
@@ -261,100 +209,56 @@
   </header>
 
   <main class="account-section">
-
     <div class="account-header">إدارة الحساب</div>
     <div class="account-option">
-      <div class="option-item" id="deposit-option">
+      
+      <!-- إجراء الإيداع -->
+      <div class="option-item">
         <div class="icon-circle">
-          <img src="https://i.ibb.co/nS2x140/A825-BDBC-18-A3-4-D5-C-9-E17-6-F994-F30-B307-removebg-preview.png" alt="إيداع">
+          <svg class="plus-icon" viewBox="0 0 24 24">
+            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
         </div>
         <div class="option-text">إجراء الإيداع</div>
         <div class="arrow-icon">›</div>
       </div>
-      <div class="option-item" id="withdraw-option">
+
+      <!-- السحب من الحساب -->
+      <div class="option-item">
         <div class="icon-circle">
-          <img src="https://i.ibb.co/rRDF6BbH/9-FD1-E7-E9-36-EE-4530-AC26-5-B1976634666-removebg-preview.png" alt="سحب">
+          <svg class="minus-icon" viewBox="0 0 24 24">
+            <path d="M5 12h14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
         </div>
         <div class="option-text">السحب من الحساب</div>
         <div class="arrow-icon">›</div>
       </div>
-    </div>
 
-    <section class="recommended-section">
-      <h3 class="recommended-title">الطرق الموصى بها</h3>
-      <div class="recommended-wrapper">
-        <!-- البطاقات الأصلية -->
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png" alt="Al Barid">
-          </div>
-          <div class="bottom-section">Al Barid</div>
+      <!-- Cash Plus -->
+      <div class="option-item">
+        <div class="icon-circle">
+          <img src="https://i.postimg.cc/kXPdP0B6/cash-plus-mobcash.png" alt="Cash Plus" />
         </div>
-
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari">
-          </div>
-          <div class="bottom-section">Attijari</div>
-        </div>
-
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://i.postimg.cc/g07jHhK5/cih.png" alt="CIH">
-          </div>
-          <div class="bottom-section">CIH</div>
-        </div>
-
-        <!-- بطاقات مؤقتة -->
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://via.placeholder.com/80x20?text=+" alt="">
-          </div>
-          <div class="bottom-section">&nbsp;</div>
-        </div>
-
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://via.placeholder.com/80x20?text=+" alt="">
-          </div>
-          <div class="bottom-section">&nbsp;</div>
-        </div>
-
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://via.placeholder.com/80x20?text=+" alt="">
-          </div>
-          <div class="bottom-section">&nbsp;</div>
-        </div>
+        <div class="option-text">Cash Plus</div>
+        <div class="arrow-icon">›</div>
       </div>
-    </section>
+
+      <!-- Barid Pay -->
+      <div class="option-item">
+        <div class="icon-circle">
+          <img src="https://i.postimg.cc/7Zxdx700/barid-pay-mobcash.png" alt="Barid Pay" />
+        </div>
+        <div class="option-text">Barid Pay</div>
+        <div class="arrow-icon">›</div>
+      </div>
+
+    </div>
   </main>
 
   <script>
     const userId = localStorage.getItem("userId") || "غير مسجل";
     document.getElementById("userIdDisplay").textContent = "id: " + userId;
-
-    document.querySelectorAll('.bank-card').forEach(card => {
-      const logo = card.querySelector('.top-section img');
-      const animate = () => {
-        logo.classList.add('animate-back');
-        setTimeout(() => logo.classList.remove('animate-back'), 500);
-      };
-      card.addEventListener('click', animate);
-      card.addEventListener('touchstart', animate, { passive: true });
-      card.addEventListener('mouseenter', animate);
-    });
-
-    const toast = document.getElementById('toast');
-    function showToast(message){
-      toast.textContent = message;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    document.getElementById('withdraw-option').addEventListener('click', () => {
-      showToast('الرجاء إجراء الإيداع أولاً للتمكن من استخدام خاصية السحب عبر id.');
-    });
   </script>
+
 </body>
 </html>
