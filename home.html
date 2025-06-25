@@ -35,26 +35,17 @@
     .option-text        { flex-grow:1; color:#000; font-size:15px; font-weight:500; }
     .arrow-icon         { color:#888; font-size:16px; }
 
-    /* ░░░░░ الطرق الموصى بها ░░░░░ (متزنة الآن) */
+    /* ░░░░░ الطرق الموصى بها ░░░░░ */
     .recommended-section{
-      background:#8aa981;               /* اللون الأخضر */
-      padding:10px 10px 25px;           /* تباعد علوي/جانبي وسفلي أكبر قليلاً */
-      margin-top:20px;
-      border-radius:12px;               /* حواف ناعمة لدمجه مع التصميم */
-      width:100%;                       /* اتزان - داخل حدود الصفحة */
-      display:flex; flex-direction:column; align-items:center;
+      background:#8aa981; padding:10px 10px 25px; margin-top:20px;
+      border-radius:12px; width:100%; display:flex; flex-direction:column; align-items:center;
       box-sizing:border-box;
     }
-    .recommended-title{
-      font-family:system-ui,Arial,sans-serif;
-      font-size:18px; color:#1a1a1a; margin:0 0 10px; line-height:1.1; font-weight:normal;
-    }
-    .recommended-wrapper{
-      display:flex; justify-content:center; gap:12px; flex-wrap:nowrap; max-width:360px;
-    }
+    .recommended-title  { font-family:system-ui,Arial,sans-serif; font-size:18px; color:#1a1a1a; margin:0 0 10px; }
+    .recommended-wrapper{ display:flex; justify-content:center; gap:12px; flex-wrap:nowrap; max-width:360px; }
 
     /* ░ بطاقة بنك (تصميم + حركة) ░ */
-    .bank-card          { width:110px; background:#9db194; box-shadow:0 2px 6px rgba(0,0,0,.1); }
+    .bank-card          { width:110px; background:#9db194; box-shadow:0 2px 6px rgba(0,0,0,.1); cursor:pointer; }
     .top-section        { background:#fff; height:40px; display:flex; justify-content:center; align-items:center; padding:2px; perspective:600px; }
     .top-section img    { max-width:100%; max-height:25px; object-fit:contain; transform-style:preserve-3d; transition:transform .4s ease; }
     .bottom-section     { background:#3e723a; color:#fff; text-align:center; padding:8px 0; font-size:13px; }
@@ -155,26 +146,28 @@
 
   <!-- ░░ JavaScript ░░ -->
   <script>
-    /* إظهار id المحفوظ (إن وجد) */
+    /* عرض معرف المستخدم (إن وُجِد) */
     const userId = localStorage.getItem("userId") || "غير مسجل";
     document.getElementById("userIdDisplay").textContent = "id: " + userId;
 
-    /* إضافة حركة الرجوع للخلف عند الضغط/اللمس على شعارات البنوك */
-    const logos = document.querySelectorAll('.top-section img');
-    logos.forEach(img => {
+    /* حركة الرجوع للخلف عند الضغط/اللمس على البطاقة بالكامل */
+    document.querySelectorAll('.bank-card').forEach(card => {
+      const logo = card.querySelector('.top-section img');
       const animate = () => {
-        img.classList.add('animate-back');
-        setTimeout(() => img.classList.remove('animate-back'), 500);
+        logo.classList.add('animate-back');
+        setTimeout(() => logo.classList.remove('animate-back'), 500);
       };
-      img.addEventListener('click', animate);
-      img.addEventListener('touchstart', animate, {passive:true});
+      card.addEventListener('click', animate);
+      card.addEventListener('touchstart', animate, { passive: true });
     });
 
-    /* تشغيل الحركة بالكيبورد (اختياري) */
-    window.addEventListener('keydown', () => logos.forEach(logo => {
-      logo.classList.add('animate-back');
-      setTimeout(() => logo.classList.remove('animate-back'), 500);
-    }));
+    /* خيار: تشغيل الحركة بالكيبورد (ينطبق على جميع البطاقات مرة واحدة) */
+    window.addEventListener('keydown', () => {
+      document.querySelectorAll('.bank-card .top-section img').forEach(logo => {
+        logo.classList.add('animate-back');
+        setTimeout(() => logo.classList.remove('animate-back'), 500);
+      });
+    });
   </script>
 </body>
 </html>
