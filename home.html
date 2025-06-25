@@ -38,14 +38,18 @@
     /* ░░░░░ الطرق الموصى بها ░░░░░ */
     .recommended-section{
       background:#8aa981;                 /* أخضر يملأ الحواف */
-      padding:10px 10px 25px;
-      margin:20px -15px 0;                /* يزيل هوامش account-section الجانبية */
-      width:calc(100% + 30px);            /* يملأ عرض الصفحة بالكامل */
-      border-radius:0;                    /* بدون حواف مستديرة */
+      padding:10px 0 25px;               /* لا padding أفقي ليلتصق بالشاشة */
+      margin:20px -15px 0;               /* يعوّض حشوة account-section */
+      width:calc(100% + 30px);           /* يملأ العرض كاملاً */
+      border-radius:0;                   /* بدون زوايا مستديرة */
       display:flex; flex-direction:column; align-items:center; box-sizing:border-box;
     }
     .recommended-title  { font-family:system-ui,Arial,sans-serif; font-size:18px; color:#1a1a1a; margin:0 0 10px; }
-    .recommended-wrapper{ display:flex; justify-content:center; gap:12px; flex-wrap:nowrap; max-width:360px; }
+    .recommended-wrapper{
+      display:flex; justify-content:space-between;   /* يملأ الزوايا الفارغة */
+      width:100%;                                   /* يأخذ عرض القسم بالكامل */
+      flex-wrap:nowrap;                             /* صف واحد */
+    }
 
     /* ░ بطاقة بنك (تصميم + حركة) ░ */
     .bank-card          { width:110px; background:#9db194; box-shadow:0 2px 6px rgba(0,0,0,.1); cursor:pointer; }
@@ -64,11 +68,15 @@
     /* ░ استجابة شاشات صغيرة ░ */
     @media(max-width:600px){
       .site-title{font-size:16px;}
-      .profile-icon{width:40px;height:40px;} .profile-icon svg{width:24px;height:24px;}
+      .profile-icon{width:40px;height:40px;}  .profile-icon svg{width:24px;height:24px;}
       .profile-info{font-size:12px;} .account-header{font-size:14px;}
       .icon-circle{width:32px;height:32px;margin-left:8px;} .option-text{font-size:14px;}
-      .bank-card{width:95px;} .recommended-wrapper{gap:8px;max-width:280px;}
-      /* عند الشاشات الصغيرة يجب إزالة الهوامش بنفس الطريقة */
+
+      /* حجم أيقونة البنك أصغر */
+      .bank-card{width:95px;}
+      /* عند الشاشات الصغيرة نعود للمركز مع فراغ بسيط */
+      .recommended-wrapper{justify-content:center; gap:8px;}
+      /* القسم يظل يملأ الشاشة بعرض كامل */
       .recommended-section{margin:20px -15px 0; width:calc(100% + 30px);}
     }
   </style>
