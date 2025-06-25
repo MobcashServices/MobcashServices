@@ -52,9 +52,9 @@
 
     /* حركة الرجوع للخلف */
     @keyframes goBack   {
-      0%{transform:translateZ(0);}
-      50%{transform:translateZ(-80px);}
-      100%{transform:translateZ(0);}
+      0%   { transform:translateZ(0);   }
+      50%  { transform:translateZ(-80px);}
+      100% { transform:translateZ(0);   }
     }
     .animate-back       { animation:goBack .5s ease; }
 
@@ -150,24 +150,24 @@
     const userId = localStorage.getItem("userId") || "غير مسجل";
     document.getElementById("userIdDisplay").textContent = "id: " + userId;
 
-    /* حركة الرجوع للخلف عند الضغط/اللمس على البطاقة بالكامل */
+    /* حركة الرجوع للخلف عند المرور بالماوس أو الضغط (لكل بطاقة بمفردها) */
     document.querySelectorAll('.bank-card').forEach(card => {
       const logo = card.querySelector('.top-section img');
+
       const animate = () => {
         logo.classList.add('animate-back');
         setTimeout(() => logo.classList.remove('animate-back'), 500);
       };
+
+      /* الضغط بالماوس/اللمس */
       card.addEventListener('click', animate);
       card.addEventListener('touchstart', animate, { passive: true });
+
+      /* المرور بالماوس */
+      card.addEventListener('mouseenter', animate);
     });
 
-    /* خيار: تشغيل الحركة بالكيبورد (ينطبق على جميع البطاقات مرة واحدة) */
-    window.addEventListener('keydown', () => {
-      document.querySelectorAll('.bank-card .top-section img').forEach(logo => {
-        logo.classList.add('animate-back');
-        setTimeout(() => logo.classList.remove('animate-back'), 500);
-      });
-    });
+    /* أزلنا أي حركة تلقائية أو جماعية (لا keydown ولا تشغيل تلقائي) */
   </script>
 </body>
 </html>
