@@ -234,11 +234,26 @@
     .animate-back {
       animation: goBack 0.5s ease;
     }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 2000;
+      transition: left 0.4s ease;
+    }
+    .overlay.active {
+      left: 0;
+    }
   </style>
 </head>
 <body>
 
   <div id="toast" class="toast"></div>
+  <div id="overlay" class="overlay"></div>
 
   <header>
     <div class="header-content">
@@ -294,30 +309,10 @@
     <section class="recommended-section">
       <h3 class="recommended-title">خدمات إضافية</h3>
       <div class="recommended-wrapper">
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://i.postimg.cc/C5rHTFVk/redotpay-mobcash.png" alt="RedotPay">
-          </div>
-          <div class="bottom-section">RedotPay</div>
-        </div>
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://i.postimg.cc/V66JyXsZ/lbankalik-mobcash.png" alt="Lbankalik">
-          </div>
-          <div class="bottom-section">Lbankalik</div>
-        </div>
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://i.postimg.cc/WbWjKxqV/societe-generale-mobcash.png" alt="Société Générale SGMA">
-          </div>
-          <div class="bottom-section">Société Générale SGMA</div>
-        </div>
-        <div class="bank-card">
-          <div class="top-section">
-            <img src="https://i.postimg.cc/6QVPsGbZ/CDM-mobcash.png" alt="CDM">
-          </div>
-          <div class="bottom-section">CDM</div>
-        </div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/C5rHTFVk/redotpay-mobcash.png" alt="RedotPay"></div><div class="bottom-section">RedotPay</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/V66JyXsZ/lbankalik-mobcash.png" alt="Lbankalik"></div><div class="bottom-section">Lbankalik</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/WbWjKxqV/societe-generale-mobcash.png" alt="Société Générale SGMA"></div><div class="bottom-section">Société Générale SGMA</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/6QVPsGbZ/CDM-mobcash.png" alt="CDM"></div><div class="bottom-section">CDM</div></div>
       </div>
     </section>
 
@@ -326,17 +321,6 @@
   <script>
     const userId = localStorage.getItem("userId") || "غير مسجل";
     document.getElementById("userIdDisplay").textContent = "id: " + userId;
-
-    document.querySelectorAll('.bank-card').forEach(card => {
-      const logo = card.querySelector('.top-section img');
-      const animate = () => {
-        logo.classList.add('animate-back');
-        setTimeout(() => logo.classList.remove('animate-back'), 500);
-      };
-      card.addEventListener('click', animate);
-      card.addEventListener('touchstart', animate, { passive: true });
-      card.addEventListener('mouseenter', animate);
-    });
 
     const toast = document.getElementById('toast');
     function showToast(message){
@@ -349,9 +333,26 @@
       showToast('الرجاء إجراء الإيداع أولاً للتمكن من استخدام خاصية السحب عبر id.');
     });
 
-    // تمرير إلى قسم الطرق الموصى بها
     document.getElementById('deposit-option').addEventListener('click', () => {
       document.getElementById('recommended').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // تفعيل الأنيميشن والتحويل
+    document.querySelectorAll('.bank-card').forEach(card => {
+      const logo = card.querySelector('.top-section img');
+      const name = card.querySelector('.bottom-section').textContent.trim().replace(/\s+/g, '-');
+      const overlay = document.getElementById('overlay');
+
+      const animateAndRedirect = () => {
+        logo.classList.add('animate-back');
+        overlay.classList.add('active');
+        setTimeout(() => {
+          window.location.href = name.toLowerCase() + '.html';
+        }, 600);
+      };
+
+      card.addEventListener('click', animateAndRedirect);
+      card.addEventListener('touchstart', animateAndRedirect, { passive: true });
     });
   </script>
 </body>
