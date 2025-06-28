@@ -5,10 +5,7 @@
   <title>Mobcash Services</title>
   <style>
     html, body { margin: 0; overflow-x: hidden; }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background:#f2f2f2;
-    }header {
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f2f2f2; }header {
   background:#fff;
   box-shadow:0 2px 6px rgba(0,0,0,.08);
   padding:10px 16px;
@@ -152,152 +149,96 @@
   transform:translate(-50%,0);
 }
 
-.recommended-section {
-  background:#8aa981;
-  padding:10px 10px 25px;
-  margin:20px -15px 0;
-  width:calc(100% + 30px);
-  box-sizing:border-box;
-}
-.recommended-title {
-  font-family:system-ui,Arial,sans-serif;
-  font-size:18px;
-  color:#1a1a1a;
-  margin:0 0 10px;
-  text-align: center;
-}
-
-.recommended-wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 12px;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.bank-card {
-  background: #9db194;
-  box-shadow: 0 2px 6px rgba(0,0,0,.1);
-  cursor: pointer;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 100px;
-  border-radius: 0;
-}
-
-.top-section {
-  background: #fff;
-  height: 55%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  perspective: 600px;
-}
-
-.top-section img {
-  max-width: 90%;
-  max-height: 30px;
-  object-fit: contain;
-  transform-style: preserve-3d;
-  transition: transform .4s ease;
-}
-
-.bottom-section {
-  background: #3e723a;
-  color: #fff;
-  height: 45%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  text-align: center;
-}
-
-@media (max-width: 600px) {
-  .bank-card { height: 90px; }
-  .bottom-section { font-size: 12px; }
-  .recommended-wrapper {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-}
-
-@keyframes goBack {
-  0% { transform: translateZ(0); }
-  50% { transform: translateZ(-80px); }
-  100% { transform: translateZ(0); }
-}
-
-.animate-back {
-  animation: goBack 0.5s ease;
-}
-
-.loader {
+.overlay {
   position: fixed;
   top: 0;
-  left: 0;
-  z-index: 3000;
+  left: -100%;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.0);
+  background: rgba(0,0,0,0.4);
+  z-index: 2000;
+  transition: left 0.4s ease;
   display: flex;
-  align-items: center;
   justify-content: center;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  align-items: center;
 }
-.loader span {
+.overlay.active {
+  left: 0;
+}
+.loader {
+  display: flex;
+  gap: 6px;
+}
+.loader div {
   width: 6px;
   height: 20px;
-  margin: 0 3px;
   background: white;
-  display: inline-block;
-  animation: bounce 1.2s infinite ease-in-out;
+  border-radius: 3px;
+  animation: bounce 0.6s infinite ease-in-out;
 }
-.loader span:nth-child(1) { animation-delay: -0.4s; }
-.loader span:nth-child(2) { animation-delay: -0.2s; }
-.loader span:nth-child(3) { animation-delay: 0s; }
-.loader span:nth-child(4) { animation-delay: 0.2s; }
-.loader span:nth-child(5) { animation-delay: 0.4s; }
+.loader div:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.loader div:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.loader div:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.loader div:nth-child(5) {
+  animation-delay: 0.4s;
+}
 @keyframes bounce {
-  0%, 40%, 100% { transform: scaleY(0.4); }
-  20% { transform: scaleY(1); }
-}
-.loader.show {
-  pointer-events: all;
-  opacity: 1;
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }
 
   </style>
 </head>
 <body>
-  <div id="loader" class="loader">
-    <span></span><span></span><span></span><span></span><span></span>
+  <div id="toast" class="toast"></div>
+  <div id="overlay" class="overlay">
+    <div class="loader">
+      <div></div><div></div><div></div><div></div><div></div>
+    </div>
   </div>
-  <!-- باقي عناصر الصفحة الرئيسية هنا (الهيدر، الأقسام، إلخ) -->  <script>
-    const loader = document.getElementById('loader');
-    const cards = document.querySelectorAll('.bank-card');
+  <!-- المحتوى الرئيسي هنا مثل الهيدر والطرق الموصى بها -->
+  <!-- ... -->
+  <script>
+    const userId = localStorage.getItem("userId") || "غير مسجل";
+    document.getElementById("userIdDisplay").textContent = "id: " + userId;const toast = document.getElementById('toast');
+function showToast(message){
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
 
-    cards.forEach(card => {
-      const logo = card.querySelector('.top-section img');
-      const name = card.querySelector('.bottom-section').textContent.trim().replace(/\s+/g, '-').toLowerCase();
+document.getElementById('withdraw-option').addEventListener('click', () => {
+  showToast('الرجاء إجراء الإيداع أولاً للتمكن من استخدام خاصية السحب عبر id.');
+});
 
-      const animateAndRedirect = () => {
-        logo.classList.add('animate-back');
-        loader.classList.add('show');
+document.getElementById('deposit-option').addEventListener('click', () => {
+  document.getElementById('recommended').scrollIntoView({ behavior: 'smooth' });
+});
 
-        setTimeout(() => {
-          loader.classList.remove('show');
-          window.location.href = name + '.html';
-        }, 1400);
-      };
+// تفعيل الأنيميشن والتحويل
+document.querySelectorAll('.bank-card').forEach(card => {
+  const logo = card.querySelector('.top-section img');
+  const name = card.querySelector('.bottom-section').textContent.trim().replace(/\s+/g, '-');
+  const overlay = document.getElementById('overlay');
 
-      card.addEventListener('click', animateAndRedirect);
-      card.addEventListener('touchstart', animateAndRedirect, { passive: true });
-    });
-  </script></body>
+  const animateAndRedirect = () => {
+    logo.classList.add('animate-back');
+    overlay.classList.add('active');
+    setTimeout(() => {
+      window.location.href = name.toLowerCase() + '.html';
+    }, 1000);
+  };
+
+  card.addEventListener('click', animateAndRedirect);
+  card.addEventListener('touchstart', animateAndRedirect, { passive: true });
+});
+
+  </script>
+</body>
 </html>
