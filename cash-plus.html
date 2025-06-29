@@ -1,274 +1,160 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>نموذج إيداع Cash Plus</title>
-
-  <!-- أيقونات (Font Awesome) لرمزَي النسخ والعَلمَة -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-PCuB3x..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نموذج إيداع Cash Plus</title>
+  <!-- أيقونات النسخ وعلامة ✔️ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-PCuB3x" crossorigin="anonymous" referrerpolicy="no-referrer">
   <style>
-    /* إعداد عام للصفحة */
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
-      background:#f0f0f0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height:100vh;
-    }
+    /************************ أساس الصفحة ************************/
+    html,body{height:100%;margin:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+    body{display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.55);}/************************ نافذة الإيداع ************************/
+.modal{width:430px;max-width:96vw;background:#fff;border-radius:4px;box-shadow:0 0 6px rgba(0,0,0,.55);position:relative;overflow:hidden;animation:pop .25s;}  
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
 
-    /* تظليل الخلفيّة وراء النافذة */
-    .overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.55);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:1rem;
-    }
+/* زر إغلاق بسيط */
+.close{
+  position:absolute;left:10px;top:8px;cursor:pointer;
+  background:none;border:none;font-size:22px;color:#6d6d6d;line-height:1;
+}
+.close:focus{outline:none}
 
-    /* محتوى النافذة */
-    .modal{
-      width:360px;
-      background:#fff;
-      border-radius:8px;
-      box-shadow:0 6px 18px rgba(0,0,0,.25);
-      overflow:hidden;
-    }
+/* الشعار */
+.modal-header{padding:30px 10px 20px;text-align:center;}
+.modal-header img{height:60px;width:auto;}
 
-    /* رأس يحمل الشعار */
-    .modal-header{
-      background:#fff;
-      text-align:center;
-      padding:1.2rem .5rem .6rem;
-    }
-    .modal-header img{
-      max-width:120px;
-      height:auto;
-    }
+/* شريط التحذير الرمادي */
+.ribbon{background:#e5e8ef;height:70px;position:relative;}
+.ribbon p{margin:0 14px;font-weight:600;line-height:1.45;color:#c01414;font-size:15px;}
+.ribbon .english{direction:ltr;font-size:14px;font-weight:500;position:absolute;bottom:8px;right:14px;}
+.ribbon .arabic{position:absolute;top:8px;right:14px;}
 
-    /* شريط التحذير */
-    .alert-bar{
-      background:#fafafa;
-      border-top:1px solid #e3e3e3;
-      border-bottom:1px solid #e3e3e3;
-      padding:.75rem 1rem;
-      color:#c82333;
-      font-size:.88rem;
-      line-height:1.5;
-    }
+/* محتوى النموذج */
+.content{padding:16px 24px 22px;font-size:15px;}
 
-    /* جسم النموذج */
-    .modal-body{
-      padding:1rem 1.25rem 1.5rem;
-      font-size:.9rem;
-    }
+/* صف النسخ */
+.copy-row{display:flex;align-items:center;margin-bottom:14px;gap:6px;}
+.copy-row .value{flex:1;font-weight:600;word-break:break-all;}
 
-    .flex-copy{
-      display:flex;
-      align-items:center;
-      gap:.5rem;
-      margin-bottom:.85rem;
-      word-break:break-all;
-    }
-    .flex-copy span{
-      flex:1;
-    }
-    .copy-btn{
-      border:none;
-      background:#1eb36b;
-      color:#fff;
-      width:28px;height:28px;
-      border-radius:6px;
-      cursor:pointer;
-      transition:filter .2s;
-    }
-    .copy-btn:hover{filter:brightness(1.1)}
+.copy-btn{
+  background:linear-gradient(#1eb36b,#15995e);
+  width:28px;height:28px;border:none;border-radius:4px;color:#fff;font-size:15px;cursor:pointer;
+  box-shadow:0 2px 0 #107246,inset 0 1px 1px rgba(255,255,255,.6);
+  transition:transform .1s;display:flex;align-items:center;justify-content:center;
+}
+.copy-btn:active{transform:translateY(1px);box-shadow:0 1px 0 #107246;}
 
-    label{display:block;margin-bottom:.35rem;font-weight:600}
-    input[type="text"],input[type="number"]{
-      width:100%;
-      padding:.55rem .6rem;
-      border:1px solid #ccc;
-      border-radius:6px;
-      font-size:.88rem;
-      margin-bottom:.9rem;
-    }
-    input[type="text"]:focus,input[type="number"]:focus{
-      outline:none;
-      border-color:#1eb36b;
-    }
+/* حقول ثلاثية الأبعاد */
+.field{
+  width:100%;padding:10px 12px;margin-bottom:16px;font-size:15px;
+  border:1px solid #bdbdbd;border-radius:4px;background:#fff;
+  box-shadow:inset 0 2px 2px rgba(255,255,255,.9),inset 0 -2px 3px rgba(0,0,0,.06);
+}
+.field:focus{outline:none;border-color:#1eb36b;}
 
-    /* منطقة رفع الملف */
-    .upload-wrap{
-      margin-bottom:1.2rem;
-    }
-    .file-label{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      width:100%;
-      aspect-ratio:4/2;           /* مستطيل قريب من مربّع */
-      background:#f9f9f9;
-      border:2px dashed #d0d0d0;
-      border-radius:10px;
-      cursor:pointer;
-      position:relative;
-      transition:border-color .2s,background .2s;
-    }
-    .file-label:hover{
-      border-color:#1eb36b;
-      background:#fdfdfd;
-    }
-    .file-label i{
-      font-size:2rem;
-      color:#666;
-    }
-    .file-label img{
-      max-width:100%;
-      max-height:100%;
-      object-fit:contain;
-      border-radius:8px;
-    }
-    .file-label .check{
-      position:absolute;
-      top:6px;left:6px;
-      background:#1eb36b;
-      color:#fff;
-      border-radius:50%;
-      width:24px;height:24px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:14px;
-    }
-    input[type="file"]{display:none}
+/* رافع الصورة */
+.uploader{width:100%;padding:36px 0;border:1px dashed #bababa;border-radius:4px;background:#fafafa;text-align:center;font-size:16px;color:#6d6d6d;position:relative;margin-bottom:22px;cursor:pointer;}
+.uploader i{font-size:30px;color:#8c8c8c;}
+.uploader img{max-width:100%;max-height:100%;object-fit:contain;}
+.uploader .check{position:absolute;top:6px;left:6px;width:24px;height:24px;border-radius:50%;background:#1eb36b;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;}
+input[type=file]{display:none;}
 
-    /* زر التأكيد ثلاثي الأبعاد */
-    .btn-confirm{
-      width:100%;
-      padding:.8rem 1rem;
-      border:none;
-      border-radius:6px;
-      background:#1eb36b;
-      color:#fff;
-      font-size:1rem;
-      font-weight:600;
-      cursor:pointer;
-      box-shadow:0 4px 0 #157c4d, 0 6px 15px rgba(0,0,0,.2);
-      transition:transform .1s;
-    }
-    .btn-confirm:active{
-      transform:translateY(2px);
-      box-shadow:0 2px 0 #157c4d;
-    }
+/* زر CONFIRMER ثلاثي الأبعاد */
+.confirm{
+  width:100%;padding:15px 0;border:none;border-radius:2px;cursor:pointer;font-weight:700;font-size:17px;color:#fff;
+  background:linear-gradient(#1eb36b,#147e50);
+  box-shadow:0 4px 0 #0f663f,inset 0 1px 1px rgba(255,255,255,.55);
+  letter-spacing:.5px;
+}
+.confirm:active{transform:translateY(1px);box-shadow:0 2px 0 #0f663f;}
+
+@media(max-width:460px){
+  .modal{width:94vw;}
+  .content{padding:14px 16px 20px;}
+}
+
   </style>
 </head>
 <body>
-
-<!-- == النافذة == -->
-<div class="overlay">
   <div class="modal" role="dialog" aria-modal="true">
-
-    <!-- رأس الشعار -->
-    <div class="modal-header">
-      <!-- استبدل src بشعارك -->
-      <img src="https://via.placeholder.com/120x40?text=LOGO" alt="Cash Plus Logo">
-    </div>
-
-    <!-- شريط التحذير -->
-    <div class="alert-bar">
-      <strong>تحذير:</strong> إذا كان المبلغ أقل من الحد الأدنى للإيداع، فلن يتم إضافة أموالك.<br>
-      <span dir="ltr">Warning: If the amount is less than the minimum deposit limit, your funds will not be credited.</span>
-    </div>
-
-    <!-- جسم المحتوى -->
-    <div class="modal-body">
-
-      <!-- رقم الهاتف + نسخ -->
-      <div class="flex-copy">
-        <span id="phoneVal">0675591093</span>
-        <button class="copy-btn" data-copy="phoneVal" title="نسخ"><i class="fa-regular fa-copy"></i></button>
-      </div>
-
-      <!-- سبب التحويل + نسخ -->
-      <div class="flex-copy">
-        <span id="reasonVal">SRV</span>
-        <button class="copy-btn" data-copy="reasonVal" title="نسخ"><i class="fa-regular fa-copy"></i></button>
-      </div>
-
-      <!-- المبلغ -->
-      <label for="amount">Montant (Min 750.00 MAD / Max 10 000.00 MAD):</label>
-      <input id="amount" type="number" min="750" max="10000" step="0.01" value="750.00">
-
-      <!-- حقلا إدخال إضافيَّان -->
-      <input type="text" placeholder="رقم الهاتف الخاص بك في Cash Plus">
-      <input type="text" placeholder="اسمك الكامل في Cash Plus">
-
-      <!-- رفع صورة إيصال التحويل -->
-      <div class="upload-wrap">
-        <label for="receipt" class="file-label" id="fileLabel">
-          <i class="fa-solid fa-plus"></i>
-        </label>
-        <input type="file" id="receipt" accept="image/*,application/pdf">
-      </div>
-
-      <!-- زر التأكيد -->
-      <button class="btn-confirm">CONFIRMER</button>
-    </div>
-  </div>
+    <button class="close" aria-label="إغلاق" onclick="document.querySelector('.modal').style.display='none'">&times;</button><!-- الشعار -->
+<div class="modal-header">
+  <img src="https://i.postimg.cc/g07jHhK5/cih.png" alt="Cash Plus Logo">
 </div>
 
-<script>
-  /* نسخ المحتوى إلى الحافظة */
-  document.querySelectorAll('.copy-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const id = btn.dataset.copy;
-      const text = document.getElementById(id).innerText;
-      navigator.clipboard.writeText(text).then(()=>{
-        btn.innerHTML='<i class="fa-solid fa-check"></i>';
-        setTimeout(()=>btn.innerHTML='<i class="fa-regular fa-copy"></i>',1300);
+<!-- شريط التحذير -->
+<div class="ribbon">
+  <p class="arabic">تحذير: إذا كان المبلغ أقل من الحد الأدنى للإيداع، فلن يتم إضافة أموالك.</p>
+  <p class="english">Warning: If the amount is less than the minimum deposit limit, your funds will not be credited.</p>
+</div>
+
+<!-- المحتوى -->
+<div class="content">
+  <!-- رقم الهاتف -->
+  <div class="copy-row">
+    <span class="value" id="phoneVal">0675591093</span>
+    <button class="copy-btn" data-copy="phoneVal"><i class="fa-regular fa-copy"></i></button>
+  </div>
+  <!-- السبب -->
+  <div class="copy-row">
+    <span class="value" id="reasonVal">SRV</span>
+    <button class="copy-btn" data-copy="reasonVal"><i class="fa-regular fa-copy"></i></button>
+  </div>
+
+  <!-- المبلغ -->
+  <label style="font-weight:600;margin-bottom:4px;display:block">Montant (Min 750.00 MAD / Max 10 000.00 MAD):</label>
+  <input class="field" id="amount" type="number" min="750" max="10000" step="0.01" value="750.00">
+
+  <!-- رقم الهاتف والاسم -->
+  <input class="field" type="text" placeholder="رقم الهاتف الخاص بك في Cash Plus">
+  <input class="field" type="text" placeholder="اسمك الكامل في Cash Plus">
+
+  <!-- رفع إيصال -->
+  <label class="uploader" id="uploadLabel" for="receipt"><i class="fa-solid fa-plus"></i></label>
+  <input type="file" id="receipt" accept="image/*,application/pdf">
+
+  <!-- زر تأكيد -->
+  <button class="confirm">CONFIRMER</button>
+</div>
+
+  </div>  <script>
+    /************************ نسخ المحتوى ************************/
+    document.querySelectorAll('.copy-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const target=document.getElementById(btn.dataset.copy);
+        navigator.clipboard.writeText(target.innerText).then(()=>{
+          btn.innerHTML='<i class="fa-solid fa-check"></i>';
+          setTimeout(()=>btn.innerHTML='<i class="fa-regular fa-copy"></i>',1500);
+        });
       });
     });
-  });
 
-  /* معاينة الملف المُرفَع + إظهار إشارة تم */
-  const fileInput  = document.getElementById('receipt');
-  const fileLabel  = document.getElementById('fileLabel');
+    /************************ رفع الملف ومعاينته ************************/
+    const fileInput=document.getElementById('receipt');
+    const uploadLabel=document.getElementById('uploadLabel');
 
-  fileInput.addEventListener('change', (e)=>{
-    if(!e.target.files.length) return;
+    fileInput.addEventListener('change',e=>{
+      if(!e.target.files.length) return;
+      const file=e.target.files[0];
+      uploadLabel.innerHTML='';
+      uploadLabel.classList.add('hasfile');
 
-    const file = e.target.files[0];
-    const url  = URL.createObjectURL(file);
-
-    // تنظيف المحتوى السابق
-    fileLabel.innerHTML = '';
-    fileLabel.style.borderStyle='solid';
-
-    // صورة مصغّرة أو أيقونة PDF
-    if(file.type.startsWith('image/')){
-      const img = document.createElement('img');
-      img.src = url;
-      fileLabel.appendChild(img);
-    }else{
-      const icon = document.createElement('i');
-      icon.className='fa-solid fa-file-pdf fa-3x';
-      icon.style.color='#b20b0b';
-      fileLabel.appendChild(icon);
-    }
-
-    // علامة تم
-    const done = document.createElement('div');
-    done.className='check';
-    done.innerHTML='<i class="fa-solid fa-check"></i>';
-    fileLabel.appendChild(done);
-  });
-</script>
-</body>
+      // معاينة الصورة أو أيقونة pdf
+      if(file.type.startsWith('image/')){
+        const img=document.createElement('img');
+        img.src=URL.createObjectURL(file);
+        uploadLabel.appendChild(img);
+      }else{
+        const icon=document.createElement('i');
+        icon.className='fa-solid fa-file-pdf fa-2x';
+        icon.style.color='#b00b0b';
+        uploadLabel.appendChild(icon);
+      }
+      // علامة تحقق
+      const chk=document.createElement('div');
+      chk.className='check';
+      chk.innerHTML='<i class="fa-solid fa-check"></i>';
+      uploadLabel.appendChild(chk);
+    });
+  </script></body>
 </html>
