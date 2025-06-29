@@ -307,7 +307,7 @@
     </section>
 
     <section class="recommended-section">
-      <h3 class="recommended-title">خدمات إضافية</h3>
+      <h3 class="recommended-title">صرافات العملات الإلكترونية</h3>
       <div class="recommended-wrapper">
         <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/C5rHTFVk/redotpay-mobcash.png" alt="RedotPay"></div><div class="bottom-section">RedotPay</div></div>
         <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/V66JyXsZ/lbankalik-mobcash.png" alt="Lbankalik"></div><div class="bottom-section">Lbankalik</div></div>
@@ -337,7 +337,6 @@
       document.getElementById('recommended').scrollIntoView({ behavior: 'smooth' });
     });
 
-    // تفعيل الأنيميشن والتحويل
     document.querySelectorAll('.bank-card').forEach(card => {
       const logo = card.querySelector('.top-section img');
       const name = card.querySelector('.bottom-section').textContent.trim().replace(/\s+/g, '-');
