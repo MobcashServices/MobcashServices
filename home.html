@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mobcash Services</title>
   <style>
-    html, body { margin: 0; overflow-x: hidden; }
+    html, body { margin: 0; overflow-x: hidden; height: 100%; }
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f2f2f2; }
 
     /* ===== HEADER ===== */
@@ -68,7 +68,7 @@
     .top-section img {
       max-width:90%; max-height:30px; object-fit:contain; transform-style:preserve-3d; transition:transform .4s ease;
     }
-    .top-section img:hover { animation:goBack 0.5s ease; } /* حركة بالـ hover */
+    .top-section img:hover { animation:goBack 0.5s ease; }
     .bottom-section {
       background:#3e723a; color:#fff; height:45%; display:flex; align-items:center; justify-content:center;
       font-size:13px; text-align:center;
@@ -86,17 +86,60 @@
       50%{transform:translateZ(-80px);}
       100%{transform:translateZ(0);}
     }
-    .animate-back{ animation:goBack 0.5s ease; } /* عند الضغط */
+    .animate-back{ animation:goBack 0.5s ease; }
 
-    /* ===== OVERLAY ===== */
-    .overlay{ position:fixed; top:0; left:-100%; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:2000; transition:left 0.4s ease; }
-    .overlay.active{ left:0; }
+    /* ===== OVERLAY & POPUP ===== */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 2000;
+      display: none;
+      overflow: hidden;
+      direction: rtl;
+    }
+    .overlay.active {
+      display: block;
+    }
+
+    .popup {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80%;
+      max-width: 400px;
+      background: #fff;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      left: -100%;
+      transition: left 0.4s ease;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    .popup.active {
+      left: 0;
+    }
+    .popup-close {
+      cursor: pointer;
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
 
-  <div id="toast"   class="toast"></div>
-  <div id="overlay" class="overlay"></div>
+  <div id="toast" class="toast"></div>
+
+  <!-- overlay + popup -->
+  <div id="overlay" class="overlay">
+    <div id="popup" class="popup">
+      <div id="popup-close" class="popup-close" title="إغلاق">×</div>
+      <div id="popup-content"></div>
+    </div>
+  </div>
 
   <!-- ===== HEADER ===== -->
   <header>
@@ -168,7 +211,6 @@
     <section class="recommended-section">
       <h3 class="recommended-title">التحويل البنكي</h3>
       <div class="recommended-wrapper">
-        <!-- ترتيب مختلف لجميع الأيقونات -->
         <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari"></div><div class="bottom-section">Attijari</div></div>
         <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Vs2dDQbJ/banque-populaire-mobcah.png" alt="Banque Populaire"></div><div class="bottom-section">Banque Populaire</div></div>
         <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Gm528FQW/barid-pay-mobcash.png" alt="Barid Pay"></div><div class="bottom-section">Barid Pay</div></div>
@@ -176,7 +218,7 @@
         <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/g07jHhK5/cih.png" alt="CIH"></div><div class="bottom-section">CIH</div></div>
         <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png" alt="Al Barid"></div><div class="bottom-section">Al Barid</div></div>
         <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/6QVPsGbZ/CDM-mobcash.png" alt="CDM"></div><div class="bottom-section">CDM</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/V66JyXsZ/lbankalik-mobcash.png" alt="Lbankalik"></div><div class="bottom-section">Lbankalik</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/V66JyXsZ/lbankalik-mobcah.png" alt="Lbankalik"></div><div class="bottom-section">Lbankalik</div></div>
         <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/C5rHTFVk/redotpay-mobcash.png" alt="RedotPay"></div><div class="bottom-section">RedotPay</div></div>
         <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/WbWjKxqV/societe-generale-mobcash.png" alt="Société Générale SGMA"></div><div class="bottom-section">Société Générale SGMA</div></div>
       </div>
@@ -206,46 +248,31 @@
     document.getElementById('deposit-option')
       .addEventListener('click', () => document.getElementById('recommended').scrollIntoView({ behavior:'smooth' }));
 
-    /* حركة عند الضغط + تحويل صفحة مع التمييز بين التمرير والضغط */
+    /* التحكم في النافذة المنبثقة */
+    const overlay = document.getElementById('overlay');
+    const popup = document.getElementById('popup');
+    const popupContent = document.getElementById('popup-content');
+    const popupClose = document.getElementById('popup-close');
+
+    function openPopup(content){
+      popupContent.innerHTML = content;
+      overlay.classList.add('active');
+      popup.classList.add('active');
+    }
+
+    function closePopup(){
+      popup.classList.remove('active');
+      setTimeout(() => overlay.classList.remove('active'), 400);
+    }
+
+    popupClose.addEventListener('click', closePopup);
+
+    // إغلاق النافذة عند الضغط على الفلتر (الخلفية)
+    overlay.addEventListener('click', (e) => {
+      if(e.target === overlay) closePopup();
+    });
+
+    /* حركة عند الضغط مع تمييز التمرير من اللمس */
     document.querySelectorAll('.bank-card').forEach(card=>{
       const logo    = card.querySelector('.top-section img');
-      const name    = card.querySelector('.bottom-section').textContent.trim().replace(/\s+/g,'-');
-      const overlay = document.getElementById('overlay');
-
-      let touchStartX = 0;
-      let touchStartY = 0;
-
-      const animateAndRedirect = ()=>{
-        logo.classList.add('animate-back');      // حركة عند الضغط
-        overlay.classList.add('active');
-        setTimeout(()=>window.location.href = name.toLowerCase()+'.html', 600);
-      };
-
-      // التعامل مع النقر (click)
-      card.addEventListener('click', animateAndRedirect);
-
-      // التعامل مع اللمس مع التمييز بين التمرير والضغط
-      card.addEventListener('touchstart', (e) => {
-        const touch = e.touches[0];
-        touchStartX = touch.clientX;
-        touchStartY = touch.clientY;
-      }, { passive: true });
-
-      card.addEventListener('touchend', (e) => {
-        const touch = e.changedTouches[0];
-        const touchEndX = touch.clientX;
-        const touchEndY = touch.clientY;
-
-        const deltaX = Math.abs(touchEndX - touchStartX);
-        const deltaY = Math.abs(touchEndY - touchStartY);
-
-        const maxMove = 10; // الحد الأقصى لتحرك الإصبع للتمييز بين الضغط والتمرير
-
-        if (deltaX < maxMove && deltaY < maxMove) {
-          animateAndRedirect();
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+      const name
