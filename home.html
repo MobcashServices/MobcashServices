@@ -206,11 +206,14 @@
     document.getElementById('deposit-option')
       .addEventListener('click', () => document.getElementById('recommended').scrollIntoView({ behavior:'smooth' }));
 
-    /* حركة عند الضغط + تحويل صفحة */
+    /* حركة عند الضغط + تحويل صفحة مع التمييز بين التمرير والضغط */
     document.querySelectorAll('.bank-card').forEach(card=>{
       const logo    = card.querySelector('.top-section img');
       const name    = card.querySelector('.bottom-section').textContent.trim().replace(/\s+/g,'-');
       const overlay = document.getElementById('overlay');
+
+      let touchStartX = 0;
+      let touchStartY = 0;
 
       const animateAndRedirect = ()=>{
         logo.classList.add('animate-back');      // حركة عند الضغط
@@ -218,8 +221,30 @@
         setTimeout(()=>window.location.href = name.toLowerCase()+'.html', 600);
       };
 
-      card.addEventListener('click',      animateAndRedirect);
-      card.addEventListener('touchstart', animateAndRedirect, { passive:true });
+      // التعامل مع النقر (click)
+      card.addEventListener('click', animateAndRedirect);
+
+      // التعامل مع اللمس مع التمييز بين التمرير والضغط
+      card.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+      }, { passive: true });
+
+      card.addEventListener('touchend', (e) => {
+        const touch = e.changedTouches[0];
+        const touchEndX = touch.clientX;
+        const touchEndY = touch.clientY;
+
+        const deltaX = Math.abs(touchEndX - touchStartX);
+        const deltaY = Math.abs(touchEndY - touchStartY);
+
+        const maxMove = 10; // الحد الأقصى لتحرك الإصبع للتمييز بين الضغط والتمرير
+
+        if (deltaX < maxMove && deltaY < maxMove) {
+          animateAndRedirect();
+        }
+      });
     });
   </script>
 </body>
