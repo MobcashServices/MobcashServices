@@ -97,6 +97,9 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
     input[type="text"],
     input[type="number"] {
@@ -120,6 +123,13 @@
       direction: ltr;
       text-align: left;
       font-family: Arial, sans-serif;
+    }
+    /* التعديل الأساسي هنا */
+    .info-input strong.english-numbers {
+      word-break: break-all;
+      max-width: 100%;
+      display: inline-block;
+      white-space: normal;
     }
     .copy-icon {
       display: inline-block;
