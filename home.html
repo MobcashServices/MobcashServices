@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mobcash Services</title>
   <style>
-    html, body { margin: 0; overflow-x: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f2f2f2; }
-    
+    html, body { margin: 0; overflow-x: hidden; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f2f2f2; }
+
     /* ===== HEADER ===== */
     header { background:#fff; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:10px 16px; }
     .header-content { display:flex; align-items:center; justify-content:space-between; }
@@ -18,9 +19,9 @@
     .profile-info    { display:flex; flex-direction:column; align-items:flex-end; font-size:13px; line-height:1.2; user-select:all; }
     #userIdDisplay   { color:#444; font-weight:500; }
     .profile-label   { color:#2e7d32; font-weight:bold; margin-right:2px; }
-    
+
     /* ===== ACCOUNT OPTIONS ===== */
-    .account-section { background:#f2f2f2; padding:20px 15px 10px; position:relative; z-index:1; }
+    .account-section { background:#f2f2f2; padding:20px 15px 10px; }
     .account-header  { font-size:15px; font-weight:500; color:#888; margin-bottom:8px; text-align:right; }
     .account-option  { background:#fff; border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.05); overflow:hidden; }
     .option-item { display:flex; align-items:center; padding:14px; cursor:pointer; position:relative; }
@@ -34,16 +35,16 @@
     .option-item:hover .icon-circle img   { filter:drop-shadow(0 0 5px rgba(0,128,0,.8)); }
     .option-text  { flex-grow:1; color:#000; font-size:15px; font-weight:500; }
     .arrow-icon   { color:#888; font-size:16px; }
-    
+
     /* ===== TOAST ===== */
     .toast {
       position:fixed; bottom:24px; left:50%; transform:translate(-50%,20px);
       background:#f44336; color:#fff; padding:12px 20px; border-radius:8px; font-size:14px;
-      opacity:0; pointer-events:none; z-index:3000;
+      opacity:0; pointer-events:none; z-index:1000;
       transition:opacity .4s ease, transform .4s ease; box-shadow:0 4px 12px rgba(0,0,0,.2);
     }
     .toast.show { opacity:1; transform:translate(-50%,0); }
-    
+
     /* ===== GREEN SECTIONS ===== */
     .recommended-section {
       background:#8aa981; padding:10px 10px 25px; margin:20px -15px 0;
@@ -59,7 +60,6 @@
     .bank-card {
       background:#9db194; box-shadow:0 2px 6px rgba(0,0,0,.1); cursor:pointer;
       overflow:hidden; display:flex; flex-direction:column; height:100px;
-      user-select:none;
     }
     .top-section {
       background:#fff; height:55%; display:flex; justify-content:center; align-items:center;
@@ -68,71 +68,35 @@
     .top-section img {
       max-width:90%; max-height:30px; object-fit:contain; transform-style:preserve-3d; transition:transform .4s ease;
     }
-    .top-section img:hover { animation:goBack 0.5s ease; }
+    .top-section img:hover { animation:goBack 0.5s ease; } /* حركة بالـ hover */
     .bottom-section {
       background:#3e723a; color:#fff; height:45%; display:flex; align-items:center; justify-content:center;
       font-size:13px; text-align:center;
     }
+
     @media (max-width:600px){
       .bank-card{height:90px;}
       .bottom-section{font-size:12px;}
       .recommended-wrapper{grid-template-columns:repeat(3,1fr); gap:10px;}
     }
+
+    /* ===== ANIMATION ===== */
     @keyframes goBack{
       0%{transform:translateZ(0);}
       50%{transform:translateZ(-80px);}
       100%{transform:translateZ(0);}
     }
-    .animate-back{ animation:goBack 0.5s ease; }
-    
-    /* ===== OVERLAY ===== */
-    .overlay {
-      position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.4); z-index:2000; 
-      transition: opacity 0.4s ease;
-      opacity: 0;
-      pointer-events: none;
-      overflow-x: hidden;
-    }
-    .overlay.active { 
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .animate-back{ animation:goBack 0.5s ease; } /* عند الضغط */
 
-    /* ===== محتوى الصفحات الفرعية مركزي فوق الفلتر ===== */
-    #subpage-container {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 90%;
-      max-width: 600px;
-      max-height: 90vh;
-      background: #fff;
-      z-index: 3000; /* أعلى من overlay */
-      overflow-y: auto;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      border-radius: 12px;
-      padding: 20px;
-      box-sizing: border-box;
-      transform: translate(-50%, -50%) scale(0.8);
-      opacity: 0;
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      pointer-events: none;
-    }
-    #subpage-container.active {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-      pointer-events: auto;
-    }
+    /* ===== OVERLAY ===== */
+    .overlay{ position:fixed; top:0; left:-100%; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:2000; transition:left 0.4s ease; }
+    .overlay.active{ left:0; }
   </style>
 </head>
 <body>
 
   <div id="toast"   class="toast"></div>
   <div id="overlay" class="overlay"></div>
-
-  <!-- المحتوى الفرعي يظهر هنا -->
-  <div id="subpage-container"></div>
 
   <!-- ===== HEADER ===== -->
   <header>
@@ -180,19 +144,47 @@
     <section class="recommended-section" id="recommended">
       <h3 class="recommended-title">الطرق الموصى بها</h3>
       <div class="recommended-wrapper">
-        <div class="bank-card" data-page="albarid.html"><div class="top-section"><img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png"  alt="Al Barid"></div><div class="bottom-section">Al Barid</div></div>
-        <div class="bank-card" data-page="attijari.html"><div class="top-section"><img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari"></div><div class="bottom-section">Attijari</div></div>
-        <div class="bank-card" data-page="cih.html"><div class="top-section"><img src="https://i.postimg.cc/g07jHhK5/cih.png"             alt="CIH"></div><div class="bottom-section">CIH</div></div>
-        <div class="bank-card" data-page="cashplus.html"><div class="top-section"><img src="https://i.postimg.cc/kXPdP0B6/cash-plus-mobcash.png" alt="Cash Plus"></div><div class="bottom-section">Cash Plus</div></div>
-        <div class="bank-card" data-page="baridpay.html"><div class="top-section"><img src="https://i.postimg.cc/Gm528FQW/barid-pay-mobcash.png" alt="Barid Pay"></div><div class="bottom-section">Barid Pay</div></div>
-        <div class="bank-card" data-page="banquepopulaire.html"><div class="top-section"><img src="https://i.postimg.cc/Vs2dDQbJ/banque-populaire-mobcah.png" alt="Banque Populaire"></div><div class="bottom-section">Banque Populaire</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png"  alt="Al Barid"></div><div class="bottom-section">Al Barid</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari"></div><div class="bottom-section">Attijari</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/g07jHhK5/cih.png"             alt="CIH"></div><div class="bottom-section">CIH</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/kXPdP0B6/cash-plus-mobcash.png" alt="Cash Plus"></div><div class="bottom-section">Cash Plus</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Gm528FQW/barid-pay-mobcash.png" alt="Barid Pay"></div><div class="bottom-section">Barid Pay</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Vs2dDQbJ/banque-populaire-mobcah.png" alt="Banque Populaire"></div><div class="bottom-section">Banque Populaire</div></div>
       </div>
     </section>
 
-    <!-- بقية الأقسام كما هي ... -->
-    
+    <!-- صرافات العملات الإلكترونية -->
+    <section class="recommended-section">
+      <h3 class="recommended-title">صرافات العملات الإلكترونية</h3>
+      <div class="recommended-wrapper">
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/C5rHTFVk/redotpay-mobcash.png"         alt="RedotPay"></div><div class="bottom-section">RedotPay</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/V66JyXsZ/lbankalik-mobcash.png"        alt="Lbankalik"></div><div class="bottom-section">Lbankalik</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/WbWjKxqV/societe-generale-mobcash.png" alt="Société Générale SGMA"></div><div class="bottom-section">Société Générale SGMA</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/6QVPsGbZ/CDM-mobcash.png"              alt="CDM"></div><div class="bottom-section">CDM</div></div>
+      </div>
+    </section>
+
+    <!-- التحويل البنكي -->
+    <section class="recommended-section">
+      <h3 class="recommended-title">التحويل البنكي</h3>
+      <div class="recommended-wrapper">
+        <!-- ترتيب مختلف لجميع الأيقونات -->
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari"></div><div class="bottom-section">Attijari</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Vs2dDQbJ/banque-populaire-mobcah.png" alt="Banque Populaire"></div><div class="bottom-section">Banque Populaire</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Gm528FQW/barid-pay-mobcash.png" alt="Barid Pay"></div><div class="bottom-section">Barid Pay</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/kXPdP0B6/cash-plus-mobcash.png" alt="Cash Plus"></div><div class="bottom-section">Cash Plus</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/g07jHhK5/cih.png" alt="CIH"></div><div class="bottom-section">CIH</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png" alt="Al Barid"></div><div class="bottom-section">Al Barid</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/6QVPsGbZ/CDM-mobcash.png" alt="CDM"></div><div class="bottom-section">CDM</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/V66JyXsZ/lbankalik-mobcash.png" alt="Lbankalik"></div><div class="bottom-section">Lbankalik</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/C5rHTFVk/redotpay-mobcash.png" alt="RedotPay"></div><div class="bottom-section">RedotPay</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/WbWjKxqV/societe-generale-mobcash.png" alt="Société Générale SGMA"></div><div class="bottom-section">Société Générale SGMA</div></div>
+      </div>
+    </section>
+
   </main>
 
+  <!-- ===== SCRIPTS ===== -->
   <script>
     /* عرض الـ userId */
     const userId = localStorage.getItem("userId") || "غير مسجل";
@@ -206,64 +198,51 @@
       setTimeout(()=>toast.classList.remove('show'), 3000);
     }
 
-    /* عند الضغط على سحب */
+    /* رسالة عند محاولة السحب */
     document.getElementById('withdraw-option')
       .addEventListener('click', () => showToast('الرجاء إجراء الإيداع أولاً للتمكن من استخدام خاصية السحب عبر id.'));
 
-    /* عند الضغط على إيداع - النزول إلى القسم */
+    /* سلاسة نزول إلى الطرق الموصى بها */
     document.getElementById('deposit-option')
       .addEventListener('click', () => document.getElementById('recommended').scrollIntoView({ behavior:'smooth' }));
 
-    /* العناصر */
-    const overlay = document.getElementById('overlay');
-    const subpageContainer = document.getElementById('subpage-container');
-
-    // دالة تحميل المحتوى الفرعي وعرضه فوق الفلتر مع حركة fade + scale
-    async function loadSubpage(url){
-      try {
-        // أظهر الفلتر (التعتيم)
-        overlay.classList.add('active');
-
-        // جلب محتوى الصفحة (المحتوى فقط بدون هيكل كامل)
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('خطأ في تحميل الصفحة');
-        const html = await response.text();
-
-        // ضع المحتوى في الحاوية واظهرها مع حركة fade + scale
-        subpageContainer.innerHTML = html;
-        subpageContainer.classList.add('active');
-
-        // ربط زر الرجوع داخل المحتوى
-        const backBtn = subpageContainer.querySelector('.back-button');
-        if(backBtn){
-          backBtn.addEventListener('click', closeSubpage);
-        }
-
-      } catch(err) {
-        showToast('فشل تحميل المحتوى');
-        overlay.classList.remove('active');
-      }
-    }
-
-    // دالة إغلاق المحتوى الفرعي مع حركة عكسية
-    async function closeSubpage(){
-      // اخفاء المحتوى الفرعي تدريجياً
-      subpageContainer.classList.remove('active');
-
-      // اخفاء الفلتر بعد مدة الانتقال
-      await new Promise(resolve => setTimeout(resolve, 400));
-      overlay.classList.remove('active');
-
-      // تفريغ المحتوى
-      subpageContainer.innerHTML = '';
-    }
-
-    // التعامل مع الضغط على بطاقات البنك
+    /* حركة عند الضغط + تحويل صفحة مع التمييز بين التمرير والضغط */
     document.querySelectorAll('.bank-card').forEach(card=>{
-      card.addEventListener('click', () => {
-        const pageUrl = card.dataset.page;
-        if(pageUrl){
-          loadSubpage(pageUrl);
+      const logo    = card.querySelector('.top-section img');
+      const name    = card.querySelector('.bottom-section').textContent.trim().replace(/\s+/g,'-');
+      const overlay = document.getElementById('overlay');
+
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      const animateAndRedirect = ()=>{
+        logo.classList.add('animate-back');      // حركة عند الضغط
+        overlay.classList.add('active');
+        setTimeout(()=>window.location.href = name.toLowerCase()+'.html', 600);
+      };
+
+      // التعامل مع النقر (click)
+      card.addEventListener('click', animateAndRedirect);
+
+      // التعامل مع اللمس مع التمييز بين التمرير والضغط
+      card.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+      }, { passive: true });
+
+      card.addEventListener('touchend', (e) => {
+        const touch = e.changedTouches[0];
+        const touchEndX = touch.clientX;
+        const touchEndY = touch.clientY;
+
+        const deltaX = Math.abs(touchEndX - touchStartX);
+        const deltaY = Math.abs(touchEndY - touchStartY);
+
+        const maxMove = 10; // الحد الأقصى لتحرك الإصبع للتمييز بين الضغط والتمرير
+
+        if (deltaX < maxMove && deltaY < maxMove) {
+          animateAndRedirect();
         }
       });
     });
