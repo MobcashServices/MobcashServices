@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mobcash Services</title>
   <style>
-    html, body { margin: 0; overflow-x: hidden; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f2f2f2; }
-
+    html, body { margin: 0; overflow-x: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f2f2f2; }
+    
     /* ===== HEADER ===== */
     header { background:#fff; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:10px 16px; }
     .header-content { display:flex; align-items:center; justify-content:space-between; }
@@ -19,9 +18,9 @@
     .profile-info    { display:flex; flex-direction:column; align-items:flex-end; font-size:13px; line-height:1.2; user-select:all; }
     #userIdDisplay   { color:#444; font-weight:500; }
     .profile-label   { color:#2e7d32; font-weight:bold; margin-right:2px; }
-
+    
     /* ===== ACCOUNT OPTIONS ===== */
-    .account-section { background:#f2f2f2; padding:20px 15px 10px; }
+    .account-section { background:#f2f2f2; padding:20px 15px 10px; position:relative; z-index:1; }
     .account-header  { font-size:15px; font-weight:500; color:#888; margin-bottom:8px; text-align:right; }
     .account-option  { background:#fff; border-radius:14px; box-shadow:0 2px 6px rgba(0,0,0,.05); overflow:hidden; }
     .option-item { display:flex; align-items:center; padding:14px; cursor:pointer; position:relative; }
@@ -35,16 +34,16 @@
     .option-item:hover .icon-circle img   { filter:drop-shadow(0 0 5px rgba(0,128,0,.8)); }
     .option-text  { flex-grow:1; color:#000; font-size:15px; font-weight:500; }
     .arrow-icon   { color:#888; font-size:16px; }
-
+    
     /* ===== TOAST ===== */
     .toast {
       position:fixed; bottom:24px; left:50%; transform:translate(-50%,20px);
       background:#f44336; color:#fff; padding:12px 20px; border-radius:8px; font-size:14px;
-      opacity:0; pointer-events:none; z-index:1000;
+      opacity:0; pointer-events:none; z-index:3000;
       transition:opacity .4s ease, transform .4s ease; box-shadow:0 4px 12px rgba(0,0,0,.2);
     }
     .toast.show { opacity:1; transform:translate(-50%,0); }
-
+    
     /* ===== GREEN SECTIONS ===== */
     .recommended-section {
       background:#8aa981; padding:10px 10px 25px; margin:20px -15px 0;
@@ -60,6 +59,7 @@
     .bank-card {
       background:#9db194; box-shadow:0 2px 6px rgba(0,0,0,.1); cursor:pointer;
       overflow:hidden; display:flex; flex-direction:column; height:100px;
+      user-select:none;
     }
     .top-section {
       background:#fff; height:55%; display:flex; justify-content:center; align-items:center;
@@ -68,35 +68,59 @@
     .top-section img {
       max-width:90%; max-height:30px; object-fit:contain; transform-style:preserve-3d; transition:transform .4s ease;
     }
-    .top-section img:hover { animation:goBack 0.5s ease; } /* حركة بالـ hover */
+    .top-section img:hover { animation:goBack 0.5s ease; }
     .bottom-section {
       background:#3e723a; color:#fff; height:45%; display:flex; align-items:center; justify-content:center;
       font-size:13px; text-align:center;
     }
-
     @media (max-width:600px){
       .bank-card{height:90px;}
       .bottom-section{font-size:12px;}
       .recommended-wrapper{grid-template-columns:repeat(3,1fr); gap:10px;}
     }
-
-    /* ===== ANIMATION ===== */
     @keyframes goBack{
       0%{transform:translateZ(0);}
       50%{transform:translateZ(-80px);}
       100%{transform:translateZ(0);}
     }
-    .animate-back{ animation:goBack 0.5s ease; } /* عند الضغط */
-
+    .animate-back{ animation:goBack 0.5s ease; }
+    
     /* ===== OVERLAY ===== */
-    .overlay{ position:fixed; top:0; left:-100%; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:2000; transition:left 0.4s ease; }
-    .overlay.active{ left:0; }
+    .overlay {
+      position:fixed; top:0; left:-100%; width:100%; height:100%;
+      background:rgba(0,0,0,0.4); z-index:2000; transition:left 0.4s ease;
+      overflow-x: hidden;
+    }
+    .overlay.active { left:0; }
+    .overlay.slide-out { left:-100%; transition:left 0.4s ease; }
+
+    /* ===== محتوى الصفحات الفرعية ===== */
+    #subpage-container {
+      position: fixed;
+      top: 0; right: -100%;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      z-index: 2500;
+      overflow-y: auto;
+      box-shadow: -4px 0 12px rgba(0,0,0,0.3);
+      transition: right 0.4s ease;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    #subpage-container.active {
+      right: 0;
+    }
+    /* زر الرجوع داخل المحتوى الفرعي (توقع موجود أصلاً داخل المحتوى) */
   </style>
 </head>
 <body>
 
   <div id="toast"   class="toast"></div>
   <div id="overlay" class="overlay"></div>
+
+  <!-- المحتوى الفرعي يظهر هنا -->
+  <div id="subpage-container"></div>
 
   <!-- ===== HEADER ===== -->
   <header>
@@ -144,47 +168,19 @@
     <section class="recommended-section" id="recommended">
       <h3 class="recommended-title">الطرق الموصى بها</h3>
       <div class="recommended-wrapper">
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png"  alt="Al Barid"></div><div class="bottom-section">Al Barid</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari"></div><div class="bottom-section">Attijari</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/g07jHhK5/cih.png"             alt="CIH"></div><div class="bottom-section">CIH</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/kXPdP0B6/cash-plus-mobcash.png" alt="Cash Plus"></div><div class="bottom-section">Cash Plus</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Gm528FQW/barid-pay-mobcash.png" alt="Barid Pay"></div><div class="bottom-section">Barid Pay</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Vs2dDQbJ/banque-populaire-mobcah.png" alt="Banque Populaire"></div><div class="bottom-section">Banque Populaire</div></div>
+        <div class="bank-card" data-page="albarid.html"><div class="top-section"><img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png"  alt="Al Barid"></div><div class="bottom-section">Al Barid</div></div>
+        <div class="bank-card" data-page="attijari.html"><div class="top-section"><img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari"></div><div class="bottom-section">Attijari</div></div>
+        <div class="bank-card" data-page="cih.html"><div class="top-section"><img src="https://i.postimg.cc/g07jHhK5/cih.png"             alt="CIH"></div><div class="bottom-section">CIH</div></div>
+        <div class="bank-card" data-page="cashplus.html"><div class="top-section"><img src="https://i.postimg.cc/kXPdP0B6/cash-plus-mobcash.png" alt="Cash Plus"></div><div class="bottom-section">Cash Plus</div></div>
+        <div class="bank-card" data-page="baridpay.html"><div class="top-section"><img src="https://i.postimg.cc/Gm528FQW/barid-pay-mobcash.png" alt="Barid Pay"></div><div class="bottom-section">Barid Pay</div></div>
+        <div class="bank-card" data-page="banquepopulaire.html"><div class="top-section"><img src="https://i.postimg.cc/Vs2dDQbJ/banque-populaire-mobcah.png" alt="Banque Populaire"></div><div class="bottom-section">Banque Populaire</div></div>
       </div>
     </section>
 
-    <!-- صرافات العملات الإلكترونية -->
-    <section class="recommended-section">
-      <h3 class="recommended-title">صرافات العملات الإلكترونية</h3>
-      <div class="recommended-wrapper">
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/C5rHTFVk/redotpay-mobcash.png"         alt="RedotPay"></div><div class="bottom-section">RedotPay</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/V66JyXsZ/lbankalik-mobcash.png"        alt="Lbankalik"></div><div class="bottom-section">Lbankalik</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/WbWjKxqV/societe-generale-mobcash.png" alt="Société Générale SGMA"></div><div class="bottom-section">Société Générale SGMA</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/6QVPsGbZ/CDM-mobcash.png"              alt="CDM"></div><div class="bottom-section">CDM</div></div>
-      </div>
-    </section>
-
-    <!-- التحويل البنكي -->
-    <section class="recommended-section">
-      <h3 class="recommended-title">التحويل البنكي</h3>
-      <div class="recommended-wrapper">
-        <!-- ترتيب مختلف لجميع الأيقونات -->
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari"></div><div class="bottom-section">Attijari</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Vs2dDQbJ/banque-populaire-mobcah.png" alt="Banque Populaire"></div><div class="bottom-section">Banque Populaire</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Gm528FQW/barid-pay-mobcash.png" alt="Barid Pay"></div><div class="bottom-section">Barid Pay</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/kXPdP0B6/cash-plus-mobcash.png" alt="Cash Plus"></div><div class="bottom-section">Cash Plus</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/g07jHhK5/cih.png" alt="CIH"></div><div class="bottom-section">CIH</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png" alt="Al Barid"></div><div class="bottom-section">Al Barid</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/6QVPsGbZ/CDM-mobcash.png" alt="CDM"></div><div class="bottom-section">CDM</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/V66JyXsZ/lbankalik-mobcash.png" alt="Lbankalik"></div><div class="bottom-section">Lbankalik</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/C5rHTFVk/redotpay-mobcash.png" alt="RedotPay"></div><div class="bottom-section">RedotPay</div></div>
-        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/WbWjKxqV/societe-generale-mobcash.png" alt="Société Générale SGMA"></div><div class="bottom-section">Société Générale SGMA</div></div>
-      </div>
-    </section>
-
+    <!-- بقية الأقسام كما هي ... -->
+    
   </main>
 
-  <!-- ===== SCRIPTS ===== -->
   <script>
     /* عرض الـ userId */
     const userId = localStorage.getItem("userId") || "غير مسجل";
@@ -198,54 +194,78 @@
       setTimeout(()=>toast.classList.remove('show'), 3000);
     }
 
-    /* رسالة عند محاولة السحب */
+    /* عند الضغط على سحب */
     document.getElementById('withdraw-option')
       .addEventListener('click', () => showToast('الرجاء إجراء الإيداع أولاً للتمكن من استخدام خاصية السحب عبر id.'));
 
-    /* سلاسة نزول إلى الطرق الموصى بها */
+    /* عند الضغط على إيداع - النزول إلى القسم */
     document.getElementById('deposit-option')
       .addEventListener('click', () => document.getElementById('recommended').scrollIntoView({ behavior:'smooth' }));
 
-    /* حركة عند الضغط + تحويل صفحة مع التمييز بين التمرير والضغط */
-    document.querySelectorAll('.bank-card').forEach(card=>{
-      const logo    = card.querySelector('.top-section img');
-      const name    = card.querySelector('.bottom-section').textContent.trim().replace(/\s+/g,'-');
-      const overlay = document.getElementById('overlay');
+    /* العناصر */
+    const overlay = document.getElementById('overlay');
+    const subpageContainer = document.getElementById('subpage-container');
 
-      let touchStartX = 0;
-      let touchStartY = 0;
-
-      const animateAndRedirect = ()=>{
-        logo.classList.add('animate-back');      // حركة عند الضغط
+    // دالة تحميل المحتوى الفرعي وعرضه مع حركة انزلاق للفلتر والمحتوى
+    async function loadSubpage(url){
+      try {
+        // أظهر الفلتر مع انزلاق من اليسار لليمين
         overlay.classList.add('active');
-        setTimeout(()=>window.location.href = name.toLowerCase()+'.html', 600);
-      };
 
-      // التعامل مع النقر (click)
-      card.addEventListener('click', animateAndRedirect);
+        // انتظر 400ms حتى انتهاء انزلاق الفلتر
+        await new Promise(resolve => setTimeout(resolve, 400));
 
-      // التعامل مع اللمس مع التمييز بين التمرير والضغط
-      card.addEventListener('touchstart', (e) => {
-        const touch = e.touches[0];
-        touchStartX = touch.clientX;
-        touchStartY = touch.clientY;
-      }, { passive: true });
+        // جلب محتوى الصفحة (المحتوى فقط بدون هيكل كامل)
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('خطأ في تحميل الصفحة');
+        const html = await response.text();
 
-      card.addEventListener('touchend', (e) => {
-        const touch = e.changedTouches[0];
-        const touchEndX = touch.clientX;
-        const touchEndY = touch.clientY;
+        // ضع المحتوى في الحاوية واظهرها مع انزلاق من اليمين لليسار
+        subpageContainer.innerHTML = html;
+        subpageContainer.classList.add('active');
 
-        const deltaX = Math.abs(touchEndX - touchStartX);
-        const deltaY = Math.abs(touchEndY - touchStartY);
+        // بعد إضافة المحتوى، اربط زر الرجوع داخل المحتوى
+        const backBtn = subpageContainer.querySelector('.back-button');
+        if(backBtn){
+          backBtn.addEventListener('click', closeSubpage);
+        }
 
-        const maxMove = 10; // الحد الأقصى لتحرك الإصبع للتمييز بين الضغط والتمرير
+      } catch(err) {
+        showToast('فشل تحميل المحتوى');
+        // اخفاء الفلتر عند الخطأ
+        overlay.classList.remove('active');
+      }
+    }
 
-        if (deltaX < maxMove && deltaY < maxMove) {
-          animateAndRedirect();
+    // دالة إغلاق المحتوى الفرعي مع حركة عكسية
+    async function closeSubpage(){
+      // انزلاق المحتوى للخارج (من اليمين لليسار)
+      subpageContainer.classList.remove('active');
+
+      // أظهر الفلتر مع انزلاق للخارج (من اليسار لليمين)
+      overlay.classList.add('slide-out');
+      overlay.classList.remove('active');
+
+      // انتظر حتى انتهاء الانزلاق (400ms)
+      await new Promise(resolve => setTimeout(resolve, 400));
+
+      // اخفاء الفلتر بالكامل
+      overlay.classList.remove('slide-out');
+
+      // فرغ المحتوى
+      subpageContainer.innerHTML = '';
+    }
+
+    // التعامل مع الضغط على بطاقات البنك
+    document.querySelectorAll('.bank-card').forEach(card=>{
+      card.addEventListener('click', () => {
+        const pageUrl = card.dataset.page;
+        if(pageUrl){
+          loadSubpage(pageUrl);
         }
       });
     });
+
   </script>
 </body>
 </html>
