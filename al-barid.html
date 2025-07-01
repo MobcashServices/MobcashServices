@@ -27,24 +27,30 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
-    /* زر الرجوع الجديد */
-    .back-button {
+    /* زر الإغلاق × داخل النموذج */
+    .exit-button {
       position: absolute;
       top: 10px;
       right: 10px;
-      font-size: 22px;
-      color: #333;
+      font-size: 28px;
+      color: #888;
       text-decoration: none;
-      background: #eee;
-      padding: 5px 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      transition: background 0.3s;
-      z-index: 10;
+      cursor: pointer;
       user-select: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+      z-index: 10;
+      background: #f0f0f0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      line-height: 36px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
-    .back-button:hover {
-      background: #ddd;
+    .exit-button:hover {
+      color: #555;
+      background: #e0e0e0;
     }
 
     .logo-box {
@@ -195,7 +201,7 @@
 <body>
 
 <div class="main-box">
-  <a href="home.html" class="back-button" title="رجوع">←</a>
+  <a href="home.html" class="exit-button" title="إغلاق">×</a>
 
   <div class="logo-box">
     <img src="https://i.ibb.co/xq8PQRZx/albarid-linebet.png" alt="albarid-linebet">
