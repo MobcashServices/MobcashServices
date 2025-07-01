@@ -89,73 +89,14 @@
     .animate-back{ animation:goBack 0.5s ease; } /* عند الضغط */
 
     /* ===== OVERLAY ===== */
-    .overlay {
-      position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.4);
-      z-index:2000; 
-      display:none; /* مخفية افتراضياً */
-      overflow: hidden;
-    }
-    .overlay.active {
-      display:block;
-    }
-
-    /* ===== MODAL CONTENT ===== */
-    .modal-content {
-      position: absolute;
-      top: 0; left: -100%; /* يبدأ خارج الشاشة جهة اليسار */
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      overflow-y: auto;
-      box-shadow: 4px 0 12px rgba(0,0,0,0.3);
-      transition: left 0.4s ease, opacity 0.4s ease;
-      opacity: 0;
-      padding: 20px;
-      box-sizing: border-box;
-      direction: rtl;
-      z-index: 3000;
-    }
-    .modal-content.active {
-      left: 0;
-      opacity: 1;
-    }
-
-    /* زر الإغلاق */
-    .close-btn {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: #f44336;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      font-size: 22px;
-      font-weight: bold;
-      cursor: pointer;
-      line-height: 30px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,.3);
-      z-index: 4000;
-      transition: background 0.3s ease;
-    }
-    .close-btn:hover {
-      background: #d32f2f;
-    }
+    .overlay{ position:fixed; top:0; left:-100%; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:2000; transition:left 0.4s ease; }
+    .overlay.active{ left:0; }
   </style>
 </head>
 <body>
 
   <div id="toast"   class="toast"></div>
-
-  <div id="overlay" class="overlay">
-    <div id="modalContent" class="modal-content">
-      <button id="closeModalBtn" class="close-btn" title="إغلاق">&times;</button>
-      <!-- سيتم تحميل المحتوى هنا -->
-    </div>
-  </div>
+  <div id="overlay" class="overlay"></div>
 
   <!-- ===== HEADER ===== -->
   <header>
@@ -212,7 +153,34 @@
       </div>
     </section>
 
-    <!-- يمكنك إضافة المزيد كما في الكود الأصلي -->
+    <!-- صرافات العملات الإلكترونية -->
+    <section class="recommended-section">
+      <h3 class="recommended-title">صرافات العملات الإلكترونية</h3>
+      <div class="recommended-wrapper">
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/C5rHTFVk/redotpay-mobcash.png"         alt="RedotPay"></div><div class="bottom-section">RedotPay</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/V66JyXsZ/lbankalik-mobcash.png"        alt="Lbankalik"></div><div class="bottom-section">Lbankalik</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/WbWjKxqV/societe-generale-mobcash.png" alt="Société Générale SGMA"></div><div class="bottom-section">Société Générale SGMA</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/6QVPsGbZ/CDM-mobcash.png"              alt="CDM"></div><div class="bottom-section">CDM</div></div>
+      </div>
+    </section>
+
+    <!-- التحويل البنكي -->
+    <section class="recommended-section">
+      <h3 class="recommended-title">التحويل البنكي</h3>
+      <div class="recommended-wrapper">
+        <!-- ترتيب مختلف لجميع الأيقونات -->
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/sgvD4Kv9/attijariwafa-mobcash.png" alt="Attijari"></div><div class="bottom-section">Attijari</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Vs2dDQbJ/banque-populaire-mobcah.png" alt="Banque Populaire"></div><div class="bottom-section">Banque Populaire</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/Gm528FQW/barid-pay-mobcash.png" alt="Barid Pay"></div><div class="bottom-section">Barid Pay</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/kXPdP0B6/cash-plus-mobcash.png" alt="Cash Plus"></div><div class="bottom-section">Cash Plus</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/g07jHhK5/cih.png" alt="CIH"></div><div class="bottom-section">CIH</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/8cmsx5SR/albarid-mobcash.png" alt="Al Barid"></div><div class="bottom-section">Al Barid</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/6QVPsGbZ/CDM-mobcash.png" alt="CDM"></div><div class="bottom-section">CDM</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/V66JyXsZ/lbankalik-mobcash.png" alt="Lbankalik"></div><div class="bottom-section">Lbankalik</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/C5rHTFVk/redotpay-mobcash.png" alt="RedotPay"></div><div class="bottom-section">RedotPay</div></div>
+        <div class="bank-card"><div class="top-section"><img src="https://i.postimg.cc/WbWjKxqV/societe-generale-mobcash.png" alt="Société Générale SGMA"></div><div class="bottom-section">Société Générale SGMA</div></div>
+      </div>
+    </section>
 
   </main>
 
@@ -238,66 +206,25 @@
     document.getElementById('deposit-option')
       .addEventListener('click', () => document.getElementById('recommended').scrollIntoView({ behavior:'smooth' }));
 
-
-    const overlay = document.getElementById('overlay');
-    const modalContent = document.getElementById('modalContent');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-
-    function showModalWithContent(pageName) {
-      // عرض overlay
-      overlay.classList.add('active');
-
-      // جلب محتوى الصفحة المطلوبة (مثلاً attijari.html)
-      fetch(pageName + '.html')
-        .then(response => {
-          if (!response.ok) throw new Error('خطأ في تحميل الصفحة');
-          return response.text();
-        })
-        .then(html => {
-          modalContent.innerHTML = '<button id="closeModalBtn" class="close-btn" title="إغلاق">&times;</button>' + html;
-          modalContent.classList.add('active');
-
-          // إعادة ربط حدث إغلاق الزر لأننا أعدنا بناء الـ modalContent
-          const closeBtn = modalContent.querySelector('.close-btn');
-          closeBtn.addEventListener('click', closeModal);
-        })
-        .catch(err => {
-          modalContent.innerHTML = <button id="closeModalBtn" class="close-btn" title="إغلاق">&times;</button><p style="color:red; text-align:center;">حدث خطأ: ${err.message}</p>;
-          modalContent.classList.add('active');
-
-          const closeBtn = modalContent.querySelector('.close-btn');
-          closeBtn.addEventListener('click', closeModal);
-        });
-    }
-
-    function closeModal() {
-      modalContent.classList.remove('active');
-      overlay.classList.remove('active');
-      modalContent.innerHTML = ''; // نظف المحتوى
-    }
-
-    // إخفاء النافذة بالضغط على overlay (خارج المحتوى)
-    overlay.addEventListener('click', (e) => {
-      if(e.target === overlay) {
-        closeModal();
-      }
-    });
-
-    // ربط الأيقونات
+    /* حركة عند الضغط + تحويل صفحة مع التمييز بين التمرير والضغط */
     document.querySelectorAll('.bank-card').forEach(card=>{
-      const logo = card.querySelector('.top-section img');
-      const name = card.querySelector('.bottom-section').textContent.trim().replace(/\s+/g,'-').toLowerCase();
+      const logo    = card.querySelector('.top-section img');
+      const name    = card.querySelector('.bottom-section').textContent.trim().replace(/\s+/g,'-');
+      const overlay = document.getElementById('overlay');
 
       let touchStartX = 0;
       let touchStartY = 0;
 
-      const openModal = ()=>{
-        logo.classList.add('animate-back'); // حركة عند الضغط
-        showModalWithContent(name);
+      const animateAndRedirect = ()=>{
+        logo.classList.add('animate-back');      // حركة عند الضغط
+        overlay.classList.add('active');
+        setTimeout(()=>window.location.href = name.toLowerCase()+'.html', 600);
       };
 
-      card.addEventListener('click', openModal);
+      // التعامل مع النقر (click)
+      card.addEventListener('click', animateAndRedirect);
 
+      // التعامل مع اللمس مع التمييز بين التمرير والضغط
       card.addEventListener('touchstart', (e) => {
         const touch = e.touches[0];
         touchStartX = touch.clientX;
@@ -315,7 +242,7 @@
         const maxMove = 10; // الحد الأقصى لتحرك الإصبع للتمييز بين الضغط والتمرير
 
         if (deltaX < maxMove && deltaY < maxMove) {
-          openModal();
+          animateAndRedirect();
         }
       });
     });
