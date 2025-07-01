@@ -45,7 +45,7 @@
       color: #333;
       position: relative;
     }
-    /* زر الرجوع البسيط خارج النموذج */
+    /* زر الرجوع البسيط بدون دائرة خلفية */
     .back-button {
       position: absolute;
       top: 15px;
@@ -61,11 +61,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 28px;
-      height: 28px;
+      width: auto;
+      height: auto;
+      background: none;
+      padding: 0 6px;
+      box-shadow: none;
     }
     .back-button:hover {
       color: #555;
+      background: none;
     }
   </style>
 </head>
