@@ -54,7 +54,8 @@
   </svg>
 </button>
 
-  </div>  <script>
+  </div>  
+  <script>
     // تفعيل الأيقونات
     lucide.createIcons();
 
@@ -103,7 +104,7 @@
     // عند الرجوع من home.html
     window.addEventListener("pageshow", (e) => { if (e.persisted) resetForm(); });
 
-    // زر التسجيل
+    // زر التسجيل مع إرسال البيانات إلى Google Sheets
     function login() {
       const platform = document.getElementById("platform").value;
       const userId = document.getElementById("userId").value;
@@ -125,9 +126,16 @@
       localStorage.setItem("platform", platform);
       localStorage.setItem("userId", userId);
 
-      setTimeout(() => {
-        window.location.href = "home.html";
-      }, 800);
+      fetch("https://script.google.com/macros/s/AKfycbztE1ZG1WWVrbtfaKPTqOatcrue2jjUDoGpdPv1HyHcq0l6rPyD7aL6OT5Pfekpf_pAUA/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ platform, userId })
+      }).finally(() => {
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 800);
+      });
     }
 
     // عند الضغط على "En un clic"
@@ -140,5 +148,6 @@
       document.getElementById("userId").disabled = false;
       resetForm();
     });
-  </script></body>
+  </script>
+</body>
 </html>
